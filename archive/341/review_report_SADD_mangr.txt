@@ -1,0 +1,235 @@
+                              External Review
+                              ===============
+                                SADD REVIEW
+                             =================
+
+================================================================================
+FORMAL REVIEW REPORT
+================================================================================
+
+Date:               10/05/2001
+Reviewer(s):        mangr
+
+Document Name:      The Software Architectural Design Document (SADD)
+Document Version:   1.12
+
+--------------------------------------------------------------------------------
+REVIEW SUMMARY
+--------------------------------------------------------------------------------
+
+---------------
+Overall: FAIL
+---------------
+
+-The abstract is poorly done, and does not clearly define what this document is
+about, it merely says what the project is about. Elaboration on what this 
+document is about and how/why is was put together is more relevant.
+
+-This document seems to look very much like the example SADD, accessed by the 
+web on the 341 website. 
+
+-The document seems cluttery and out of order..ie why are your use cases defined
+at the very end, when they are done at the very start of OOA?
+
+-From the layout it seems that the object oriented paradigm was followed, but
+not demonstrated very well.  How did you know what to do and where? Where are
+your references? How does any stakeholder in this document know what was done
+here was correct?
+
+-Did you use the checklist in the project manual at all? Or consider using the
+template given?
+
+-Where are the rest of your module/object (whatever your doing) design 
+descriptions? You have some for section 2.1 but thats it.
+I suggest you just have listed all the modules used in the architectural design
+done, in your piece wise class diagram, then a separate section with all your
+module descriptions.
+
+-The overall module design descriptions seemed fine, so reuse them.
+
+-Overall i think little time and effort was spent on the document, and the
+research into how to synthesise it.  I suggest you spend time understanding
+the OO paradigm, then reconstruct this document accordingly.  Time spent
+understanding the paradigm, will help you with your document, and also create
+one more relevant to your team, as opposed to the example PDD you used.
+I failed you because where the content was critical, you had lack-lustre 
+descriptions. The heart of the SADD is in the Design description, and this was 
+not very well addressed. Also read the Project Handbook a bit more, it has a lot
+of structure help, and content help, and refer to the 341 website Q and A for 
+more help.
+
+--------------------------------------------------------------------------------
+DEFINITION OF RECOMMENDATIONS
+--------------------------------------------------------------------------------
+
+PASS
+----
+1. The review item adequately addresses all the specified criteria. 
+2. Only minor modification is required to bring it up to scratch. 
+3. Modifications can be dealt with internally and thus does not require further 
+   review.
+
+REWORK
+------
+1. The review item does not address all specified criteria. 
+2. The review item requires further work meet the stated standards.
+3. There is omitions or ambiguities in existing information which requires 
+   restructuring. 
+
+FAIL
+----
+1. The review item does not address the specified criteria. 
+2. The review item requires major (re-)work and should undergo strict quality
+   assurance monitoring. 
+3. A Formal Re-review is recommended.
+
+--------------------------------------------------------------------------------
+GENERAL CRITERIA - RESULTS & COMMENT
+--------------------------------------------------------------------------------
+
+1. Legibility   PASS 
+
+   Is the document readable? Mistake-ridden? Are pictures clear?
+   -------------------------------------------------------------
+   The document seemed to be quite readable, with very few spelling mistakes.
+	 Flow of the document seemed quite poor in some areas. I suggest you 
+	 proof read your document before you hand it up, and maybe internally review
+	 it.
+   There seemed no legibility mistakes and generally was of good
+	 quality. Pictures were clear and easy to follow and the captions for them
+	 made for good understanding of each picture.
+
+2. Conciseness  REWORK
+
+   Is the document direct? Too much/little detail?
+   ----------------------------------------------- 
+   The document has too little detail in most areas, and adequate detail in 
+	 others.  The major part of the document (ie what should be called the design
+   description in the templates (which are given to you for a reason!), lacked
+	 the detail required to make this a quality document.
+
+3. Coherence    FAIL
+
+   Is the document referencing itself/other docs correctly?
+   ------------------------------------------------------- 
+   The referencing to the SRS is fine, but what sections of it? im sure that
+	 the WHOLE srs is not relevant to a particular part of the SADD.
+	 Also it seems, you have made up your own OO paradigm, so you should reference
+	 where you go this from, or follow the paradigm from the suggested text for 
+	 the subject or something.  Also it seems, there is a slight plagurism of
+	 the example SADD given on the web.  This is a bad trap to fall into, either
+	 reference that document to say that it was used as a template, or rework your
+	 document to reflect what you did.  Poor thought has gone into this doc.
+	 Why is it contradicting the design methodologies used etc.
+	 
+4. Relevance    REWORK
+
+   Is the document addressing its stated aims? 
+   -------------------------------------------
+   The document has a poor aim, and therefore does not really address it.
+	 On the other hand, it does have mostly correct content, and i can understand
+	 what they are trying to do..Remember that this document, can be viewed by
+	 and stakeholders, and should have good detail so that those ppl can 
+	 understand what has been done. Mainly concentrate on your big section 
+   (design description)
+
+
+--------------------------------------------------------------------------------
+SECTIONAL RECOMMENDATIONS
+--------------------------------------------------------------------------------
+
+
+Section 1  FAIL
+---------
+1.1 Aim - More information here would be good, as in the SRS, like what was the
+existing system? Elaborate more on the proposed system.
+
+1.3 Project team - You should list who your project manager is here.
+
+1.4 Design Process - Seems plagurised from the example give.  This is not a valid
+design process.
+where are your references?  How do the italicised headings related to the OO
+paradigm? Show how...as Data flow diagrams do not or structure charts. Maybe
+your using the wrong model? Maybe use enumerated dot points to list the 
+OO paradigm (ie 1.4.1 Use cases etc). If these processes are in order they are
+wrong. Why is Architectural Design in italics listed twice? This is ambiguous..
+This part seems extremely poorly and lazily done.
+I suggest you find a good text.. reference it, follow their process outline
+and define what methodology you are really using.
+
+1.5 Programming Environment - Define your terms in a glossary, as you are 
+defining technology non explicitly (cgi-bin). What version of VB are you using?
+what make of SQL are you using? What standard of HTML? are you using CSS? etc
+I suggest you clearly define your technologies more.
+  
+Section 2    FAIL
+---------
+List what sections of the SRS are referred to..here im guessing your
+functional requirements.
+
+2.1  and 2.2 what about this title? relevance to architectural design..
+
+Order of this section seems out of whack...maybe sit down and organise
+the structure a bit better as the flow of the document is compromised here.
+
+2.1.1 In the last section you said you were using OO Paradigm, and now here you
+are using the structured paradigm. What the hell is going on? Do you know 
+your process as taught in 341? Structured diagrams and Data flow diagrams
+are not relevant to OOP.
+
+Why are you doing the module design descriptions here? It should only be
+each module used in the module design and how it relates to the 
+architectural.
+
+2.2 This layout is better... you do not need the module design descriptions 
+as in the last section.
+
+2.4 Maybe this should come under data structures? (as in the checklist of
+		the project handbook).  Where are the diagrams to support how you
+		derived this structure? or of the existing one. Maybe read a database
+		book to see how to make tables.
+
+Section 3    PASS
+---------
+This section seems well done. I would maybe put this section more to the back 
+though.
+
+Section 4     REWORK 
+---------
+Move this section to a more relevant position and describe the process you did
+and why you went into so much detail.  Maybe demonstrate the format better. i 
+got lost a fair bit.  Maybe use a user/ system notation? for ease of tracing?
+
+
+Section 5    REWORK
+---------
+
+This is where your module designs should go...They get expanded upon when you 
+reach detailed design. So move those module designs here.
+
+Section 6    PASS
+---------
+
+Dont talk in a future tense. Otherwise this looks fine.
+
+Section 7    REWORK
+---------
+
+Why are there structure diagrams and data flow diagrams here, when this is OO 
+paradigm?
+Figure 3-7: If any objects are reused in another diagram, make sure it has a 
+triangle in the top right corner to show this. At the end of OOD you should 
+have every object having either data or action attributes or both.
+Maybe make separate appendix for each relevant section (ie OOA OOD, user interface etc.)
+
+
+Section 8    PASS
+---------
+
+These diagrams are fine. However, detail is required to show what action is
+to be performed to get to a class.
+
+--------------------------------------------------------------------------------
+END OF FORMAL REVIEW REPORT
+--------------------------------------------------------------------------------
+

@@ -1,0 +1,8 @@
+#!/bin/sh
+set -x
+
+PEOPLE='nhall alberty varun caley rlogozzo rasika rmsubr matjazl kspc cont dmend tmds cjg teapen myw'
+
+for PERSON in $PEOPLE ; do
+	cat `echo $PERSON` `finger $PERSON | grep Mail` >> mail.tmp 
+done

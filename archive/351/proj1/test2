@@ -1,0 +1,3 @@
+select hname, luxprice, regprice
+from HOTEL
+\g

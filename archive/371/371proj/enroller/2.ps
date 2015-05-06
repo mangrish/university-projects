@@ -1,0 +1,592 @@
+%!PS-Adobe-3.0
+%%Creator: A2ps version 4.3
+%%CreationDate: Tue Sep 12 14:07:47 2000
+%%Pages: (atend)
+%%DocumentFonts: Courier Courier-Bold Helvetica Helvetica-Bold
+%%EndComments
+% Copyright (c) 1993, 1994, Miguel Santana, M.Santana@frgu.bull.fr
+
+/$a2psdict 100 dict def
+$a2psdict begin
+
+% General macros.
+/xdef {exch def} bind def
+/getfont {exch findfont exch scalefont} bind def
+
+% Create Courier backspace font
+/backspacefont {
+    /Courier findfont dup length dict begin
+	{ % forall
+	    1 index /FID eq { pop pop } { def } ifelse
+	} forall
+	currentdict /UniqueID known { % if
+	    /UniqueID UniqueID 16#800000 xor def
+	} if
+	CharStrings length 1 add dict begin
+	    CharStrings { def } forall
+	    /backspace { -600 0 0 0 0 0 setcachedevice } bind def
+	    currentdict
+	end
+	/CharStrings exch def
+	/Encoding Encoding 256 array copy def
+	Encoding 8 /backspace put
+	currentdict
+    end
+    definefont pop
+} bind def
+
+% FUNCTIONS
+
+% Function filename: Initialize file printing.
+/fn
+{ /filenm xdef
+  /filenmwidth filenm stringwidth pop def
+  /filenmfont
+       filenmwidth fns gt
+       {
+	       filenmfontname
+	       fnfs fns mul filenmwidth div
+	     getfont
+       }
+       { sfnf }
+     ifelse
+  def
+} bind def
+
+% Function header: prints page header. no page
+% is passed as argument.
+/hp
+  { x sd get  y sd get hs sub 1 add  moveto
+    df setfont
+    gsave
+      x sd get y sd get moveto
+      0 hs 2 div neg rmoveto 
+      hs setlinewidth
+      0.95 setgray
+      pw 0 rlineto stroke
+    grestore
+    gsave
+      dfs hm rmoveto
+      d show				% date/hour
+    grestore
+    gsave
+      pnum cvs pop				% page pop up
+        pw (Page 999) stringwidth pop sub
+        hm
+	  rmoveto
+      (Page ) show pnum show		% page number
+    grestore
+    empty pnum copy pop
+    gsave
+      filenmfont setfont
+         fns filenm stringwidth pop sub 2 div dw add
+          bm 2 mul 
+        add 
+        hm
+      rmoveto
+        filenm show			% file name
+      grestore
+    } bind def
+
+% Function border: prints border page
+/border 
+{ x sd get y sd get moveto
+  gsave				% print four sides
+    0.7 setlinewidth		% of the square
+    pw 0 rlineto
+    0 ph neg rlineto
+    pw neg 0 rlineto
+    closepath stroke
+  grestore
+} bind def
+
+% Function hborder: completes border of the header.
+/hborder 
+{ gsave
+	0.7 setlinewidth
+	0 hs neg rmoveto
+	pw 0 rlineto
+	stroke
+  grestore
+} bind def
+
+% Function sheetnumber: prints the sheet number.
+/sn
+    { snx sny moveto
+      df setfont
+      pnum cvs
+	  dup stringwidth pop (0) stringwidth pop sub neg 0 rmoveto show
+      empty pnum copy pop
+    } bind def
+
+% Function loginprint: prints the login id of the requestor.
+/lgp
+    { lx ly moveto
+      df setfont
+      dup stringwidth pop neg 0 rmoveto show
+    } bind def
+
+% Function currentdate: prints the current date.
+/cd
+    { dx dy moveto
+      df setfont
+      (Printed: ) show
+      td show
+    } bind def
+
+% Function filename_footer: prints the file name at bottom of page.
+/fnf
+    { fnx fny moveto
+      df setfont
+      filenm center show
+    } bind def
+
+% Function center: centers text.
+/center
+    { dup stringwidth pop
+      2 div neg 0 rmoveto
+    } bind def
+
+% Function s: print a source line
+/s  { show
+      /y0 y0 bfs sub def
+      x0 y0 moveto
+    } bind def
+
+% Functions b and st: change to bold or standard font
+/b  { show
+      bdf setfont
+    } bind def
+/st { show
+      bf setfont
+    } bind def
+
+% Strings used to make easy printing numbers
+/pnum 12 string def
+/empty 12 string def
+
+% Global initializations
+
+/CourierBack backspacefont
+/filenmfontname /Helvetica-Bold def
+/inch {72 mul} bind def
+
+%
+% Meaning of some variables and functions (coded names)
+%
+%	twp:		twinpages?
+%	sd:		sheet side
+%	l:		line counter
+%	c:		column counter
+%	d:		date
+%	td:		current date (for today)
+%	lg:		login name
+%	fn:		filename printing function
+%	sn:		sheetnumber printing function
+%	cd:		current date printing function
+%	fnf:		filename footer printing function
+%	lgp:		login printing function
+%	hp:		header printing function
+%	y:		y coordinate for the logical page
+%	x:		x coordinate for the logical page
+%	sny:		y coordinate for the sheet number
+%	snx:		x coordinate for the sheet number
+%	dy:		y coordinate for the date
+%	dx:		x coordinate for the date
+%	ly:		y coordinate for the login
+%	lx:		x coordinate for the login
+%	scx:		x coordinate for the sheet center
+%	fny:		y coordinate for the filename (footer)
+%	fnx:		x coordinate for the filename (footer)
+%	fnfs:		filename font size
+%	bfs:		body font size
+%	dfs:		date font size
+%	bfs:		body font size
+%	df:		date font
+%	bf:		body font
+%	bdf:		bold font
+%	sfnf:		standard filename font
+%	dw:		date width
+%	pw:		page width
+%	sw:		sheet width
+%	ph:		page height
+%	sh:		sheet height
+%	hm:		header margin
+%	tm:		top margin
+%	bm:		body margin
+%	rm:		right margin
+%	lm:		left margin
+%	hs:		header size
+%	fns:		filename size
+
+% Initialize page description variables.
+/x0 0 def
+/y0 0 def
+/sh 11.64 inch def
+/sw 8.27 inch def
+/margin 1.4 inch def
+/rm margin 3 div def
+/lm margin 2 mul 3 div def
+/d () def
+/td (Sep 12 2000 14:07) def
+/lg (Printed by dwyer from mundook.cs.mu.OZ.AU) def
+%%EndProlog
+
+/docsave save def
+%%Page: 1 1
+/pagesave save def
+/twp true def
+/fnfs 11 def
+/dfs fnfs 0.8 mul def
+/df /Helvetica dfs getfont def
+/dw df setfont td stringwidth pop def
+/sfnf filenmfontname fnfs getfont def
+/hm fnfs 0.25 mul def
+/hs 0.22 inch def
+/bfs 6.8 def
+/bdf /Courier-Bold bfs getfont def
+/bm bfs 0.7 mul def
+/bf /CourierBack bfs getfont def
+/l 69 def
+/c 89 def
+/pw
+   bf setfont (0) stringwidth pop c mul bm dup add add
+   def
+/ph
+   bfs l mul bm dup add add hs add
+   def
+/fns
+      pw
+      fnfs 4 mul dw add (Page 999) stringwidth pop add
+    sub
+  def
+/tm margin twp {3} {2} ifelse div def
+/sd 0 def
+/y [ rm ph add bm add
+          dup ] def
+/sny dfs dfs add def
+/snx sh tm dfs add sub def
+/dy sny def
+/dx tm dfs add def
+/x [ tm			% left page
+          dup 2 mul pw add	% right page
+        ] def
+/scx sh 2 div def
+/fny dy def
+/fnx scx def
+/ly fnfs 2 div y sd get add def
+/lx snx def
+/d (Aug 28 2000 14:53) def
+( Enrolment.java ) fn
+sw 0 translate
+90 rotate
+1 hp
+border
+hborder
+/x0 x 0 get bm add def
+/y0 y 0 get bm bfs add hs add sub def
+x0 y0 moveto
+bf setfont
+( /* Enrolment.java) s
+(  *) s
+(  * Created 23 August 2000) s
+(  */) s
+( ) s
+( package enroller;) s
+( ) s
+( import java.io.*;) s
+( import org.w3c.dom.*;) s
+( import org.xml.sax.*;) s
+( import com.sun.xml.tree.*;) s
+( import javax.xml.parsers.DocumentBuilderFactory;) s
+( import javax.xml.parsers.DocumentBuilder;) s
+( import java.util.Vector;) s
+( ) s
+( /** Class for loading and accessing xml enrolment data for the) s
+(  * Enroller.) s
+(  *) s
+(  * @author Tim Dwyer) s
+(  * @version 1.0) s
+(  */) s
+( public class Enrolment) s
+( {) s
+(   private XmlDocument doc;) s
+(   private String fileName;) s
+(   /** Create and load the Enrolment data structures from the data held) s
+(    * in the specified file) s
+(    * @param fileName the name of the xml file containing the enrolment) s
+(    * data \(file must use the Enrolment.dtd template\)) s
+(    */ ) s
+(   public Enrolment \(String fileName\)) s
+(   throws IOException) s
+(   {) s
+(     this.fileName = fileName;) s
+(     try {) s
+(       //) s
+(       // turn the filename into a fully qualified URL) s
+(       //) s
+(       String uri = "file:" + new File \(fileName\).getAbsolutePath \(\);) s
+(       System.out.println\(uri\);) s
+( ) s
+(       // \(the following comment comes from an example distributed) s
+(       // with the JAXP parser\)) s
+(       // turn it into an in-memory object ... we couple the) s
+(       // parser and builder bidirectionally to ensure that ) s
+(       // the parser enforces namespace syntax rules \(which) s
+(       // add constraints that XML 1.0 doesn't have\).) s
+(       //) s
+(       doc = XmlDocument.createXmlDocument\(uri,true\);) s
+( ) s
+(     }catch \(SAXException e\) {) s
+(       Exception x = e;) s
+(       if \(e.getException \(\) != null\)) s
+(         x = e.getException \(\);) s
+(       x.printStackTrace \(\);) s
+( ) s
+(     } catch \(Throwable t\) {) s
+(       t.printStackTrace \(\);) s
+(     }) s
+(   }) s
+( ) s
+(   /** wrapper class to access enrolment details for a whole day from) s
+(    * the xml data in memory.) s
+(    */) s
+(   public class Day {) s
+(     private Element dayElement;) s
+(     protected Day\(Element dayElement\) {) s
+(       this.dayElement = dayElement;) s
+(     }) s
+/sd 1 def
+2 hp
+border
+hborder
+/x0 x 1 get bm add def
+/y0 y 1 get bm bfs add hs add sub def
+x0 y0 moveto
+bf setfont
+(     /** wrapper class to access enrolment details for one timeslot) s
+(      */) s
+(     public class Time {) s
+(       private Element timeElement;) s
+(       protected Time\(Element timeElement\) {) s
+(         this.timeElement = timeElement;) s
+(       }) s
+(       /** returns the start time for the timeslot) s
+(        * @return the start time as a String format HH24:MI) s
+(        */) s
+(       public String getStartTime\(\) {) s
+(         return timeElement.getAttribute\("StartTime"\);) s
+(       }) s
+(       /** get the duration of the class or meeting) s
+(        * @return an integer number of hours duration) s
+(        */) s
+(       public int getDuration\(\) {) s
+(         return Integer.parseInt\(timeElement.getAttribute\("Duration"\)\);) s
+(       }) s
+(       /** get the maximum number of people allowed to enrol in this) s
+(        * timeslot) s
+(        * @return the maximum allowed as an integer) s
+(        */) s
+(       public int getEnrolmentLimit\(\) {) s
+(         return Integer.parseInt\(timeElement.getAttribute\("EnrolmentLimit"\)\);) s
+(       }) s
+(       /** A typesafe vector to get a list of names enrolled in a) s
+(        * given timeslot) s
+(        */) s
+(       public class EnrolledList extends Vector {) s
+(         protected boolean add\(String enrolled\) {) s
+(           return super.add\(enrolled\);) s
+(         }) s
+(         /** retrieve the name of the person enrolled at a given) s
+(          * location in the list.) s
+(          * @param i index of name in the list to retrieve \(starts) s
+(          * from 0\)) s
+(          * @return the name as a String) s
+(          */) s
+(         public String item\(int i\) {) s
+(           return \(String\)super.elementAt\(i\);) s
+(         }) s
+(       }) s
+(       /** ) s
+(        * @return the list of all those enrolled in this timeslot) s
+(        */) s
+(       public EnrolledList getEnrolledList\(\) {) s
+(         EnrolledList enrolledList = new EnrolledList\(\);) s
+(         NodeList enrolledNodes = timeElement.getElementsByTagName\("Enrolled"\);) s
+(         for\(int i=0; i < enrolledNodes.getLength\(\); i++\) {) s
+(           Element e = \(Element\)enrolledNodes.item\(i\);) s
+(           enrolledList.add\(e.getFirstChild\(\).getNodeValue\(\).trim\(\)\);) s
+(         }) s
+(         return enrolledList;) s
+(       }) s
+(      ) s
+(       /** add a name to this timeslot) s
+(        * @param enrolledName the name of the person to add to the) s
+(        * list) s
+(        */) s
+(       public void addEnrolled\() s
+(         String enrolledName) s
+(       \) {) s
+(         Element newEnrolled = doc.createElement\("Enrolled"\);) s
+(         newEnrolled.appendChild\(doc.createTextNode\(enrolledName\)\);) s
+(         timeElement.appendChild\(newEnrolled\);) s
+(       }) s
+(     }) s
+(     /** A typesafe vector to get a list of all the timeslots) s
+/sd 0 def
+1 sn
+fnf
+lg lgp
+pagesave restore
+showpage
+%%Page: 2 2
+/pagesave save def
+/twp true def
+/fnfs 11 def
+/dfs fnfs 0.8 mul def
+/df /Helvetica dfs getfont def
+/dw df setfont td stringwidth pop def
+/sfnf filenmfontname fnfs getfont def
+/hm fnfs 0.25 mul def
+/hs 0.22 inch def
+/bfs 6.8 def
+/bdf /Courier-Bold bfs getfont def
+/bm bfs 0.7 mul def
+/bf /CourierBack bfs getfont def
+/l 69 def
+/c 89 def
+/pw
+   bf setfont (0) stringwidth pop c mul bm dup add add
+   def
+/ph
+   bfs l mul bm dup add add hs add
+   def
+/fns
+      pw
+      fnfs 4 mul dw add (Page 999) stringwidth pop add
+    sub
+  def
+/tm margin twp {3} {2} ifelse div def
+/sd 0 def
+/y [ rm ph add bm add
+          dup ] def
+/sny dfs dfs add def
+/snx sh tm dfs add sub def
+/dy sny def
+/dx tm dfs add def
+/x [ tm			% left page
+          dup 2 mul pw add	% right page
+        ] def
+/scx sh 2 div def
+/fny dy def
+/fnx scx def
+/ly fnfs 2 div y sd get add def
+/lx snx def
+/d (Aug 28 2000 14:53) def
+( Enrolment.java ) fn
+sw 0 translate
+90 rotate
+3 hp
+border
+hborder
+/x0 x 0 get bm add def
+/y0 y 0 get bm bfs add hs add sub def
+x0 y0 moveto
+bf setfont
+(      * available on this day) s
+(      */) s
+(     public class TimeList extends Vector {) s
+(       protected boolean add\(Time time\) {) s
+(         return super.add\(time\);) s
+(       }) s
+(       /** retrieve the timeslot at a given location in the list) s
+(        * @param i index in the list of the time to retrieve \(starts) s
+(        * from 0\).) s
+(        * @return the time at that index) s
+(        */) s
+(       public Time item\(int i\) {) s
+(         return \(Time\)super.elementAt\(i\);) s
+(       }) s
+(     }) s
+(     /** Get a list of all the times available on this day) s
+(      * @return the list of all the times available on this day) s
+(      */) s
+(     public TimeList getTimeList\(\) {) s
+(       TimeList times = new TimeList\(\);) s
+(       NodeList timeNodes = dayElement.getElementsByTagName\("Time"\);) s
+(       for\(int i=0; i < timeNodes.getLength\(\); i++\) {) s
+(         times.add\(new Time\(\(Element\)timeNodes.item\(i\)\)\);) s
+(       }) s
+(       return times;) s
+(     }) s
+(     /** Get a text description name for the day \(eg "Wednesday"\)) s
+(      * @return a string representing the day) s
+(      */) s
+(     public String getName\(\) {) s
+(       return dayElement.getAttribute\("Name"\);) s
+(     }) s
+(   }) s
+( ) s
+(   /** A typesafe vector to get a list of all the days with times) s
+(    * allocated in this enrolment timetable.) s
+(    */) s
+(   public class DayList extends Vector {) s
+(     protected DayList\(\) {) s
+(       super\(\);) s
+(     }) s
+(     protected boolean add\(Day day\) {) s
+(       return super.add\(day\);) s
+(     }) s
+(     /** retrieve the day at a given location in the list) s
+(      * @param i index in the list of the day to retrieve \(starts from) s
+(      * 0\).) s
+(      * @return the day at that index) s
+(      */) s
+(     public Day item\(int i\) {) s
+(       return \(Day\)super.elementAt\(i\);) s
+(     }) s
+(   }) s
+( ) s
+(   /** @return the list of all days with times allocated in this) s
+(    * enrolment timetable) s
+(    */) s
+(   public DayList getDayList\(\) {) s
+(     DayList days = new DayList\(\);) s
+(     NodeList dayNodes =) s
+(       doc.getDocumentElement\(\).getElementsByTagName\("Day"\);) s
+(     for\(int i=0; i < dayNodes.getLength\(\); i++\) {) s
+(       days.add\(new Day\(\(Element\)dayNodes.item\(i\)\)\);) s
+(     }) s
+(     return days;) s
+(   }) s
+( ) s
+(   /** write out the updated data) s
+(    */) s
+/sd 1 def
+4 hp
+border
+hborder
+/x0 x 1 get bm add def
+/y0 y 1 get bm bfs add hs add sub def
+x0 y0 moveto
+bf setfont
+(   public void save\(\) {) s
+(     try {) s
+(       FileWriter out = new FileWriter\(fileName\);) s
+(       doc.write\(out\);) s
+(     } catch\(Exception e\) {) s
+(       e.printStackTrace\(\);) s
+(     }) s
+(   }) s
+( ) s
+( }) s
+/sd 0 def
+2 sn
+fnf
+lg lgp
+pagesave restore
+showpage
+
+%%Trailer
+%%Pages: 2
+docsave restore end

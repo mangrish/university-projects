@@ -1,0 +1,128 @@
+package enroller;
+
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
+
+/** A frame to display the Enrolment timetable GUI
+ * 
+ * @author Tim Dwyer
+ * @version 1.0 25/8/2000
+ */
+public class EnrolmentFrame extends JInternalFrame {
+  static int openFrameCount = 0;
+  static final int xOffset = 30, yOffset = 30;
+
+  /** create the enrolment frame to display details from the
+   * given file and to enrol the given user
+   *
+   * @param fileName name of xml file holding enrolment data
+   * @param userName the name of the person to add to the enrolment
+   * list
+   */
+  public EnrolmentFrame(String fileName, String userName) {
+    super("Enrolment File #" + (++openFrameCount), 
+        true, //resizable
+        true, //closable
+        true, //maximizable
+        true);//iconifiable
+
+    initGUI(fileName,userName);
+
+
+    //...Then set the window size or call pack...
+    setSize(300,300);
+
+    //Set the window's location.
+    setLocation(xOffset*openFrameCount, yOffset*openFrameCount);
+  }
+  
+  /**
+   * The initGUI method is an example of how to read and update the
+   * data structure.  It simply outputs the data as text in a 
+   * JTextArea, also adding "Harry" to each time slot and
+   * finally saves the file again.
+   *
+   * Replace the contents of this procedure to add your own GUI and
+   * implement the required functionality.
+   */
+  public void initGUI(String fileName, String userName) {
+    JTextArea textArea = new JTextArea();
+    textArea.setEditable(false);
+    try{
+      // the enrolment object holds all the data
+      // which it reads in from fileName
+      Enrolment enrolment = new Enrolment(fileName);
+
+      // Declare all the objects we'll need to refer to the data
+      // within enrolment
+
+      // Day is a class that holds a set of times
+      Enrolment.Day day;
+      // days is a list of Days (DayList extends java.util.Vector)
+      Enrolment.DayList days;
+      // time is a reference to a timeslot within a given day
+      Enrolment.Day.Time time;
+      // times is a list of times
+      Enrolment.Day.TimeList times;
+      // enrolledList is a list of the names of 
+      // those enrolled (a list of strings)
+      Enrolment.Day.Time.EnrolledList enrolledList;
+
+      // get a list of all the available days
+      days = enrolment.getDayList();
+  
+      // For each day in days:
+      for(int i = 0; i<days.size(); i++) {
+        day = days.item(i);
+
+        // Show the name of the day (ie: "Wednesday") in our textArea 
+        textArea.append(day.getName() + "\n");
+
+        // get a list of the times available for the day
+        times = day.getTimeList();
+
+        // For each timeslot
+        for(int j = 0; j<times.size(); j++) {
+          time = times.item(j);
+
+          // Show the start time and duration of the class
+          textArea.append("  Time = " + time.getStartTime()
+            + "  Duration = " + time.getDuration() + "  EnrolmentLimit = "
+            + time.getEnrolmentLimit() + "\n");
+
+          // Get all the people enrolled in that class
+          enrolledList = time.getEnrolledList();
+
+          // For each person enrolled
+          for(int k = 0; k<enrolledList.size(); k++) {
+            String enrolled = enrolledList.item(k);
+
+            // Show the name in the text area
+            textArea.append("    " + enrolled + "\n");
+          }
+
+          // Add a new entry to each timeslot
+          time.addEnrolled(userName);
+	  /* The following quick hack, if I left it in, would remove
+	     the userName just inserted from the last timeslot...
+	     this is a silly bit of code that I put here to show you that
+	     there is also a time.removeEnrolled method!
+	  if(j==(times.size()-1))
+	    time.removeEnrolled(userName);
+	    */
+        }
+      }
+      // Save changes back out to the file
+      enrolment.save();
+    } catch(java.io.IOException e) {
+      // display any error messages
+      e.printStackTrace();
+    }
+    
+    // add the text area to the frame
+    getContentPane().add(textArea);
+  }
+}
+
+

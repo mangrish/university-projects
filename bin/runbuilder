@@ -1,0 +1,5 @@
+#!/bin/sh
+#set -x
+
+java -cp /home/case/440/hydra/workspaces/mangr/sandbox/compbuild/product/code/build hydra.dess.ui.presentation.componentbuilder.Test
+

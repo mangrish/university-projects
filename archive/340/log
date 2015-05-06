@@ -1,0 +1,23 @@
+#!/bin/sh
+set -x
+
+tasks_outstanding=/home/case/340/s340gg/www_private/htdocs/Tasks/tasks_outstanding.txt
+
+/home/case/340/s340gg/Common/Src/login
+
+echo
+echo "Welcome to log. This will open up the taskID file you have finished"
+echo "and move the completed task to a Unverified file, which will later"
+echo "be validated and put in completed.  A mail to the group reguarding"
+echo "changes will also be sent off automatically after the log is completed."
+echo
+echo "Enter the completed tasks ID number:"
+
+read taskID
+vim "/home/case/340/s340gg/Common/Tasks/Outstanding/task_$taskID.txt"
+mv "/home/case/340/s340gg/Common/Tasks/Outstanding/task_$taskID.txt" /home/case/340/s340gg/Common/Tasks/Unverified/.
+
+`fgrep -v ^"|$taskID" $tasks_outstanding` > tmp
+/usr/bin/cp tmp $tasks_outstanding
+/usr/bin/rm tmp 
+mailx -s "Completion of task $taskID by `whoami`" mangr@students.cs.mu.oz.au < /home/case/340/s340gg/Common/Tasks/Unverified/task_$taskID.txt

@@ -1,0 +1,56 @@
+============================================
+Testing fcfs on proc[0-3] w/ cache size 15
+time at completion:             7611
+time spent idle:                527
+number of requests:             202
+number of reads/writes:         105/97
+number of cache hits/misses:    32/73
+number of seeks executed:       170
+number of tracks travelled:     5384
+average time/request:           37.678
+average seeks/request:          0.842
+average tracks/seek:            31.671
+============================================
+vis/sstf.out
+============================================
+Testing sstf on proc[0-3] w/ cache size 15
+time at completion:             6979
+time spent idle:                164
+number of requests:             202
+number of reads/writes:         105/97
+number of cache hits/misses:    27/78
+number of seeks executed:       174
+number of tracks travelled:     5075
+average time/request:           34.550
+average seeks/request:          0.861
+average tracks/seek:            29.167
+============================================
+vis/cscan.out
+============================================
+Testing cscan on proc[0-3] w/ cache size 15
+time at completion:             7452
+time spent idle:                306
+number of requests:             202
+number of reads/writes:         105/97
+number of cache hits/misses:    34/71
+number of seeks executed:       168
+number of tracks travelled:     5466
+average time/request:           36.891
+average seeks/request:          0.832
+average tracks/seek:            32.536
+============================================
+vis/vscan.out
+============================================
+Testing vscan on proc[0-3] w/ cache size 15
+Vscan reverse penalty is 0.5
+time at completion:             7202
+time spent idle:                199
+number of requests:             202
+number of reads/writes:         105/97
+number of cache hits/misses:    28/77
+number of seeks executed:       172
+number of tracks travelled:     5283
+average time/request:           35.653
+average seeks/request:          0.851
+average tracks/seek:            30.715
+

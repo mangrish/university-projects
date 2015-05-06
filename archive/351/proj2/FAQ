@@ -1,0 +1,66 @@
+FAQ for 351 proj 2
+
+Last updated 15 May.
+
+
+_____________________________________________
+
+Q: How long should we make the fields in our structs that hold the data?
+
+A: To get the width of each column in a table, use the sql command
+   " help <tablename> ", e.g. help owners \g.
+
+   Your struct must be at least this length PLUS 1 for the null terminator.
+
+_____________________________________________
+
+Q: Some field widths in the hotel table have changed since project 1.
+   Is this significant? 
+
+A: Not really.  The field widths were made smaller, so that the table
+   data could be displayed more easily.
+
+_____________________________________________
+
+Q: Should we do the searching for owners in SQL or dump the data into
+   a data structure and do it in C.
+
+A: The project specification states quite clearly that "when a piece of
+   data must be handled more than once, put the results of your query in 
+   data structure, then work with the data structure, rather than access
+   the database repeatedly."
+
+   If you think about the potential number of database accesses you might
+   have to make by searching for each owner in each chain using SQL,
+   you will see that it is more efficient in terms of disk accesses to
+   put all the data in a data structure and process it in an 
+   in-memory data structure.
+
+   While in this case you will need to dump the whole table, so it
+   may seem like you are throwing away all the potential of relational
+   database searching, in most real-world situations the select statement
+   would include a condition that leads it to capture only a small
+   fraction of the data, which would then be searched in-memory;
+   in this situation the time savings is even more significant.  
+
+
+_____________________________________________
+
+
+Q: The specification says that hotels can only have one owner.  Can other
+   companies have more than one owner?
+
+A: No, to simplify the programming you can assume that each company only
+   has one owner.  
+
+_____________________________________________
+
+
+Q: Do we have to check whether cycles exist in the ownership, e.g. company
+   A owns part of company B, and company B owns part of company A?
+
+A: No, there is no need to check for cycles.   You can assume that there 
+   are no cycles in the data.
+
+_____________________________________________
+

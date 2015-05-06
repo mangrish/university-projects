@@ -1,0 +1,986 @@
+============================================
+vis/mangr.output
+14:38:37_Tuesday_17_October_2000
+============================================
+-------------------------------------------------------------
+Submission: mangr              433-255 Logic & Computation
+-------------------------------------------------------------
+This submit script tests your puzzle-solver for the existence
+of a solution by invoking e.g.
+
+test_puzzle(,S).   % Hint: No puzzle should fail.
+
+Correctness is NOT tested at this stage.
+
+TESTING proj3.pl...
+-------------------------------------------------------------
+
+test_puzzle(zebra,S).
+
+S = [['the zebra owner is', japanese], ['the water drinker is', norwegian]] 
+
+-------------------------------------------------------------
+
+test_puzzle(olympic,S).
+
+S = ['Activities Monday to Friday are:', stepAerobics, weights, exerciseBike, pressUps, chestExpander, 'Times Monday to Friday are:', 3, 4, 5, 1, 2, 'Breakfasts Monday to Friday are:', orangeJuice, muesli, lowCalorieFlakes, grapeFruit, poachedEgg] 
+
+-------------------------------------------------------------
+
+test_puzzle(frogs,S).
+
+S = ['The number of frogs is', 4] 
+
+-------------------------------------------------------------
+
+test_puzzle(policeman,S).
+
+S = ['Incidents Monday to Friday were:', brokenWindow, cyclingWithoutLights, scooterAccident, drunkAndIncapable, missingTortoise, 'Times  Monday to Friday  were:', 4, 8, 12, 10, 2, 'Locations Monday to Friday were:', royalParade, victoriaMarket, melbourneCentral, tinAlley, bouverieStreet] 
+
+-------------------------------------------------------------
+
+test_puzzle(spelling,S).
+
+S = ['Alfie Bett misspelt:', league, routine, medicine, 'Ida Guest misspelt:', plague, scandal, building, 'Ivor Notion misspelt:', unique, chimney, delicacy, 'Kenny Spellett misspelt:', detail, mystery, magazine, 'May Beewright misspelt:', sphere, display, crescent] 
+
+-------------------------------------------------------------
+
+test_puzzle(flatfoot,S).
+
+S = ['James was the murderer, the weapon was', spanner, 'and Room was', library] 
+
+-------------------------------------------------------------
+END OF TESTING.
+============================================
+src/proj3.pl
+15:55:56_Thursday_12_October_2000
+============================================
+%------------------------------------------------------------------------------
+%/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+%------------------------------------------------------------------------------
+%
+%       program:        Project, Semester 2,2000:      PUZZLE SOLVER 
+%
+%       for:                    433-255, logic and computation;
+%
+%       written:        Mark Angrish, Student number 74592
+%                                               Project, september 2000.
+%
+%
+%
+%------------------------------------------------------------------------------
+%/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+%------------------------------------------------------------------------------
+
+
+%------------------------------------------------------------------------------
+%
+%			test_puzzle/2 : given the name of a puzzle defined, suceeds if
+%											the solution is able to unify solve_puzzle
+%											(this code comes from lecture notes)
+%
+%------------------------------------------------------------------------------
+test_puzzle(Name, Solution) :-
+	structure(Name, Structure),
+	clues(Name, Structure, Clues),
+	queries(Name, Structure, Queries, Solution),
+	solve_puzzle(puzzle(Clues, Queries, Solution), Solution).
+
+solve_puzzle(puzzle(Clues,Queries,Solution), Solution):-
+		solve(Clues),
+		solve(Queries).
+
+solve([Clue|Clues]):-
+	Clue, solve(Clues).
+	solve([ ]).
+
+%===================================================
+%===STRUCTURES======================================
+%===================================================
+%structure/2 : given the name of a puzzle, an appropriate list is
+%							 arranged.
+%====================
+%---zebra------------
+%====================
+structure( zebra,
+		[man(_H1, _N1, _P1, _D1, _C1), 			%H is the house colour
+		 man(_H2, _N2, _P2, _D2, _C2),			%N is the nationality, P is the pet,
+		 man(_H3, _N3, _P3, _D3, _C3),			%D is the drink, C is the cigarette
+		 man(_H4, _N4, _P4, _D4, _C4),
+		 man(_H5, _N5, _P5, _D5, _C5)] ).
+
+
+%====================
+%---olympic----------
+%====================
+structure(olympic, 
+		[day( _A1, _T1, _B1),			%A is the activity
+		 day( _A2, _T2, _B2),			%T is the duration
+		 day( _A3, _T3, _B3),			%B is the breakfast
+		 day( _A4, _T4, _B4),
+		 day(_A5, _T5, _B5)]).
+
+
+%====================
+%---frogs------------
+%====================
+structure(frogs, 
+		[friend(_T1),			%T is the type of animal
+		friend(_T2),
+		friend(_T3),
+		friend(_T4), 
+		friend(_T5)] ).
+
+
+%====================
+%---policeman--------
+%====================
+
+structure(policeman,
+		[event(_T1, _L1, _N1),		%T is the time of the incident
+		 event(_T2, _L2, _N2),		%L is the location
+		 event(_T3, _L3, _N3), 		%N is the nature of the incident
+		 event(_T4, _L4, _N4),
+		 event(_T5, _L5, _N5)] ).
+
+
+%====================
+%---spelling---------
+%====================
+
+structure(spelling,
+		[pupil(_SIX1, _SEVEN1, _EIGHT1),		%SIX is the six letter misspelt word
+		 pupil(_SIX2, _SEVEN2, _EIGHT2), 		%SEVEN is the seven letter misspelt word
+		 pupil(_SIX3, _SEVEN3, _EIGHT3), 		%EIGHT is the eight letter misspelt word
+		 pupil(_SIX4, _SEVEN4, _EIGHT4),
+		 pupil(_SIX5, _SEVEN5, _EIGHT5)]).
+
+
+%====================
+%---flatfoot---------
+%====================
+
+structure(flatfoot,
+		[scene(_M, _W, _R)]).	%M is the murderer, W is the weapon, R is the room
+
+
+%===================================================
+%===CLUES===========================================
+%===================================================
+% clues/3 : given the name of the puzzle and the data structure made by structure/2,
+%						a list of clues is generated (from the spec sheet).
+%====================
+%---zebra------------
+%====================
+
+clues(zebra, Men,
+	[	(member(Man1Clue1, Men),								% Clue 1 
+		 nationality(Man1Clue1, englishman),
+		 house(Man1Clue1, red) ),
+
+		(member(Man1Clue2, Men),								% Clue 2
+		 nationality(Man1Clue2, spaniard),
+		 pet(Man1Clue2, dog) ),
+
+		(member(Man1Clue3, Men),								% Clue 3
+		 house(Man1Clue3, green),
+		 drink(Man1Clue3, coffee) ),
+
+		(member(Man1Clue4, Men),								% Clue 4
+		 nationality(Man1Clue4, ukranian),
+		 drink(Man1Clue4, tea) ),
+
+		(on_right(Man1Clue5, Man2Clue5, Men),		% Clue 5
+		 house(Man1Clue5, green),
+		 house(Man2Clue5, ivory) ),
+
+		(member(Man1Clue6, Men),								% Clue 6
+		 cigarette(Man1Clue6, winston),
+		 pet(Man1Clue6, snails) ),
+
+		(member(Man1Clue7, Men),								% Clue 7
+		 house(Man1Clue7, yellow),
+		 cigarette(Man1Clue7, kools) ),
+
+		(middle(Man1Clue8, Men),								% Clue 8
+		 drink(Man1Clue8, milk) ),
+
+		(first(Man1Clue9, Men),									% Clue 9
+		 nationality(Man1Clue9, norwegian) ),
+
+		(next_to(Man1Clue10, Man2Clue10, Men),	% Clue 10
+		 cigarette(Man1Clue10, chesterfields),
+		 pet(Man2Clue10, fox) ),
+
+		(next_to(Man1Clue11, Man2Clue11, Men),	% Clue 11
+		 cigarette(Man1Clue11, kools),
+		 pet(Man2Clue11, horse) ),
+
+		(member(Man1Clue12, Men),								% Clue 12
+		 cigarette(Man1Clue12, lucky_strike),	
+		 drink(Man1Clue12, orange_juice) ),
+
+		(member(Man1Clue13, Men),								% Clue 13
+		 nationality(Man1Clue13, japanese),	
+		 cigarette(Man1Clue13, parliaments) ),
+
+		(next_to(Man1Clue14, Man2Clue14, Men),	% Clue 14
+		 nationality(Man1Clue14, norwegian),
+		 house(Man2Clue14, blue) )
+	] ).
+
+
+
+%====================
+%---olympic----------
+%====================
+
+clues(olympic,Week,
+		[	(not_friday(Day1Clue1, Week),					%clue 1
+			 time(Day1Clue1, 3),
+			 activity(Day1Clue1, stepAerobics)),
+
+			(tuesday(Day1Clue2, Week),						%clue 2
+			 time(Day1Clue2, 4) ),
+
+			(wednesday(Day1Clue3, Week),					%clue 3
+			 activity(Day1Clue3, exerciseBike),
+			 cereal(Day1Clue3),
+			 thursday(Day2Clue3, Week),
+			 breakfast(Day2Clue3, grapeFruit),
+			 not_thursday(Day3Clue3, Week),
+			 activity(Day3Clue3, stepAerobics)),
+
+			(not_friday(Day1Clue4, Week),					%clue 4
+			 activity(Day1Clue4, weights) ),
+
+			(member(Day1Clue5, Week),							%clue 5
+			 member(Day2Clue5, Week),
+			 three_less(Day1Clue5, Day2Clue5),
+			 activity(Day1Clue5, pressUps),
+			 breakfast(Day1Clue5, grapeFruit),
+			 breakfast(Day2Clue5, muesli)),
+
+			(member(Day1Clue6, Week),							%clue 6
+			 time(Day1Clue6, 2),
+			 breakfast(Day1Clue6, poachedEgg)),
+
+			(member(Day1Clue7, Week),							%extra clue 7
+			 breakfast(Day1Clue7, orangeJuice)),
+
+			(member(Day1Clue8, Week),							%extra clue 8
+			 activity(Day1Clue8, chestExpander)),
+
+			(member(Day1Clue9, Week),							%extra clue 9
+			 time(Day1Clue9, 5))
+		]).
+
+
+%====================
+%---frogs------------
+%====================
+
+clues(frogs, Friends,
+		[(albert(Friend1Clue2, Friends),																		%clue 2
+		  bernard(Friend2Clue2, Friends),	
+			((type(Friend1Clue2, kangaroo), type(Friend2Clue2, kangaroo));
+		  (type(Friend1Clue2, frog), type(Friend2Clue2, frog)))),
+			
+		 (charles(Friend1Clue3, Friends),																		%clue 3
+		  daniel(Friend2Clue3, Friends),
+			((type(Friend1Clue3, kangaroo), type(Friend2Clue3, frog));
+		  (type(Friend1Clue3, frog), type(Friend2Clue3, kangaroo)))),
+
+		 (ellie(Friend1Clue4, Friends),																			%clue 4
+		  albert(Friend2Clue4, Friends),
+			((type(Friend1Clue4, kangaroo), type(Friend2Clue4, kangaroo));
+		  (type(Friend1Clue4, frog), type(Friend2Clue4, frog)))),
+
+		 (bernard(Friend1Clue5, Friends),																		%clue 5
+		  charles(Friend2Clue5, Friends),
+			((type(Friend1Clue5, kangaroo), type(Friend2Clue5, frog));
+		  (type(Friend1Clue5, frog), type(Friend2Clue5, kangaroo)))),
+
+		 (daniel(Friend1Clue6, Friends),																		%clue 6
+		  ellie(Friend2Clue6, Friends),
+		  albert(Friend3Clue6, Friends),
+			((type(Friend1Clue6, kangaroo),
+		  ((type(Friend2Clue6, kangaroo) , type(Friend3Clue6, frog));
+		  (type(Friend2Clue6, frog) , type(Friend3Clue6, kangaroo))));
+			(type(Friend1Clue6, frog),
+		  ((type(Friend2Clue6, frog), type(Friend3Clue6, frog));
+		  (type(Friend2Clue6, kangaroo), type(Friend3Clue6, kangaroo))))))
+		]).
+
+
+%====================
+%---policeman--------
+%====================
+
+clues(policeman, Events,
+		[(day_after(Event1Clue1, Event2Clue1, Events),	%clue 1
+			timeof(Event1Clue1, 8),
+			nature(Event1Clue1, cyclingWithoutLights),
+			location(Event2Clue1, melbourneCentral)),
+
+		 (not_friday(Event1Clue2, Events),							%clue 2
+			timeof(Event1Clue2, 10),
+			location(Event1Clue2, tinAlley),
+			friday(Event2Clue2, Events),
+			nature(Event2Clue2, missingTortoise)),
+
+		 (later_in_day(Event1Clue3, Event2Clue3),				%clue 3
+			monday(Event1Clue3, Events),
+			member(Event2Clue3, Events),
+			location(Event2Clue3, bouverieStreet)),
+
+		 (wednesday(Event1Clue4, Events),								%clue 4
+			timeof(Event1Clue4, 12)),
+
+		 (tuesday(Event1Clue5, Events),									%clue 5
+		  location(Event1Clue5, victoriaMarket)),
+
+			(not_thursday(Event1Clue6, Events),						%clue 6
+			nature(Event1Clue6, scooterAccident)),
+
+		 (member(Event1Clue7, Events),									%clue 7
+			nature(Event1Clue7, brokenWindow),
+			location(Event1Clue7, royalParade)),
+
+		 (member(Event1Clue8, Events),									%extra clue 8
+			nature(Event1Clue8, drunkAndIncapable)),
+
+		 (member(Event1Clue9, Events),									%extra clue 9
+			timeof(Event1Clue9, 2)),
+
+		 (member(Event1Clue10, Events),									%extra clue 10
+			timeof(Event1Clue10, 4))
+		]).
+	
+	
+%====================
+%---spelling---------
+%====================
+
+
+clues( spelling, Pupils,
+		[	(alfie(Pupil1Clue1, Pupils),									%clue 1
+			 got_detail_rite(Pupil1Clue1),
+			 got_chimney_rite(Pupil1Clue1),
+			 got_building_rite(Pupil1Clue1),
+			 may(Pupil2Clue1, Pupils),
+			 got_unique_rite(Pupil2Clue1),
+			 got_scandal_rite(Pupil2Clue1),
+			 got_medicine_rite(Pupil2Clue1)),
+
+			(ivor(Pupil1Clue2, Pupils),										%clue 2
+			 wrong_8(Pupil1Clue2, delicacy)),
+
+			(on_right(Pupil1Clue3, Pupil2Clue3, Pupils),	%clue 3
+			 wrong_6(Pupil1Clue3, detail),
+			 wrong_7(Pupil1Clue3, mystery),
+			 wrong_8(Pupil2Clue3, crescent),
+			 wrong_6(Pupil2Clue3, sphere)),
+
+			(boy(Pupil1Clue4, Pupils),										%clue 4
+			 wrong_7(Pupil1Clue4, chimney),
+			 girl(Pupil2Clue4, Pupils),
+			 wrong_7(Pupil2Clue4, display)),
+			 
+			(member(Pupil1Clue5, Pupils),									%clue 5
+			 wrong_8(Pupil1Clue5, building),
+			 wrong_7(Pupil1Clue5, scandal)),
+
+			(ida(Pupil1Clue6, Pupils),										%clue 6
+			 wrong_6(Pupil1Clue6, plague)),
+
+			(member(Pupil1Clue7, Pupils),									%clue 7
+			 wrong_7(Pupil1Clue7, routine),
+			 got_magazine_rite(Pupil1Clue7),
+			 select(Pupils, Pupil2Clue7, NewPupils),
+			 member(Pupil3Clue7, NewPupils),
+			 wrong_6(Pupil2Clue7, unique),
+			 wrong_8(Pupil3Clue7, medicine)),
+
+			(member(Pupil1Clue8, Pupils),									%extra clue 8
+			 wrong_8(Pupil1Clue8, magazine))
+	]).
+
+
+
+%====================
+%---flatfoot---------
+%====================
+
+clues(flatfoot, Scenario,
+		[
+			(member(Clue1, Scenario),				%clue 1
+			(not_knife(Clue1);
+			 murderer(Clue1 ,mary);
+			 murderer(Clue1 , george))),
+
+			(member(Clue2, Scenario),				%clue 2
+			(not_spanner(Clue2);
+			 room(Clue2, library);
+			 room(Clue2, lounge))),
+
+			(member(Clue3, Scenario),				%clue 3 
+			 (not_candlestick(Clue3);
+				murderer(Clue3, katherine);
+				room(Clue3, conservatory))),
+
+			(member(Clue4, Scenario),				%clue 4
+			 (not_mary(Clue4);
+				room(Clue4, garage))),
+
+			(member(Clue5, Scenario),				%clue 5
+			 (not_library(Clue5);
+				murderer(Clue5, james))),
+
+			(member(Clue6, Scenario),				%clue 6
+			 (not_wal(Clue6);
+				weapon(Clue6,gun);
+				weapon(Clue6, rope))),
+
+			(member(Clue7, Scenario),				%clue 7
+			 (not_lounge(Clue7);
+				murderer(Clue7, wal))),
+
+			(member(Clue8, Scenario),				%clue 8
+			 (not_tanya(Clue8);
+				room(Clue8, garage);
+				room(Clue8, ballroom))),
+
+			(member(Clue9, Scenario),				%clue 9
+			 (not_conservatory(Clue9);
+				murderer(Clue9, wal);
+				murderer(Clue9, mary))),
+
+			(member(Clue10, Scenario),			%clue 10
+			 (not_rope(Clue10);
+				room(Clue10, ballroom);
+				room(Clue10, diningRoom))),
+
+			(member(Clue11, Scenario),			%clue 11
+			 (not_ballroom(Clue11);
+				murderer(Clue11, mary);
+				murderer(Clue11, katherine);
+				weapon(Clue11, spanner))),
+
+			(member(Clue12, Scenario),			%clue 12
+			 (not_gun(Clue12);
+				murderer(Clue12, george);
+				murderer(Clue12, james))),
+
+			(member(Clue13, Scenario),			%clue 13
+			 (not_tanya(Clue13);
+				weapon(Clue13, spanner);
+				weapon(Clue13, candleStick))),
+
+			(member(Clue14, Scenario),			%clue 14
+			 (not_gun(Clue14);
+				room(Clue14, conservatory))),
+
+			(member(Clue15, Scenario),			%clue 15
+			 (not_george(Clue15);
+				weapon(Clue15, candleStick);
+				weapon(Clue15, leadPiping))),
+
+			(member(Clue16, Scenario),			%clue 16
+			 (not_diningroom(Clue16);
+				murderer(Clue16, tanya);
+				murderer(Clue16, mary))),
+
+			(member(Clue17, Scenario),			%clue 17
+			 (not_garage(Clue17);
+				weapon(Clue17, gun))),
+
+			(member(Clue18, Scenario),			%clue 18
+			 (not_diningroom(Clue18);
+				weapon(Clue18, spanner);
+				weapon(Clue18, leadPiping))),
+
+			(member(Clue19, Scenario),			%clue 19
+			 (not_conservatory(Clue19);
+				weapon(Clue19, gun);
+				weapon(Clue19, leadPiping))),
+
+			(member(Clue20, Scenario),			%clue 20
+			 (not_katherine(Clue20);
+			 murderer(Clue20,george);
+			 room(Clue20, lounge))),
+
+			(member(Clue21, Scenario),			%clue 21
+			 (not_leadPiping(Clue21);
+				weapon(Clue21, gun)))
+		]).
+
+		
+
+%===================================================
+%===QUERIES=========================================
+%===================================================
+% queries/4 : given appropriate puzzlename and data structure, queries are asked,and
+%							are are unified toa solution, if there is a solution
+%
+%====================
+%---zebra------------
+%====================
+
+queries(zebra, Men, 
+	[	member(Q1, Men),					% Query 1
+		nationality(Q1, Name1),
+		pet(Q1, zebra),
+		member(Q2, Men),					% Query 2
+		nationality(Q2, Name2),
+		drink(Q2, water)
+	],
+	[['the zebra owner is' , Name1], ['the water drinker is' , Name2]]).
+
+%====================
+%---olympic----------
+%====================
+
+
+queries(olympic, Week,
+		[ monday(Q1, Week),
+			activity(Q1, Activity1),
+			time(Q1, Time1),
+			breakfast(Q1, Breakfast1),
+			tuesday(Q2, Week),
+			activity(Q2, Activity2),
+			time(Q2, Time2),
+			breakfast(Q2, Breakfast2),
+			wednesday(Q3, Week),	
+			activity(Q3, Activity3),
+			time(Q3, Time3),
+			breakfast(Q3, Breakfast3),
+			thursday(Q4, Week),
+			activity(Q4, Activity4),
+			time(Q4, Time4),
+			breakfast(Q4, Breakfast4),
+			friday(Q5, Week),
+			activity(Q5, Activity5),
+			time(Q5, Time5),
+			breakfast(Q5, Breakfast5),
+			maplist(breakfast, Week, Rs),
+			list_to_set(Rs,Ss),
+			length(Ss, 5)
+		],
+		['Activities Monday to Friday are:' , Activity1, Activity2, Activity3, Activity4, Activity5,
+		 'Times Monday to Friday are:' , Time1, Time2, Time3, Time4, Time5, 
+		 'Breakfasts Monday to Friday are:'
+		 ,Breakfast1, Breakfast2, Breakfast3, Breakfast4, Breakfast5 ]).
+
+
+%====================
+%---frogs------------
+%====================
+
+queries(frogs, Friends,
+		[	
+			add_frogs(Friends, Final)
+		],
+		['The number of frogs is', Final]).
+
+%====================
+%---policeman--------
+%====================
+
+queries(policeman, Events,
+		[ monday(Q1, Events),
+			nature(Q1, Incident1),
+			timeof(Q1, Time1),
+			location(Q1, Location1),
+			tuesday(Q2, Events),
+			nature(Q2, Incident2),
+			timeof(Q2, Time2),
+			location(Q2, Location2),
+			wednesday(Q3, Events),	
+			nature(Q3, Incident3),
+			timeof(Q3, Time3),
+			location(Q3, Location3),
+			thursday(Q4,Events ),
+			nature(Q4, Incident4),
+			timeof(Q4, Time4),
+			location(Q4, Location4),
+			friday(Q5, Events),
+			nature(Q5, Incident5),
+			timeof(Q5, Time5),
+			location(Q5, Location5)
+		],
+		['Incidents Monday to Friday were:', Incident1, Incident2, Incident3, Incident4,  Incident5, 
+'Times  Monday to Friday  were:', Time1, Time2, Time3, Time4, Time5, 'Locations Monday to Friday were:',
+Location1, Location2, Location3, Location4, Location5]
+).
+
+%====================
+%---spelling---------
+%====================
+
+queries(spelling, Pupils,
+		[alfie(Q1, Pupils),
+		 wrong_6(Q1, Six1),
+		 wrong_7(Q1, Seven1),
+		 wrong_8(Q1, Eight1),
+		 ida(Q2, Pupils),
+		 wrong_6(Q2, Six2),
+		 wrong_7(Q2, Seven2),
+		 wrong_8(Q2, Eight2),
+		 ivor(Q3, Pupils),
+		 wrong_6(Q3, Six3),
+		 wrong_7(Q3, Seven3),
+		 wrong_8(Q3, Eight3),
+		 kenny(Q4, Pupils),
+		 wrong_6(Q4, Six4),
+		 wrong_7(Q4, Seven4),
+		 wrong_8(Q4, Eight4),
+		 may(Q5, Pupils),
+		 wrong_6(Q5, Six5),
+		 wrong_7(Q5, Seven5),
+		 wrong_8(Q5, Eight5),
+		 list_to_set([Six1, Six2, Six3, Six4, Six5], Sixes),
+		 length(Sixes, 5),
+		 list_to_set([Seven1,Seven2, Seven3, Seven4, Seven5], Sevens),
+		 length(Sevens, 5),
+		 list_to_set([Eight1, Eight2, Eight3, Eight4, Eight5], Eights),
+		 length(Eights, 5)
+		],
+		['Alfie Bett misspelt:', Six1, Seven1, Eight1, 'Ida Guest misspelt:',Six2, Seven2, Eight2,'Ivor Notion misspelt:', Six3, Seven3, Eight3,'Kenny Spellett misspelt:', Six4, Seven4, Eight4,'May Beewright misspelt:',Six5, Seven5, Eight5]
+		).
+%====================
+%---flatfoot---------
+%====================
+
+queries(flatfoot, Scenario,
+		[
+			member(P, Scenario),
+			murderer(P , james),
+			weapon(P, Weapon),
+			room(P, Room)
+
+		],
+		['James was the murderer, the weapon was', Weapon, 'and Room was', Room ]).
+
+
+
+%===================================================
+%===ADDITIONAL PREDICATES===========================
+%===================================================
+
+
+%====================
+%---zebra------------
+%====================
+
+% structure access predicates :
+%--------------------------------------
+house(man(A, _B, _C, _D, _E), A).
+nationality(man(_A, B, _C, _D, _E), B).
+pet(man(_A, _B, C, _D, _E), C).
+drink(man(_A, _B, _C, D, _E), D).
+cigarette(man(_A, _B, _C, _D, E), E).
+
+% next_to/3 : uses on_right/3 and tries to find wat is next to an element in a 
+%							data structure
+%----------------
+next_to(X,Y,L) :- 
+	on_right(X,Y,L);
+	on_right(Y,X,L).
+
+% on_right/3 : tests and tries to unify a solution to get the elements on the right of 
+%								a list
+%----------------------
+on_right(X,Y,[X,Y|_Xs]).
+on_right(X,Y,[_Xs|T]):- on_right(X,Y,T).
+
+
+%--------------------------------
+middle( C, [_A, _B, C, _D, _E] ).
+
+% first/2 : given a list unifies the 1st element of the list to a solution
+%-------------------
+first( A, [A | _As]).
+
+
+%====================
+%---olympic----------
+%====================
+
+% structure access predicates :
+%----------------------------
+activity(day(A, _B, _C), A).
+time(day(_A, B, _C), B).
+breakfast(day(_A, _B, C), C).
+
+monday( A, [A, _B, _C, _D, _E]).
+tuesday( B,[_A, B, _C, _D, _E]).
+wednesday( C, [_A, _B, C, _D, _E]).
+thursday( D, [_A, _B, _C, D, _E]).
+friday( E, [_A, _B, _C, _D, E]).
+
+
+cereal(A):-
+	breakfast(A, lowCalorieFlakes);
+	breakfast(A, muesli).
+
+not_friday( X ,Xs):-
+	monday(X, Xs);
+	tuesday(X, Xs);
+	wednesday(X, Xs);
+	thursday(X, Xs).
+
+% three_less/2 unifies a time that is three less  than the 2nd member
+three_less(X, Y):-
+	time(X, 2) , time(Y, 5);
+	time(X, 1) , time(Y, 4).
+%====================
+%---frogs------------
+%====================
+
+% structure access predicates :
+%--------------------------------
+type(friend(A), A).
+
+albert( A, [A, _B, _C, _D, _E]).
+bernard( B, [_A, B, _C, _D, _E]).
+charles( C, [_A, _B, C, _D, _E]).
+daniel( D, [_A, _B, _C, D, _E]).
+ellie( E, [_A, _B, _C, _D, E]).
+
+% add_frogs/2 given a list, counts the number of frogs there are in that list
+%-------------------------
+add_frogs( [],  0).
+add_frogs( [X | Xs] , S):-
+	add_frogs(Xs, S2),
+	((type(X,frog),
+	S is S2+1);
+	(type(X, kangaroo),
+	S is S2)). 
+
+%====================
+%---policeman--------
+%====================
+
+% structure access predicates :
+%-----------------------------
+timeof(event(A, _B, _C), A).
+location(event(_A, B, _C), B).
+nature(event(_A, _B, C), C).
+
+not_thursday( X , Xs):-
+	monday(X, Xs);
+	tuesday(X, Xs);
+	wednesday(X, Xs);
+	friday(X, Xs).
+
+% day_after/3 : similar to on_right/3, just selects element on right of element in list
+day_after(X,Y,[X,Y|_Xs]).
+day_after(X,Y,[_Xs|T]):- day_after(X,Y,T).
+
+later_in_day(X, Y):-
+	((timeof(Y,10),(timeof(X,12); timeof(X,2); timeof(X,4); timeof(X,8)));
+	(timeof(Y,12),(timeof(X,2); timeof(X,4); timeof(X,8)));
+	(timeof(Y,2), (timeof(X,4); timeof(X,8)));
+	(timeof(Y,4), timeof(X,8))).
+%====================
+%---spellling--------
+%====================
+
+% structure access predicates :
+%--------------------------
+wrong_6(pupil(A,_B,_C),A).
+wrong_7(pupil(_A,B,_C),B).
+wrong_8(pupil(_A,_B,C),C).
+
+alfie( A, [A,_B,_C,_D,_E]).
+ida( B, [_A,B,_C,_D,_E]).
+ivor( C, [_A,_B,C,_D,_E]).
+kenny( D, [_A,_B,_C,D,_E]).
+may( E, [_A,_B,_C,_D,E]).
+
+boy( A, As):-
+	alfie(A, As);
+	ivor(A, As);
+	kenny(A, As).
+
+girl(A, As):-
+	ida(A, As);
+	may(A, As).
+
+
+got_chimney_rite(X):-
+	wrong_7(X,display);
+	wrong_7(X,mystery);
+	wrong_7(X,routine);
+	wrong_7(X,scandal).
+
+got_scandal_rite(X):-
+	wrong_7(X,chimney);
+	wrong_7(X,display);
+	wrong_7(X,mystery);
+	wrong_7(X,routine).
+
+got_unique_rite(X):-
+	wrong_6(X,detail);
+	wrong_6(X,league);
+	wrong_6(X,plague);
+	wrong_6(X,sphere).
+
+got_detail_rite(X):-
+	wrong_6(X,league);
+	wrong_6(X,plague);
+	wrong_6(X,sphere);
+	wrong_6(X,unique).
+
+got_medicine_rite(X):-
+	wrong_8(X, building);
+	wrong_8(X, crescent);
+	wrong_8(X, delicacy);
+	wrong_8(X, magazine).
+
+got_building_rite(X):-
+	wrong_8(X, crescent);
+	wrong_8(X, delicacy);
+	wrong_8(X, magazine);
+	wrong_8(X, medicine).
+
+
+got_magazine_rite(X):-
+	wrong_8(X, building);
+	wrong_8(X, crescent);
+	wrong_8(X, delicacy);
+	wrong_8(X, medicine).
+
+
+%====================
+%---flatfoot---------
+%====================
+
+% structure access predicates :
+%--------------------------------------
+murderer(scene(A, _B, _C), A).
+weapon(scene(_A, B, _C), B).
+room(scene(_A, _B, C), C).
+
+not_knife(X):-
+	weapon(X,spanner);
+	weapon(X,candlestick);
+	weapon(X,rope);
+	weapon(X,gun);
+	weapon(X,leadPiping).
+
+not_spanner(X):-
+		weapon(X,knife);
+		weapon(X,candlestick);
+		weapon(X,rope);
+		weapon(X,gun);
+		weapon(X,leadPiping).
+
+not_candlestick(X):-
+	weapon(X,knife);
+	weapon(X,spanner);
+	weapon(X,rope);
+	weapon(X,gun);
+	weapon(X,leadPiping).
+
+not_rope(X):-
+	weapon(X,knife);
+	weapon(X,spanner);
+	weapon(X,candlestick);
+	weapon(X,gun);
+	weapon(X,leadPiping).
+
+not_gun(X):-
+	weapon(X,knife);
+	weapon(X,spanner);
+	weapon(X,candlestick);
+	weapon(X,rope);
+	weapon(X,leadPiping).
+
+not_leadPiping(X):-
+	weapon(X,knife);
+	weapon(X,spanner);
+	weapon(X,candlestick);
+	weapon(X,gun);
+	weapon(X,rope).
+
+not_mary(X):-
+	murderer(X,tanya);
+	murderer(X,george);
+	murderer(X,katherine);
+	murderer(X,james);
+	murderer(X,wal).
+
+not_wal(X):-
+	murderer(X,tanya);
+	murderer(X,george);
+	murderer(X,katherine);
+	murderer(X,james);
+	murderer(X,mary).
+
+not_tanya(X):-
+	murderer(X,mary);
+	murderer(X,george);
+	murderer(X,katherine);
+	murderer(X,james);
+	murderer(X,wal).
+
+not_george(X):-
+	murderer(X,tanya);
+	murderer(X,mary);
+	murderer(X,katherine);
+	murderer(X,james);
+	murderer(X,wal).
+
+not_katherine(X):-
+	murderer(X,tanya);
+	murderer(X,george);
+	murderer(X,mary);
+	murderer(X,james);
+	murderer(X,wal).
+
+not_lounge(X) :-
+   room(X,library);
+   room(X,conservatory);
+   room(X,ballroom);
+   room(X,garage);
+   room(X,diningroom).
+
+not_conservatory(X) :-
+   room(X,library);
+   room(X,lounge);
+   room(X,ballroom);
+   room(X,garage);
+   room(X,diningroom).
+
+not_ballroom(X) :-
+   room(X,library);
+   room(X,lounge);
+   room(X,conservatory);
+   room(X,garage);
+   room(X,diningroom).
+
+not_diningroom(X) :-
+   room(X,library);
+   room(X,lounge);
+   room(X,conservatory);
+   room(X,ballroom);
+   room(X,garage).
+
+not_garage(X) :-
+   room(X,library);
+   room(X,lounge);
+   room(X,conservatory);
+	 room(X,ballroom);
+   room(X,diningRoom).
+
+not_library(X) :-
+   room(X,garage);
+   room(X,lounge);
+   room(X,conservatory);
+	 room(X,ballroom);
+   room(X,diningRoom).
+
+
+

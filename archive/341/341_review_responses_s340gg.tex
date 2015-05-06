@@ -1,0 +1,1205 @@
+                                 ==========
+                                SQAP  Review
+                                 Followup 
+																============
+
+================================================================================
+FORMAL REVIEW REPORT
+================================================================================
+
+Date:                09/05/01
+Reviewer(s):         sja, walkera
+
+Group:               s340gg
+Document Name:       Software Quality Assurance Plan
+Document Version:    None Specified.
+
+Date of follow-up:   16/05/01
+Follow up report by: Kevin McDonald (kem)
+                     Sylvia Syamanond (vss)
+
+Follow up responses by Team G (340) will be denoted by >>
+
+--------------------------------------------------------------------------------
+REVIEW SUMMARY
+--------------------------------------------------------------------------------
+
+Overall: REWORK
+
+* The document meets all the points outlined in the 340 manual checklist apart
+from the style guide for data-flow diagrams. Only requires some slight
+reworkings to the existing sections. The structure of the document is
+straightforward and easy to understand and reference. There are however some
+sections within the document that tend to contradict themselves such as the
+directory structure and the layout guidelines as mentioned in the section
+breakup.
+
+>> These inconsistencies have been addressed and was probably a sign that
+>> the document was rushed in the concluding stages. The layout guideline
+>> problem arose as a result of the guidelines being created late. Also due
+>> to people writing different sections. These problems have been rectified.
+
+
+* The only other alteration that could improve the overall readability of
+the document is the highlighting of directory and file names within the
+document. Overall a good SQAP.
+
+>> These changes were implemented in subsequent versions of the SQAP. We also
+>> believed that these suggestions would improve clarity.
+
+
+Sections that are missing:
+* 1. style guide for diags - this is mentioned in your Verification and
+Validation section for your sqap (sect 7) but there is no mention of it
+anywhere in the sqap itself.
+
+>> We no longer think a style guide for diagrams is necessary, so we have
+>> deleted it from section 7.
+
+* 2. permissions - what are your dir and file permissions like? these need to be
+consistent across the group
+
+>> Good point. We have recently added descriptions of permissions in the SQAP.
+
+--------------------------------------------------------------------------------
+DEFINITION OF RECOMMENDATIONS
+--------------------------------------------------------------------------------
+
+PASS
+----
+1. The review item adequately addresses the specified criteria.
+2. Only minor modification is required to bring it up to scratch.
+3. Modifications can be dealt with by the Section or individual and do not
+require further checking.
+
+REWORK
+------
+1. The review item addresses some of specified criteria.
+2. The review item requires further work meet the stated standards.
+3. There may be omitted information, or existing information may be ambiguous
+and requires restructuring.
+
+FAIL
+----
+1. The review item does not address the specified criteria.
+2. The review item requires a lot of work and should undergo strict quality
+assurance monitoring within the section.
+3. A Formal Re-review is recommended.
+
+--------------------------------------------------------------------------------
+GENERAL CRITERIA - RESULTS & COMMENT
+--------------------------------------------------------------------------------
+
+    1. Legibility   PASS
+
+                    The document is readable. Minor spelling mistakes, some
+                    grammar mistakes also. Please highlight filenames, dir names
+                    and any other important variables within the document.
+
+    2. Conciseness  PASS
+
+		    The document sections are to the point and concise. No work
+		    required to fix this criteria.
+
+    3. Coherence    PASS
+
+                    Good, no work required to meet criteria.
+
+    4. Relevance    PASS
+
+                    Good, no work required to meet criteria.
+
+--------------------------------------------------------------------------------
+SECTIONAL RECOMMENDATIONS
+--------------------------------------------------------------------------------
+
+Title Page	PASS
+----------
+* Fine, maybe an outline of the content/purpose of the SQAP should be
+  added to the abstract.
+
+>> I believe we did mention the content of the SQAP in the abstract...
+
+Section 1	PASS
+---------
+
+* Needs a clearer description of the project with better grammar.
+
+>> We believe our grammar is OK, but you are right in saying the description
+>> of the project needs to be clearer; we will endeavour to do this. 
+
+Section 2	REWORK
+---------
+* Software Architectural Design Document not mentioned.
+
+>> In the following version of the SQAP, we addressed this concern.
+
+Section 3	REWORK
+---------
+* Within the role descriptions Backup Manager was mentioned twice 3.1.9
+  and 3.1.11.
+
+>> Well spotted. This highlights that our review process needs to be adjusted.
+>> We have deleted 3.1.11 Backup manager.
+	
+* In organisation you mentioned the role of Document Manager however in
+  the descriptions of the roles there was no description for the Document
+  Manager, however there was a description for Document Co-Ordinator.
+
+>> This was an error on our behalf. They are the same role which will indeed
+>> be titled Document Coordinator.
+
+* ADD mentioned in the project plan but nowhere else in the document.
+
+>> OK. The ADD name should be replaced with SADD to maintain consistency. 
+
+Section 4	REWORK
+---------
+* SQAP description needs to be clearer, what is the software engineering
+  process to a client?
+
+>> We agree, it is not very readable. The SQAP description has been reworked
+>> to improve clarity.
+	
+* Spelling error in user documentation produce should be produced.
+
+>> OK
+
+* Unclear sentence also present "and also in the maintenance of the software
+  that does not alter the source code". How can you maintain software with out
+  altering or adding to the source code?!?
+
+>> Yes it does not convey its meaning well. What we meant to say was  
+>> administration following installation.
+	
+* SDD document description is actually an SADD description, and nowhere
+  in this section is the true SDD document description mentioned.
+
+>> This error has been remedied. We now have seperate descriptions of both the
+>> SDD and the SADD.
+
+ Section 5       PASS
+---------
+* Team Meeting Times and Location; "conducted no less the 24 hours
+  prior"
+
+* Slight spelling / grammatical errors in Task Allocation: "task as they sees
+  fit" (pp 18), "directory of the teams repository" (pp 18) and "including
+  [writing] any notes" (pp 19).
+
+>> Task Allocation subsection has been completely changed so these
+>> sentences no longer exist in the current SQAP. Again, this was
+>> due to the lack of attention paid when proofreading the document in
+>> preparation for the 341 SQAP submission. 
+
+* Document Standards mentioned that indentation be only used for pointed
+  lists and that paragraphs be separated by a single blank line. Most of the
+  document was inconsistent with these two guidelines. Paragraphs where
+  indented sometimes and rarely separated by a line except in later sections.
+
+>> This was due to several team members proofreading different parts of the
+>> SQAP. Proofreading process was refined after this submission. 
+
+* First sentence of Coding Standard should be made clearer and more
+  grammatically correct.
+
+>> This subsection undergone a change after the internal review so this
+>> has been corrected.
+
+* The group directory in coding standard should be re-aligned on the next line.
+
+>> The external reviews by the 440 students pointed this out and has been
+>> corrected accordingly.
+
+
+Section 6       PASS
+---------
+* The times at which the audits should take place should be mentioned in
+  relation to the phase of product development. Mentioned in some, not in
+  others.
+
+>> This was also brought up in the external reviews by the 440 students.
+>> Again, this careless mistake was due to a lack of proofreading. Team
+>> G learnt a valuable lesson from the SQAP submission and had since
+>> been improving on our proofreading. 
+
+* In-Process Audits personnel involved not mentioned.
+
+>> This had been fixed up during the internal review following the
+>> 341 SQAP submission. 
+
+Section 7       REWORK
+---------
+* In validation criteria style guide for data flow diagrams is mentioned
+  but not present within the document.
+
+>> Data flow diagrams will not be used and this has been taken out
+>> of the current SQAP. 
+
+* Preliminary Software Design Description mentioned however not present in
+  milestones or reference documents. Should it be renamed as ADD or even
+  SADD?
+
+>> This was referring to the Software Architectural Design Description. We
+>> now refer to this as SADD and keep this consistent throughout the SQAP.
+
+* Acronym SDD used to describe both the Preliminary Software Design Description
+  and the Detailed Software Design Description, may cause confusion.
+
+>> There was confusion over the difference between SADD and SDD. This has been
+>> resolved and the SQAP was updated so that SADD and SDD are distinguished
+>> from one another. 
+
+
+Section 8       PASS
+---------
+* Fine.
+
+Section 9       REWORK
+---------
+* Title capitalisation to be consistent with rest of document.
+
+>> Again, these mistakes were detected and corrected after internal review.
+
+* Fix first sentence of Design Methodology. "The Waterfall model will be used as
+  a basis for the design method we will be using the waterfall model" ?!?
+
+>> This revealed the lack of proofreading on the SQAP. It was fixed
+>> during the internal review.
+
+* CVS structure uses directory naming that does not conform to the standards
+  specified earlier in section 5.5. ie. Design-notebook should be
+  Design_notebook.
+
+>> This was pointed out during the external reviews by 440 students and
+the SQAP was fixed up and the Librarian renamed this subdirectory in our group 
+directory so that it conforms to the standards.
+
+* Changes from third person to first person in records collection, maintenance
+  and retention.
+
+>> The internal review revealed this inconsistency throughout the SQAP. 
+>> The SQAP Document Coordinator and Review and Audit Manager have gone  
+>> the whole document and made sure this problem is fixed and that all terms
+>> used are consistent.
+
+* No Bugs directory mentioned in directory structure (pp 31) but referenced in
+  Section 8.2
+
+>> Internal review revealed this problem and has since been fixed.
+
+* No Risks directory mentioned in directory structure (pp 31) but referenced in
+  Section 10.6
+
+>> Same situation as the Bugs directory problem above.
+
+* Separate directory for Agendas in group directory structure however agenda for
+  each meeting is placed in the /Design-notebook/Meetings/ directory in the
+  Meeting Agenda section (pp 17).
+
+>> Group directory has undergone major changes since the initial 341 submission
+>>of the SQAP. We now have sections for agendas for different types of meetings.
+>> Agendas for team meetings are found under the group directory:
+>> /Common/Design-notebook/Meetings/Group/Agenda.
+>> while agendas for client meetings are found under the group directory in:
+>> /Common/Design-notebook/Meetings/Client/Agenda
+
+Section 10      PASS
+----------
+* Fine.
+
+-------------------------------------------------------------------------------
+END OF FORMAL REVIEW REPORT
+-------------------------------------------------------------------------------            
+                                 ==========
+                                 SRS Review
+                                  Followup 
+																 ==========
+
+================================================================================
+FORMAL REVIEW REPORT
+================================================================================
+
+Date:                10/05/01
+Reviewer(s):         dcgl, sss
+
+Group:               s340gg
+Document Name:       Software Requirements Specification
+Document Version:    1.21
+
+Date of follow-up:   17/05/01
+Follow up report by: Flynn Connor (frc)
+
+Follow up responses by Team G (340) will be denoted by >>
+
+--------------------------------------------------------------------------------
+REVIEW SUMMARY
+--------------------------------------------------------------------------------
+
+Overall: FAIL
+
+This document seems extremely rushed, and it shows. There is by no means any
+information that would help the client understand the project better. A lot
+of programming/implementation content has been included which should be left
+to the SADD/SDD after a design process has taken place. Otherwise it could
+be used against you in a court of law. If we were the client, we would not sign
+this document. We may even consider hiring a new supplier based on this
+document alone.
+>> More details have been included that were not available at the time the
+>> document was created. Legal issues are not considered relevant enough to
+>> include in this third year document, since legal terms would possibly
+>> cause more confusion than is necessary for this level. It would however
+>> addressed in real world contracts, etc, that is beyond the scope of this
+>> project
+
+
+An (early) description of the different types of 'users' would help remove any
+confusion associated with the use of these terms. Also, greater use of formal
+methods (eg. use case, use case diagrams) would greatly increase the
+readability when describing the proposed system.
+>> Users have been described better. Diagrams havve been improved.
+
+
+Overall you really need to make some major revisions to this document
+before it can resemble a proper SRS or legally binding document.
+>> It is agreed that more work is necessary and has been undertaken to make
+>> this document better since this version, but the points made in this review
+>> similar to those discussed by previous reviews and were still relevant in
+>> some cases.
+
+
+Sections that are missing:
+1. acceptance criteria - one sentence does not constitute a section. Read the
+detailed section description for reasons why.
+>> see comments below
+
+2. appendix - should also include an appendix for things like changes to the
+SRS throughout the year. useful to include them in here because you will be
+changing and adding requirements.
+>> No appendix was considered necessary at this stage since there was nothing
+>> to put in to it
+
+3. client signature - blank page with a title does not count as a section.
+>> see comments below
+
+Although the verdict is fail, I think you should definitely internally
+review the SRS after modifications. The standard really needs to be improved
+if this is ever to resemble a legally binding document.
+>> This process has been completed and resulted in a document that we belive
+>> to be superior to the one that was reviewed.
+
+--------------------------------------------------------------------------------
+DEFINITION OF RECOMMENDATIONS
+--------------------------------------------------------------------------------
+
+PASS
+----
+1. The review item adequately addresses the specified criteria.
+2. Only minor modification is required to bring it up to scratch.
+3. Modifications can be dealt with by the Section or individual and do not
+require further checking.
+
+REWORK
+------
+1. The review item addresses some of specified criteria.
+2. The review item requires further work meet the stated standards.
+3. There may be omitted information, or existing information may be ambiguous
+and requires restructuring.
+
+FAIL
+----
+1. The review item does not address the specified criteria.
+2. The review item requires a lot of work and should undergo strict quality
+assurance monitoring within the section.
+3. A Formal Re-review is recommended.
+
+--------------------------------------------------------------------------------
+GENERAL CRITERIA - RESULTS & COMMENT
+--------------------------------------------------------------------------------
+
+    1. Legibility   PASS
+
+                    The document is readable. Minor spelling mistakes, some
+                    grammar mistakes also.
+
+    2. Conciseness  FAIL
+
+                  Things like the Requirements section is not very concise.
+		  What makes it worse is the fact that you don't even address
+		  the issues related to the section.
+
+    3. Coherence    REWORK
+
+                  There is little reference to other sections within the
+                  document. Very little teamwork between the collaborators of
+		  the document. There is also little reference to other
+                  documents. Although structuraly sound, there is very little
+		  flow of ideas within the document itself.
+
+    4. Relevance    FAIL
+
+                  This document is an SRS. Not a SADD/SDD. You have not
+		  addressed the main aims of specifing the "requirements" as
+		  elicited from the client. You should not mention "how" the
+		  criteria are to be met, only "what" they are within this
+		  document. Programming language and other technical issues
+		  are best left to other documents.
+
+--------------------------------------------------------------------------------
+SECTIONAL RECOMMENDATIONS
+--------------------------------------------------------------------------------
+
+Title Page		REWORK
+----------
+* "Training Works" - could give a more descriptive name to the project.
+>> The title given to the project from the client was "TrainingWorks", so this
+>> suggestion isn't relevant
+
+* should state who the proposed system is for.
+>> This has bee done with the client name and some details
+
+* the Abstract clearly states the intentions of the document.
+
+
+Section 1		REWORK
+---------
+* "...existing system the client already has in place.", poor grammar, a
+  tautology.
+>> All grammar through-out the document has been modified
+
+* mention of 'users' however no description of who they are and what their role
+  within the system is. Outline the people (administrators, trainees ...)
+  involved in the system here.
+>> The system was to be defined in terms of the capabilities that individuals
+>> would have, rather than predefined "roles". This point has been explained
+>> better in more recent versions
+
+* better flow if issues are mentioned in order they will be addressed in the
+  document. For example, mention existing system before Training Works.
+>> Structure has been modified to reflect this
+
+* should have a more specific outline of document structure.
+>> A purpose has been included to discuss aspects like this
+
+Section 2		REWORK
+---------
+* should be broken down into subsections, to aid readability.
+>> This has been done
+
+* a visual aid and possibly use cases would help with written descriptions.
+>> more examples of the data used has been included to explain them better, but
+>> since the data flow is direct to and from the one point, DFD's were deamed to
+>> be a waste of resources
+
+Section 3		REWORK
+---------
+* (Last sentence of 3.1) talks about the users but still no mention of who
+  they actually are. Should put a more detailed description at the beginning
+  of the section, because this makes it easier for whoever reads the document
+  to understand the concept of 'user'
+>> users have been defined better, both in early sections and in this section
+
+* (section 3.2) "Shaded" should not be capitalised.
+>> This diagram has been removed since it was decided that it did not display
+>> effectively what it was meant to.
+
+* (section 3.2) ".. regions of the diagram .." should reference diagram.
+>> see above comment
+
+* title of Figure 1 not descriptive enough. Control Diagram of what?
+>> see above comment
+
+* brief, should go into further relevant detail of the system.  For example
+  could use a data flow diagram to show interactions with the database.
+>> again, DFD's would not be effective, in that they would only show one
+>> stream of input data, and one stream to a user coming from the system
+
+
+Section 4		FAIL (BADLY!)-
+---------
+* This section goes into programming details (eg 'OwnRecord, EditAll..') when it
+  should only have a description of the requirement not how the requirement is
+  to be met. If the aforementioned variables, functions do not exist in the
+  final product then this could lead to legal issues because they form part
+  of the acceptance criteria.
+>> These were client required capability variables, therefore they do form
+>> part of the requirements, they also give names to the capabilities mentioned
+>> that were used through-out the rest of the document
+
+* should be a brief discussion of what functional requirements entail.
+>> This was considered implicit in the name of the sections
+
+* (section 4.1) introduction of Core Requirements needed, could mention that
+  they form the basis of acceptable criteria.
+>> This was mentioned in the section specifically called "Acceptance Criteria"
+
+* (section 4.1.1) Still no mention of user. How do they get "appropriate
+  capability" ? What is capability in reference to.
+>> see above for users comment. This was an outline of what capabilities are
+>> in the system before they are referenced to what was their specific role in
+>> the system. This section now reflects what sections each capability is
+>> referrenced in.
+
+* (section 4.1.1) "Edit non-user records" who are the non-users. Why do they
+  have records?
+>> Non-User Records have now been beeter defined. This actually meant records
+>> kept about institutions, courses, and modules.
+
+* (section 4.1.1) it is unclear exactly what the user is editing when they "Edit
+  user profiles, hence capabilities."
+>> Now referenced to the section describing the functional activity of editing
+>> user profiles
+
+* (section 4.1.1) a clarification of the statement, "These capabilities will be
+  separate, so that a user may have any combination from an available list."
+  is needed.
+>> This has been reworded to attempt to make it clearer.
+
+* (section 4.1.2) subsection heading had no relevance whatsoever to the info
+  contained in the subsection. The main sentence is phrased badly.
+>> All headings for the "Functional Requirements" sections have been changed
+>> to be clearer.
+
+* (section 4.1.3) subsection heading had no relevance whatsoever to the info
+  contained in the subsection. The main sentence is phrased badly.
+>> see above comment
+
+* (section 4.1.3) heading states "users may have their own record", but talks
+  about editing their own or others records, should use a more descriptive
+  heading.
+>> see above comment
+
+* (section 4.1.3) "An text.." should be "A text..".
+>> gramatical errors have been fixed
+
+* (section 4.1.3) it is unclear what type of user has a record on the system and
+  "EditAll capability".
+>> see above comments about users profiles, rather than "roles"
+
+* (section 4.1.4) subsection heading had no relevance whatsoever to the info
+  contained in the subsection. The main sentence is phrased badly.
+>> see above comment
+
+* (section 4.1.6) "This process is to be performed off-line so no output to the
+  user is expected in the interface".  Does this mean the "user" can not find
+  out their marks for a given module?
+>> This section relates only to skill level calculations, not other user
+>> details
+
+* (section 4.1.6) Not a functional requirement. The section heading is, however
+  the description is not.
+>> This has been changed
+
+* (section 4.1.9) What? Needs more clarification.
+>> this has been given
+
+* (section 4.1.9-10) Even though not relevant to this section, you do not
+  mention the level which is needed to access these.
+>> These are accesable to all users of the system. This has now been stated
+
+* (section 4.1.13) what is a "non-modal"?
+>> this has been placed in the glossary
+
+* (section 4.1.13) who are the "non-users"?  "non-users" still has not been
+  defined. Use cases would be useful in describing the users.
+>> see above comments about what non-user records are
+
+* (section 4.1.13) "Heirachical indexed browsing technique" wtf? could your
+  final product stand up to this in a court of law?
+>> This has been modified
+
+* (section 4.1.13) No labelling of the figure. What does it show?
+>> This has been modified
+
+* (section 4.1.14) Even though not relevant to this section, you do not mention
+  the level which is needed to access these.
+>> This was an oversight, it has been modified
+
+* (section 4.1.15) "all the capabilities set for an administrator" What are the
+  capabilities of an administrator? If its not called Admin in the final product
+  you may be sued. Once again this is not relevant in this section!
+>> This has been better explained, and is was a functional requirement that
+>> a user profile be available to use the system with all capabilities
+
+* (section 4.1.16) "set of default capabilities" what are the default
+  capabilities. We feel once again that this section is not relevant in
+  Functional Requirements.
+>> Default capabilities are to be changable, so there is no specific constant
+>> default. Again this was a functional requirement.
+
+* (section 4.1.16) first mention of a Guest. Who are they? What can they do?
+>> This is a name to be given a user profile that is to be provided. It has
+>> been better explained
+
+* (section 4.2) What are non core requirements? To the client reading this what
+  does it mean, are they not going to be implemented?
+>> A description has been added
+
+* (section 4.2.2) first mention of pre-requisite modules, what are they?
+>> They were mentioned in section 4.1.4, and described
+
+* (section 4.2.4) "Adacel system password" what is it? where does it come from?
+>> This has been included in the glossary
+
+* This whole section is very ambiguous, filled with discrepancies, wordings open
+  to interpretation. Even though we have no legal background we are certain that
+  this section would be your downfall because of the aforementioned factors. You
+  should not put programming definitions inside this section as it forces you to
+  implement this legally, before any real design process has taken place. We
+  cannot mention enough times that this is the main legally binding document
+  between you and the client, and as such needs to be less open to differing
+  interpretations. You seem to have somewhere lost the purpose of this section
+  which is to outline the requirements that have been established though
+  mediation with the client. Not how they will be met but rather what they are.
+>> All requirements have been expanded upon to reflect not only the actual
+>> functionality required, but also the technical details required to be
+>> implemented. The client has given clearer requirements, that not only
+>> the functionality, but also go into the design of the functionality, and
+>> rather than making many points in the design constraints sections and trying
+>> to link them back to functional requirements, it was decided to include them
+>> with the actual requirements.
+
+Section 5		REWORK
+---------
+* description of non-functional requirements should be added.
+>> This has been added
+
+* (section 5.1) have to discuss in more detail users with "edit capabilities",
+  general users and non-users, at some point in the document because these
+  issues are still unclear. This section should be referenced in previous
+  sections, as it partly explains who the users are. Will need more elaboration
+  to be fully describe users.
+>> see above comments
+
+* (section 5.3) How does this effect the overall system? limitations of the
+  hardware/software?
+>> This is the required platform from the client. The affect of these on the
+>> system are to handled by the design of the system
+
+* (section 5.3) wtf? what do these names mean to the client? They are not
+  referenced in the glossary.
+>> They were given to the design team by the client. We were the ones who they
+>> meant nothing to, so we were required to look them up
+
+* (section 5.4) what are these "other existing databases"
+>> There are many other databases controlled by the client, but any linking to
+>> these would be handled by the client as required. This has been explained.
+
+* (section 5.5) "not take longer than one second to respond" is this a tad
+  optimistic even in an interactive real time system. They will hold you to
+  this figure!
+>> This has been clarified by the client, and relaxed. It is however a guide
+>> expected response time. This has been modified.
+
+* (section 5.5) and (section 5.6) there should not be any TBA's (to be advised),
+  for example "The quality of the user interface is to be determined by the
+  client upon description."
+>> This is to be developed through-out the project so that the client is more
+>> involved with the final outcome of the product. This has been addressed.
+
+* (section 5.6) all the specified quality requirements are not measurable, and
+  will differ from person to person. Maybe they should not be here.
+>> These are standard definitions for quality attributes. They have been
+>> elaborated upon.
+
+* (section 5.7) what is a JDBC? what is mySQL? why are they not mentioned in the
+  glossary?
+>> These terms have been added to the glossary
+
+* (section 5.8) What is JSP?
+>> see above comment
+
+* (section 5.9) How does gaining access to 'data' concern "another user"? What
+  is the "global password system" ? Aren't the capabilities already mentioned
+  and defined in the Functional Requirements? (eg OwnRecord, EditAll etc) even
+  though they should not be there!
+>> It is clear that the capabilities have confused the issues, but they in fact
+>> relate to the functionality of the system. Access to the system as a whole
+>> is governed by a combination of user profiles and the client's global
+>> password system. This has been addressed through-out the document to try
+>> to clear up this mis-conception.
+
+Section 6		REWORK
+---------
+* A description of what the user interface is should be added. Not just what
+  the user interface contains.
+>> This was considered implicit in the section heading
+
+* Need more information on the whole User Interface.
+>> What kind of information are you referring to? More details have been
+>> included through-out the whole document
+
+* Grammar - 'an in Active Window' should be 'in an Active Window'
+>> thanks
+
+* What is a "main menu frontpage" no mention of this so far.
+>> more descriptions and screenshots have been given
+
+* final dot point should have been included earlier.
+>> ordering of points have been modified to reflect their relative priority
+
+* Figure 2 - Would improve understanding of product if a more detailed diagram
+  of the interface is included.
+>> screenshots and detailed descriptions have been added
+
+Section 7		PASS
+---------
+* Surely not all the users need the same 'tutorial' documentation. An
+  Administrator is a 'user' as defined by  the document. Is she/he supposed to
+  administrator the system using the 'tutorials' as a guide.
+>> The system is to be designed in a way that the help documentation will be
+>> most useful in this format. The client requested that tutorial type help
+>> documentation would be provided
+
+* Last paragraph; how does the administrator know how to run and setup the
+  system without documentation?
+>> This has been clarified by the client, and only installation guides were
+>> required in hard-copy format
+
+Section 8		FAIL
+---------
+* What is the point of having a whole section if it is just one sentence? This
+  should contain a summary of your Core Requirements alongside any other
+  stipulations not previously mentioned.
+>> This has been modified to reflect these suggestions
+
+* Mention that these are the legally binding criteria upon which the finished
+  product will be compared to in the case of any legal proceedings, pertaining
+  to the specified product meeting the requirements of the client.
+>> This is a little to technical for a third year project. Any legal references
+>> would be made up since we have no access to legal advice, and would more
+>> than likely cause us more legal trouble than it would be worth. It has been
+>> acknowledged however that this kind of information would be included in a
+>> document of this kind in the real world situations.
+
+Section 9		REWORK
+---------
+* Formal methods would help to clarify this section. (eg. Use Cases, Use Case
+  Diagrams). No specific technique has been used to describe the behaviour of
+  the system, rather than straight paragraphs in sequential order.
+>> better use case scenarios have been included. Use case diagrams and other
+>> related Object-Oriented Analysis techmiques have been applied in the SADD
+
+* In section 9.2 Viewing Records "..user is either enrolled or has.." should
+  be ".. user is either enrolled in or has ..".
+>> thanks
+
+* (section 9.2) first reference of "icon bar" is this the "tool bar" that
+  contains icons?
+>> yes, this has been changed
+
+* (section 9.3) "identifiable by a cursor" not very specific. A cursor is always
+  present on a screen, are there multiple cursors at one time? Does it change
+  in appearance?
+>> the screen shots now show more information, as well as the "User Interface"
+>> section having more details
+
+* (section 9.3) "upon selecting the okay option" what does this do? What is
+  okay? What does it refer to? Don't you mean 'ok' button? If I select it will
+  everything be okay(jk)?
+>> These kind of issues have been addressed in modifications through-out the
+>> document
+
+* (section 9.3 - 4) What is a "combo box"?
+>> this has now been included in the glossary
+
+* (section 9.4) Should include diagrams for clarity as to what the layout will
+  entail.
+>> screenshots are now provided
+
+* (section 9.4) What are "browsing window" and "main window"
+>> "User Interface" and screenshots now define these two better
+
+* In section 9.3 Editing Records "To delete record,.." should be "To delete a
+  record".
+>> thanks
+
+Glossary		FAIL
+--------
+* the Glossary is sparse. It should include all Acronyms eg. JSP, all
+  application names eg. Excel and terms that are ambiguous eg. non-user.
+>> More terms have identified from this review have been included, as well as
+>> other terms that were identified as possible point of cofusion in our own
+>> group review
+
+Client Signature	FAIL
+----------------
+* A description of what the client is signing and why is paramount. The client
+  will not sign this until they know what they are signing, if they do then get
+  them to sign a check for you as well(jk)!
+>> Again, this is only a third year document. Any legal jargon would just cause
+>> us more hassle and land us in more trouble in the future. It would be
+>> required in larger scale projects
+
+* You also need to have the date, and the signature of any witness' as well.
+  Ideally, you would like two client signatures from two different people, and
+  another two from team members.
+>> lines for multiple signatures, and date fields have been included
+--------------------------------------------------------------------------------
+END OF FORMAL REVIEW REPORT
+--------------------------------------------------------------------------------
+
+                                 341 Review
+                                 ==========
+                                 SADD Review
+                                 ==========
+
+================================================================================
+FORMAL REVIEW REPORT
+================================================================================
+
+Date:               10/05/01
+Reviewer(s):        zbz, tdyu
+
+Group:              s340gg
+Document Name:      Preliminary Software Design Description
+Document Version:   1.36
+
+--------------------------------------------------------------------------------
+REVIEW SUMMARY
+--------------------------------------------------------------------------------
+
+Overall: FAIL
+
+This document appears extremely rushed. There is limited 
+information that would help the programmer clearly understand the project.
+»This project was rushed to meet the deadline for 341, and was not up to the
+»standard we usually expect.
+
+Overall you really need to make some major revisions to this document
+before it can resemble a SADD of the standard that can be used in a real project.
+>>Work on fixing this document began pretty much as soon as it was submitted.
+>>We understand the need for a high quality SADD in order to complete our project.
+
+Sections that are missing:
+Was not really any sections missing that could be determined. Rather the main 
+problem lay the content of each of the sections. 
+>>We put in the right sections, and your right, content is a little sparce.
+
+The standard really needs to be improved
+if this is ever to resemble a useful design document. A measure of this is that
+a programmer who was not part of the design process up until now, should be able to
+pick up the SADD and understand the top-level design of the system. After
+repeated re-reads of the SADD, the system design was still unclear hence not passing 
+this measure.
+>>We are already undertaking extreme action to rectify this document. We understand 
+>>its importance to developing a quality project.  I believe however, that a programmer
+>>should be able to see the way we did our design fairly well, but not the actual 
+>>content.We have put in place a big strategy however, to make sure this document is
+>>done to the highest level of quality possible.
+
+--------------------------------------------------------------------------------
+DEFINITION OF RECOMMENDATIONS
+--------------------------------------------------------------------------------
+
+PASS
+----
+1. The review item adequately addressees the specified criteria.
+2. Only minor modification is required to bring it up to scratch.
+3. Modifications can be dealt with by the Section or individual and do not
+require further checking.
+
+REWORK
+------
+1. The review item addressees some of specified criteria.
+2. The review item requires further work meet the stated standards.
+3. There may be omitted information, or existing information may be ambiguous
+and requires restructuring.
+
+FAIL
+----
+1. The review item does not address the specified criteria.
+2. The review item requires a lot of work and should undergo strict quality
+assurance monitoring within the section.
+3. A Formal Re-review is recommended.
+
+--------------------------------------------------------------------------------
+GENERAL CRITERIA - RESULTS & COMMENT
+--------------------------------------------------------------------------------
+
+    1. Legibility   PASS
+
+                    The document is readable. Minor spelling mistakes, some
+                    grammar mistakes also.
+		>>These have since been corrected.
+    2. Conciseness  REWORK
+
+                    The document was too concise, skipping explanation of many 
+				  parts of the design. Hence making understanding such things as 
+				  diagrams very difficult.
+		>>Design was explained adequatly enough we felt, but justification, was
+		>>not done very much, this has also been rectified.
+    3. Coherence    FAIL
+
+                  There is little reference to other sections within the
+                  document. There is also little reference to other documents. 
+			Although all relevant sections appear, there is very little
+		  	flow of ideas within the document itself. Such things as putting
+			all diagrams in the appendix and no discussion did not help matters.
+		>>We are still working on a way to fix our diagrams, and their positioning.
+		>>We have since gone back, and tried to reference as many of our decisions
+		>> as possible, and an awareness, for future expansion of this document.
+
+    4. Relevance    PASS
+
+			For the most part all the sections covered in the SADD were
+			relevant to the design. However, decisions such as  the size
+			of arrays should be left to the SDD, eg in the Detailed
+			Class Diagram. This Document should only concentrate in the 
+			module breakdown and design.
+			>>No i disagree, we followed Schach, and it clearly shows to place
+			>>string and int lengths in the arch design as well as requirements.
+			>>We are alsoe pretty sure our document concentrates on module breakdown
+			>>and design, after all this is an architectural design document.
+--------------------------------------------------------------------------------
+SECTIONAL RECOMMENDATIONS
+--------------------------------------------------------------------------------
+
+Title Page		REWORK
+----------
+* the Abstract  does not clearly state the intentiones of the document. eg That this 
+  document's target audience is the programmers. That it should help them understand 
+  the top-level design of the system.
+>>This documents target audience, is the team, the client and any stakeholders. 
+>>It also says that this document describes the arch design and the database design.
+
+* Titling of the document is confusing. First it refers to the document as a
+  "Preliminary Software Design Description", then as a "SDD" and the expected was
+  "SADD". The team should really decide what standard titles should be used and 
+  stick to them. As well the description of this document is completely missing from
+  the SQAP which maybe the reason  for the confusion.
+>> Good point, we'll get on that!
+
+Introduction		PASS
+------------
+* section 1.1 
+   * Spelling error - excel
+   * Indicate Windows as a registered trademark.
+   * Paragraph 2, sentence 1 - Difficult to read.
+   * Paragraph 3, sentence 1 - Bad reference to Schach
+>> We have taken  the above advice onbaord.
+* section 1.5 
+   * Paragraph 1, sentence 1 - Bad reference to Schach
+
+* section 1.6
+   * Should fix TM (trademarks)
+   * What is JDBCTM? What is version number x.x?
+   * What is mySQL?
+>>These TM signs have since been rectified.
+>>the reference to mySQL has also been rectified.
+Design Description		FAIL
+------------------
+* Hyphenation will help readability, eg. non-core, use-case.
+* Should place diagrams in with the relevant section, not in the appendices.
+>>We agree, and we are working on fixing these problems.
+
+* section 2.1 
+   * Maybe explain that OO Analysis is broken into three parts, being USE CASE
+   * MODELLING, CLASS MODELLING & DYNAMIC MODELLING and describe what they are 
+	 there instead of where the modelling actually occurs. 
+>>We planned to have a breif overview, but ran out of time, we will put this in.
+   * 
+* section 2.1.1
+   * Use-case diagram should be included in this section. 
+>> Trying to fix this problem with pic positioning.
+   * Maybe have a brief discussion of each of the use-cases before going into detail.
+>> We have since decided upon branch trees, to help us get better clarification 
+f what is going on.
+   * Typos - each (not Each), misplaced comma. 
+
+
+* section 2.1.2 
+   * Initial Class Diagram should have been placed here and a description of
+     each of the classes would help with explaining their function in the
+     system. This would have helped in giving an overview of the system design.
+>>Yes we know, see above about Use case diagram.
+	 A suggestion, the  process of noun extraction and iterations of class diagrams 
+	 could have been put into  appendix to show how this class diagram was arrived at. 
+>>We like this suggestion, and plan to follow it up.
+   * Also it makes reference to noun extraction done in the SRS. The copy of the SRS 
+     that we received did not contain noun extraction.
+>>see SRS review.
+   * No blank line between first, second and third paragraph, or bad spacing between
+     sentences.
+   * Bad reference to Schach.(BiTeX didn't work)
+>>still in process of fixing.
+
+* section 2.1.3
+   * State Diagrams should have been placed here and a brief discussion to put
+     them into context of the design. Then put the second interaction of the
+	 class diagram with the methods that have been derived.
+>> Yes we realise, but they were omitted due to time constraints.
+>>We agree with the placing of a discussion for context.
+   * No blank line between paragraphes.(As specified in the SQAP)
+
+* section 2.1.4
+   * Admitting that you have not done any formal testing is never a good thing!!!!!
+>>We had no time, we plan to do it still.
+   * No blank line between paragraphes.
+
+* section 2.2
+
+* section 2.2.1 
+	* The user-cases are not scenarios so they should not be used as the basis
+	  the sequence diagrams. Rather scenarios should be derived from the
+	  user-cases.
+>>Umm.. we didnt use use cases as scenarios...they were derived from the the
+>>use cases, as demonstated in Schache.
+	* The sequence diagrams should be placed in this section with the scenarios
+	  that have been created from the use-cases, making it very clear how the
+	  the objects in the system interact. 
+>> This is a good point, and we will follow it up. However it already makes 
+>> reference in the SADD, that sequence diagrams, came from the scenarios.
+
+* section 2.2.2
+   * Detailed class diagrams should be placed here and explained.
+>> See above, about use case diagram
+   * Paragraph 2, sentence 3 - Class diagram (singular)? There are two diagrams.
+>> It was split to fit the page....
+   * Detailed Class Diagram should be placed here and additions to classes
+   * should be noted.
+>>We agree, and will work on it.
+
+Object Designs		PASS
+--------------
+* section 3.2
+   * Typo on StudyRecord
+
+Database Structure		PASS
+------------------
+* Paragraph 1, sentence 2 - grammatical error.
+
+Appendix A		FAIL			 	
+----------
+* Use case diagram:
+   * Use case diagram describes the interaction between the user and what?
+>>The omitted work screen, should have been in there, it now is....
+   * Are there three systems the user is interacting with, or is there one?
+>>One System, different modal windows, hence 3 boxes.
+   * Lines from user do not touch ellipses. The purpose of the Use Case Diagram
+     is to show the System's Use Cases and which actors interact with them and
+     not the interactions between systems.
+>>I have no idea what your talking about here...but other use cases, spawn other
+>>use cases, thats why some lines make others.
+
+* Class Diagram (top level):
+   * Diagram is ambiguous. CLASS DIAGRAMS derived on the class modelling are 
+     very unclear. The class diagram should show the top level existence of
+     classes and their relationships in the logical view of the system. The
+     class diagram presented, seems to indicate that all the parts of the 
+     system is disconnected from each other.
+>>Disreguard that diagram, it was formulated very quickly for the deadline,
+>>and not a reflection of the real work we have put in.
+
+* State Diagram:
+   * The state diagram is used to elicit the methods of each class. 
+   * Use the dot at the tail of the default arrow to indicate Login state as the
+     default state.
+>>We know, and it was ommitted due to time constraints, and general stress.
+
+* Class Diagram:
+   * Very cluttered - Difficult to read a relationship from the diagram and
+     identify which classes it relates to.
+   * Too detailed - Fields and sizes should not be considered yet. Leave these
+     details for the detailed class diagram.
+>>See above class diagram response for point one, and we disagree with point two.
+>>Refer to Scache, as this is the model we followed.
+
+Appendix B		FAIL
+----------
+
+* Section 1.5 states that UML notation has been demonstrated throughout. In UML,
+  an instance of a class (an object) is represented by the underline name of
+  the class in lowercase, and only objects are shown in sequence diagrams.
+  Clearly, UML notation was not followed.
+>> Ouch...take it easy champ, you could have just told us to fix this error...
+>> which we are still in the process of rectifying anyway.
+
+* Sequence Diagrams would be much clearer if a Scenario List was included before 
+  the diagram. Most examples seen in textbooks have each stage in the sequence
+  numbered. These numbers correspond to the numbers in the scenario list (see
+  Schach) As well there appears to be more than one scenario on each sequence 
+  diagram making them very hard to follow. This maybe because the use cases
+  were used instead of creating of scenario from them.
+>>We agree with the first point, however, due to the shear number of possibilities
+>> that this project encounters, it is hard for us to just define one scenario
+>> from a use case, so we EXPLAINED, why we used more scenarios, so we can illict
+>> more sequence diagrams, and use them to pick  up and methods we may have missed.
+
+* Each message between objects relate to one step in its scenario, and each step
+  in a scenario relates to one message between objects. I can not see
+  any consistency in this respect, even though you haven't get scenarios. If
+  this was consistent, the several alternatives makes this very difficult to
+  follow.
+>>We admit the fist lot of sequence diagrams were bad, and are being rectifyed
+>>this weekend.
+
+* Sequence Diagram for the Login Scenario:
+   * You can not use "other" as one of your objects. Schach can use "other"
+     because his Art Dealer example has a class called "Other".
+>>see above point.
+
+* Sequence Diagram for the MyRecord Scenario:
+   * Spelling errors - lgin, r, MylRecords.
+>>see above point.
+
+* Sequence Diagram for the AllRecords Scenario:
+   * Training History is not one of your classes.
+   * Spelling errors - editahle, inclue.
+   * There are two interactions without description.
+>>see above point.
+
+* Sequence Diagram for the Browse Scenario:
+   * Institution, Course, Module and Skill are not classes within this project.
+   * Some interactions are badly labelled or even not labelled at all.
+   * Typo - Servelet.
+>>see above point.
+Appendix C		REWORK
+----------
+* Diagrams take up a whole page, yet, page numbering does not reflect this.
+>> We are still working on a way to rectify tis problem
+* Detailed Class Diagram (top level):
+   * This diagram included twice on two consecutive pages?
+   * Relationships between entities are missing.
+   * typos - BrowseServet, DeleteContent().
+>>see the last two points...
+* Detailed Class Diagram:
+   * Missing?
+>>no it was included as a hardcopy unless you didnt recieve one.
+Appendix D
+----------
+* These don't look like Entity-Relationship diagrams. To what section do these
+  diagrams belong to? Section 2.2.1 makes no reference to these diagrams.
+>>We are still redoing our original database design
+
+* E-R Diagram for the User Profile database section :
+  Looks like it is in Appendix C.
+>> Does it? okay then.... We have fixed up our document structure so that appendix
+>> no longer exists.
+References
+----------
+Incorrect use of quote marks?
+Typo - misplaced comma in first reference.
+>>Again this was a rushed document, so this will be fixed.
+________________________________________________________________________________
+
+Attachments
+-----------
+No part of the SADD made reference to Attachments.
+
+>>We had no need at the time, but now we do, after a few revsions of this document.
+
+Appendix A in Attachment
+------------------------
+Repeating one portion of Appendix A.
+>>We noticed it too.
+
+Appendix C in Attachment
+------------------------
+Looks like a mix up of pages with Appendix C. This contains two identical
+    detailed class diagrams, not included in Appendix C.
+>>Again, this was very rushed...have mercy on our souls =P...
+
+--------------------------------------------------------------------------------
+END OF FORMAL REVIEW REPORT
+--------------------------------------------------------------------------------

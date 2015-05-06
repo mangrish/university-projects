@@ -1,0 +1,11 @@
+#!/usr/local/bin/perl -w
+
+print "Please enter the first number\n";
+chomp($num1 = <STDIN>);
+
+print "Please enter the second number\n";
+chomp($num2 = <STDIN>);
+
+$product = $num1 * $num2;
+
+print "The product of $num1 and $num2 is $product\n";

@@ -1,0 +1,24 @@
+---------------------------------
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+=================================
+========== SECTION B.============
+=================================
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+­--------------------------------
+
+Author: Mark Angrish (74592)
+Date:		May 2001.
+
+Refer to the spec sheet for the question.
+
+Answer.
+The timout based scheme has limited applicability.  This scheme falls 
+somewhere between deadlock prevention (ie where
+deadlock will never occur) and deadlock detection and recovery (as implemented
+in this project). While this scheme would be easy to implement, it would only work
+well if transactions are short, and if long waits are likly due to be deadlocks.
+However, in general it is hard to decide how long a transaction must wait before
+timing out.  Too long a wait results in unnessaray delays once a deadlock has
+occured.  Too short a wait results in transaction rollback, even if there is no
+deadlock, leading to wasted resources.  Starvations is also a possibility with
+this scheme.

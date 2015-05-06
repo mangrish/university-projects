@@ -1,0 +1,610 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0062)http://pandonia.canberra.edu.au/ClientServer/week4/socket.html -->
+<HTML><HEAD><TITLE>Client Server Computing - Unix Sockets and RPC</TITLE>
+<META content="text/html; charset=windows-1252" http-equiv=Content-Type><!-- document: /ClientServer/week4/socket.html -->
+<META name=Author value="Jan Newmarch">
+<META name=Keywords value="">
+<META name=DC.Creator value="Jan Newmarch">
+<META name=DC.Subject value="">
+<META content="MSHTML 5.00.2314.1000" name=GENERATOR></HEAD>
+<BODY>
+<H1>TCP/IP </H1>The OSI model was devised using a committee process wherein the 
+standard was set up and then implemented. Some parts of the OSI standard are 
+obscure, some parts cannot easily be implemented, some parts have not been 
+implemented. 
+<P>The TCP/IP protocol was devised through a long-running DARPA project. This 
+worked by implementation followed by RFCs (Request For Comment). TCP/IP is the 
+principal Unix networking protocol. TCP/IP = Transmission Control 
+Protocol/Internet Protocol. 
+<H1>TCP/IP stack </H1>The TCP/IP stack is shorter than the OSI one: <BR><IMG 
+src="Client Server Computing - Unix Sockets and RPC_files/tcp_stack.gif"> 
+<BR>TCP is a connection-oriented protocol, UDP (User Datagram Protocol) is a 
+connectionless protocol. 
+<H2>IP datagrams </H2>The IP layer provides a connectionless and unreliable 
+delivery system. It considers each datagram independently of the others. Any 
+association between datagrams must be supplied by the higher layers. 
+<P>The IP layer supplies a checksum that includes its own header. The header 
+includes the source and destination addresses. 
+<P>The IP layer handles routing through an Internet. It is also responsible for 
+breaking up large datagrams into smaller ones for transmission and reassembling 
+them at the other end. 
+<H2>UDP </H2>UDP is also connectionless and unreliable. What it adds to IP is a 
+checksum for the contents of the datagram and <I>port numbers.</I> These are 
+used to give a client/server model - see later. 
+<H2>TCP </H2>TCP supplies logic to give a reliable connection-oriented protocol 
+above IP. It provides a <I>virtual circuit </I>that two processes can use to 
+communicate. 
+<HR>
+Addressing 
+<H1>Internet adddresses </H1>In order to use a service you must be able to find 
+it. The Internet uses an address scheme for machines so that they can be 
+located. 
+<P>The address is a 32 bit integer which gives the IP address. This encodes a 
+network ID and more addressing. The network ID falls into various classes 
+according to the size of the network address. 
+<H2>Network address </H2>Class A use 8 bits for the network address with 24 bits 
+left over for other addressing. Class B uses 16 bit network addressing. Class C 
+uses 24 bit network addressing and class D uses all 32. 
+<P>The University of Canberra is registered as a Class B network, so we have a 
+16 bit network address with 16 bits left to identify each machine. 
+<H2>Subnet address </H2>Internally, the Uni network is divided into subnetworks. 
+8 bits are used for this. Building 11 is currently on one subnetwork. 
+<H2>Host address </H2>8 bits are finally used for host addresses within out 
+subnet. This places a limit of 256 machines that can be on the subnet. 
+<H2>Total address </H2>The 32 bit address is usually written as 4 integers 
+separated by dots <BR><IMG 
+src="Client Server Computing - Unix Sockets and RPC_files/inet_addr.gif"> <BR>
+<H2>Symbolic names </H2>Each host has a name. This can be found from the user 
+level command <XMP>hostname
+</XMP>A symbolic name for the network also exists. For our network it is 
+``canberra.edu.au''. The the symbolic network name for any host is formed from 
+the two: <XMP>birch.canberra.edu.au
+</XMP>
+<H2>Programming interface </H2>
+<H3>Address conversion </H3>These functions convert to and from the ``dotted'' 
+addresses as in 137.92.11.1 to 32 bit integer addresses: <XMP>#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
+unsigned long inet_addr(char *ptr)
+char *inet_ntoa(struct in_addr in)
+</XMP>(The structure in_addr has only one field which is the 32 bit IP address.) 
+<PRE>struct in_addr {
+    unsigned long int s_addr;
+}
+</PRE>The BSD library provides some functions for finding names. <XMP>char *gethostname(char *name,
+                  int size)
+</XMP>finds the ordinary hostname. <XMP>struct hostent 
+    *gethostbyname(char *name)
+</XMP>returns a pointer to a structure with two important fields:``char * 
+h_name'' which is the ``official'' network name of the host and ``char 
+**h_addr_list'' which is a list of TCP/IP addresses. <PRE>struct hostent {
+   char    *h_name;        /* official name of host */
+   char    **h_aliases;    /* alias list */
+   int     h_addrtype;     /* host address type */
+   int     h_length;       /* length of address */
+   char    **h_addr_list;  /* list of addresses */
+}
+</PRE>The following program prints these: <XMP>#include <stdio.h>
+#include <sys/param.h>
+
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
+#define SIZE (MAXHOSTNAMELEN+1)
+
+int main(void)
+{
+    char name[SIZE];
+    struct hostent *entry;
+
+    if (gethostname(name, SIZE)
+                != 0) {
+        fprintf(stderr,
+             "unknown name\n");
+        exit(1);
+    }
+    printf("host name is %s\n",
+            name);
+
+    if ((entry =
+        gethostbyname(name)) ==
+              NULL) {
+        fprintf(stderr,
+        "no host name info\n");
+        exit(2);
+    }
+    printf("offic. name: %s\n",
+                entry->h_name);
+    printf("address: %s\n",
+           inet_ntoa(
+       *(struct in_addr *) (entry->h_addr_list[0])));
+
+
+    exit(0);
+}
+</XMP>This programming interface uses a number of standard files: /etc/hostname 
+to find the name, /etc/rhosts to find the network address (or a name server) if 
+it can't find it there. 
+<HR>
+
+<H1>Port addresses </H1>A service exists on a host, and is identified by its 
+port. This is a 16 bit number. To send a message to a server you send it to the 
+port for that service of the host that it is running on. This is <I>not 
+</I>location transparency! 
+<P>Certain of these ports are ``well known''. They are listed in the file 
+/etc/services. For example, 
+<UL>
+  <LI>ftp: 21/tcp 
+  <LI>time: 37/tcp 
+  <LI>time: 37/udp 
+  <LI>finger 79/tcp </LI></UL>Ports in the region 1-255 are reserved by TCP/IP. 
+The system may reserve more. User processes may have their own ports above 1023. 
+
+<P>The function ``getservbyname'' can be used to find the port for a service 
+that is registered in /etc/services. <PRE>struct servent *getservbyname(const char *name, const char *proto);
+
+struct servent {
+   char    *s_name;        /* official service name */
+   char    **s_aliases;    /* alias list */
+   int     s_port;         /* port number */
+   char    *s_proto;       /* protocol to use */
+}
+</PRE>
+<HR>
+
+<H1>Berkeley sockets </H1>When you know how to reach a service via its network 
+and port IDs, what then? If you are a client you need an API that will allow you 
+to send messages to that service and read replies from it. 
+<P>If you are a server, you need to be able to create a port and listen at it. 
+When a message comes in you need to be able to read and write to it. 
+<P>Berkeley sockets are the BSD Unix system calls for this. They are part of the 
+BSD Unix kernel. They have also been adopted by the PC world. They form the 
+lowest practical level of doing client/server on both DOS and Unix. They form 
+the highest common denominator for DOS and Unix (changing rapidly). 
+<HR>
+
+<H1>Data representation </H1>Some computers are ``big endian''. This refers to 
+the representation of objects such as integers within a word. A big endian 
+machine stores them in the expected way: the high byte of an integer is stored 
+in the leftmost byte, while the low byte of an integer is stored in the 
+rightmost byte. A Sun Sparc is big endian. So the number 5 + 6 * 256 would be 
+stored as <BR><IMG 
+src="Client Server Computing - Unix Sockets and RPC_files/big_end.gif"> <BR>A 
+``little endian'' machine stores them the other way. The 386 is little endian. 
+<BR><IMG 
+src="Client Server Computing - Unix Sockets and RPC_files/little_end.gif"> 
+<BR>If a Sparc sends an integer to a 386, what happens? The 386 sees 5 + 6 * 256 
+as <PRE>     5 *16777216 + 6 * 65536 
+</PRE>To avoid this, two communicating machines must agree on data 
+representation. 
+<P>The Sun RPC uses a format known as XDR, which just happens to be the format 
+that doesn't require any conversions for Suns. However, if two 386s are 
+communicating then each of them will have to keep swapping bytes both on receipt 
+and send. 
+<P>The OSF DCE uses native format, with the <I>receiving </I>machine swapping 
+bytes if needed. This section describes the Unix BSD networking API for IP as in 
+WR Stevens ``Unix Network Programming.'' 
+<HR>
+
+<H1>Byte ordering </H1>To handle byte ordering for non-standard size integers 
+there are conversion functions 
+<UL>
+  <LI>htonl - host to network, long int 
+  <LI>htons - host to network, short int 
+  <LI>ntohl - network to host, long int 
+  <LI>ntohs - network to host, short int </LI></UL>
+<HR>
+
+<H1>Addresses </H1>The address of an IP service given is using a structure <XMP>#include <netinet/in.h>
+
+struct sockaddr_in {
+  short   sin_family;
+  u_short sin_port;
+  struct  in_addr sin_addr;
+  char    sin_zero[8];
+}
+</XMP><B>Example:</B> The finger service (port 79) on machine 137.92.11.1 is 
+given by <XMP>struct sockaddr_in addr;
+
+addr.sin_family = AF_INET;
+addr.sin_port = htons(79);
+addr.sin_addr.s_addr =
+     inet_addr("137.9.2.11.1");
+</XMP>
+<HR>
+
+<H1>Sockets </H1>A socket is a data structure maintained by a BSD-Unix system to 
+handle network connections. 
+<P>A socket is created using the call ``socket''. It returns an integer that is 
+like a file descriptor: it is an index into a table and ``reads'' and ``writes'' 
+to the network use this ``socket file descriptor''. <XMP>#include <sys/types.h>
+#include <sys/socket.h>
+
+int socket(int family,
+           int type,
+           int protocol);
+</XMP>Here ``family'' will be AF_INET for IP communications, ``protocol'' will 
+be zero, and ``type'' will depend on whether TCP or UDP is used. 
+<P>Two processes wishing to communicate over a network create a socket each. 
+These are similar to two ends of a pipe - but the actual pipe does not yet 
+exist. 
+<HR>
+
+<H1>Connection oriented (TCP) </H1>One process (server) makes its socket known 
+to the system using ``bind''. This will allow other sockets to find it. 
+<P>It then ``listens'' on this socket to ``accept'' any incoming messages. 
+<P>The other process (client) establishes a network connection to it, and then 
+the two exchange messages. 
+<P>As many messages as needed may be sent along this channel, in either 
+direction. <BR><IMG 
+src="Client Server Computing - Unix Sockets and RPC_files/tcp_seq.gif"> <BR><PRE>Server:
+
+create endpoint (socket())
+bind address (bind())
+specify queue (listen())
+wait for conection (accept())
+transfer data (read() write())
+
+Client:
+
+create endpoint (socket())
+connect to server (connect())
+transfer data (read() write())
+</PRE>
+<HR>
+
+<H1>TCP time client </H1>Each machine runs a TCP server on port 13 that returns 
+in readable form the time on that particular machine. All that a client has to 
+do is to <I>connect </I>to that machine and then <I>read </I>the time from that 
+machine. <XMP>/* TCP client that finds the
+   time from a server */
+
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+
+#define SIZE 1024
+char buf[SIZE];
+
+#define TIME_PORT 13
+
+int main(int argc, 
+         char *argv[])
+{
+  int sockfd;
+  int nread;
+  struct sockaddr_in serv_addr;
+
+  if (argc != 2) {
+    fprintf(stderr,
+        "usage: %s IPaddr\n",
+        argv[0]);
+    exit(1);
+  }
+
+  /* create endpoint */
+  if ((sockfd =
+       socket(AF_INET,
+              SOCK_STREAM, 0))
+      < 0) {
+    perror(NULL);
+    exit(2);
+  }
+
+  /* connect to server */
+  serv_addr.sin_family =
+            AF_INET;
+  serv_addr.sin_addr.s_addr =
+            inet_addr(argv[1]);
+  serv_addr.sin_port =
+            htons(TIME_PORT);
+  if (connect(sockfd,
+             (struct sockaddr *) &serv_addr,
+             sizeof(serv_addr))
+      < 0) {
+    perror(NULL);
+    exit(3);
+  }
+
+  /* transfer data */
+  nread = read(sockfd, buf, 
+               SIZE);
+  write(1, buf, nread);
+  close(sockfd);
+  exit(0);
+}
+</XMP><B>Example:</B> If the program is compiled to ``tcptime'', find the time 
+in various places by 
+<UL>
+  <LI>tcptime 139.130.4.6 
+  <LI>tcptime 192.76.144.75 
+  <LI>tcptime 146.169.22.37 </LI></UL>
+<HR>
+
+<H1>TCP time server </H1>The real time server can only be started by the system 
+supervisor (usually at boot time) asss the time port is reserved. To run the 
+following code yourself, change the time port to say 2013. <XMP>#include <stdio.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+
+#define SIZE 1024
+char buf[SIZE];
+
+#define TIME_PORT 13
+
+int main(int argc, 
+         char *argv[])
+{
+  int sockfd, client_sockfd;
+  int nread, len;
+  struct sockaddr_in serv_addr,
+                   client_addr;
+  time_t t;
+
+  /* create endpoint */
+  if ((sockfd =
+       socket(AF_INET,
+              SOCK_STREAM, 0))
+      < 0) {
+    perror(NULL);
+    exit(2);
+  }
+
+  /* bind address */
+  serv_addr.sin_family =
+            AF_INET;
+  serv_addr.sin_addr.s_addr =
+         htonl(INADDR_ANY);
+  serv_addr.sin_port =
+            htons(TIME_PORT);
+
+  if (bind(sockfd, &serv_addr, sizeof(serv_addr)) < 0) {
+    perror(NULL);
+    exit(3);
+  }
+
+  /* specify queue */
+  listen(sockfd, 5);
+  for (;;) {
+    len = sizeof(client_addr);
+    client_sockfd =
+          accept(sockfd,
+                 &client_addr,
+                 &len);
+    if (client_sockfd == -1) {
+      perror(NULL);
+      continue;
+    }
+
+    /* transfer data */
+    time(&t);
+    sprintf(buf, "%s",
+        asctime(localtime(&t)));
+    len = strlen(buf) + 1;
+    write(client_sockfd, buf, len);
+    close(client_sockfd);
+  }
+}
+
+</XMP>
+<HR>
+
+<H1>Connectionless (UDP) </H1>In a connectionless protocol both sockets have to 
+make their existence known to the system using ``bind''. This is because each 
+message is treated separately, so the client has to find the server each time it 
+sends a message and vice versa. 
+<P>When bind is called it binds to a new port - it cannot bind to one already in 
+use. If you specify the port as zero the system gives you a currently unused 
+port. 
+<P>Because of this extra task on each message send, the processes do not use 
+read/write but recvfrom/sendto. These functions take as parameters the socket to 
+write to, and the address of the service on the remote machine. <BR><IMG 
+src="Client Server Computing - Unix Sockets and RPC_files/udp_seq.gif"> <BR><PRE>Server:
+
+create endpoint (socket())
+bind address (bind())
+transfer data (sendto() recvfrom())
+
+Client:
+
+create endpoint (socket())
+bind address (bind())
+connect to server (connect())
+transfer data (sendto() recvfrom())
+</PRE>
+<HR>
+
+<H1>Time client (UDP) </H1>The UDP time server requires a datagram to be sent to 
+it. It ignores the contents of the message but uses the <I>return address </I>to 
+send back a datagram containing the time. <XMP>/* UDP client for time */
+
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <fcntl.h>
+
+#define SIZE 1400
+char buf[SIZE];
+
+#define TIME_PORT 13
+
+int main(int argc,
+         char *argv[])
+{
+  int sockfd;
+  int nread;
+  struct sockaddr_in serv_addr,
+                   client_addr;
+  int len;
+
+  if (argc != 2) {
+    fprintf(stderr,
+          "usage: %s IPaddr\n",
+          argv[0]);
+    exit(1);
+  }
+  if ((sockfd =
+       socket(AF_INET,
+              SOCK_DGRAM, 0)) 
+       < 0) {
+    perror(NULL);
+    exit(2);
+  }
+  client_addr.sin_family =
+             AF_INET;
+  client_addr.sin_addr.s_addr =
+             htonl(INADDR_ANY);
+  client_addr.sin_port =
+             htons(0);
+
+  serv_addr.sin_family =
+            AF_INET;
+  serv_addr.sin_addr.s_addr =
+            inet_addr(argv[1]);
+  serv_addr.sin_port =  
+            htons(TIME_PORT);
+
+
+  if (bind(sockfd,
+           &client_addr, 
+           sizeof(client_addr))
+      < 0) {
+    perror(NULL);
+    close(sockfd);
+    exit(3);
+  }
+
+  len = sizeof(serv_addr);
+  sendto(sockfd, buf, 1, 0,
+         &serv_addr, len);
+  nread = recvfrom(sockfd, buf,
+                  SIZE, 0,
+                  &client_addr,
+                  &len);
+  write(1, buf, nread);
+
+  close(sockfd);
+  exit(0);
+}
+</XMP>
+<HR>
+
+<H1>Socket controls </H1>Sockets are treated by the O/S as devices and so there 
+are a variety of device driver controls that can be used (see later). For 
+example, the command ``fcntl'' can be used to make a socket non-blocking, and 
+``select'' can be used to test if a socket (device) has input or output pending. 
+
+<P>In addition, ``getsockopt'' and ``setsockopt'' can be used for more specific 
+socket control: 
+<UL>
+  <LI>broadcast - allowed for datagrams 
+  <LI>keepalive - periodic transmits on connected sockets </LI></UL>If a read or 
+write does not return, it should timeout. What should the time limit be? On your 
+own machine or on your local network it should be in milliseconds. To Melbourne 
+in seconds, whereas to Scandinavia it should probably be minutes. 
+<P>Timeout algorithms should adjust the time according to the curent trip time 
+in some manner. They can be implemented using timer signals. 
+<H2>Server slaves</H2>The servers given earlier could only handle one client at 
+a time. If the connection lasted for some time, then other clients would be 
+blocked from access during this time. In such cases, the server should create 
+"slave" servers to handle each client as it connects, as a separate process. 
+<P>In Unix this is fairly easy: after the accept() has succedeed, the server 
+should fork off a new process to handle the client. Here is the TCP time server, 
+capable of handling many clients at once: <XMP>#include <stdio.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+
+#define SIZE 1024
+char buf[SIZE];
+
+#define TIME_PORT 13
+
+int main(int argc, 
+         char *argv[])
+{
+  int sockfd, client_sockfd;
+  int nread, len;
+  struct sockaddr_in serv_addr,
+                   client_addr;
+  time_t t;
+
+  /* create endpoint */
+  if ((sockfd =
+       socket(AF_INET,
+              SOCK_STREAM, 0))
+      < 0) {
+    perror(NULL);
+    exit(2);
+  }
+
+  /* bind address */
+  serv_addr.sin_family =
+            AF_INET;
+  serv_addr.sin_addr.s_addr =
+         htonl(INADDR_ANY);
+  serv_addr.sin_port =
+            htons(TIME_PORT);
+
+  if (bind(sockfd, &serv_addr, sizeof(serv_addr)) < 0) {
+    perror(NULL);
+    exit(3);
+  }
+
+  /* specify queue */
+  listen(sockfd, 5);
+  for (;;) {
+    len = sizeof(client_addr);
+    client_sockfd =
+          accept(sockfd,
+                 &client_addr,
+                 &len);
+    if (client_sockfd == -1) {
+      perror(NULL);
+      continue;
+    }
+
+    /* create a new slave */
+    if (fork() == 0) {
+	close(sockfd);
+	/* transfer data */
+	time(&t);
+	sprintf(buf, "%s",
+	    asctime(localtime(&t)));
+	len = strlen(buf) + 1;
+	write(client_sockfd, buf, len);
+	close(client_sockfd);
+	exit(0);
+    }    
+  }
+}
+
+</XMP>
+<H2>Server listening on multiple sockets</H2>A server may be attempting to 
+listen to multiple clients not just on one port, but on many. In this case it 
+has to use some sort of polling mechanism between the ports. 
+<P>The select() call lets the kernel do this work. The call takes a number of 
+file descriptors. The process is suspended. When I/O is ready on one of these, a 
+wakeup is done, and the process can continue. This is cheaper than busy polling. 
+
+<H2>Internet superserver</H2>Each server executes as a process. If there are 
+multiple servers on a system, then many processes will exist, most probably 
+doing nothing. The Internet inetd process can replace many of these, doing a 
+listen on each port. When a request comes through, inetd will create a new 
+process to handle each request. The file /etc/inetd.conf will specify which 
+servers it is to listen for. 
+<P>When a request comes through, a server is created to handle it. To make it 
+simpler for the server, instead of having to deal with ports, inetd will remap 
+these onto stdin and stdout so that the server just reads/writes to 
+stdin/stdout. 
+<HR>
+This page is maintained by Jan Newmarch <A 
+href="http://pandonia.canberra.edu.au/">http://pandonia.canberra.edu.au/</A></BODY></HTML>

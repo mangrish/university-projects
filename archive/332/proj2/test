@@ -1,0 +1,15 @@
+Process 1 p 3 h 3 6 r 1
+Process 2 p 2 h 1 7 r 3
+Process 3 p 1 h * r 2 7 9
+Process 4 p 7 h 4 r 5
+Process 5 p 6 h 5 r 4
+Process 6 p 5 h 8 r *
+Process 7 p 8 h * r *
+Process 8 p 3 h 10 11 r 19
+Process 9 p 2 h 19 17 r 10
+Process 11 p 1 h * r 16 17 15
+Process 10 p 7 h 16 r *
+Process 14 p 6 h 15 r 11
+Process 19 p 5 h 12 r 10
+Process 20 p 8 h 14 r *
+

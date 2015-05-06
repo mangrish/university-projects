@@ -1,0 +1,517 @@
+EQUIVALENCE CLASSES
+-------------------
+
+			valid classes				invalid classes
+			-------------				---------------
+1. student no.		A.5 digit num				D.4 digit num
+			B.6 digit num				E.7 digit num
+			C.9 digit num				F.10 digit num
+
+2. birth month		A.3 character string			B.2 char string
+								C.4 char string
+3. birth date		A.date=1 month=jan			B.date=32 month=jan
+			C.date=1 month=feb			D.date=29 month=feb
+			E.date=1 month=mar			F.date=32 month=mar
+			G.date=1 month=apr			H.date=31 month=apr
+			I.date=1 month=may			J.date=32 month=may
+			K.date=1 month=jun			L.date=31 month=jun
+			M.date=1 month=jul			N.date=32 month=jul
+			O.date=1 month=aug			P.date=32 month=aug
+			Q.date=1 month=sep			R.date=31 month=sep
+			S.date=1 month=oct			T.date=32 month=oct
+			U.date=1 month=nov			V.date=31 month=nov
+			W.date=1 month=dec			X.date=32 month=dec
+
+4. first name		A.string without no.			B.string with numbers
+
+5. surname initial	A. single letter			B. multiple letters
+								C. number
+
+6. lectures missed	A. 4					B. -1
+								C. 13
+
+7. slept during lect	A. true					B. other string
+
+8. assignment 1 mark	A. 5 digit stud num		
+			with ass1=5
+			B. 5 digit stud num
+			with calculated mark
+			less than 3.
+			C. 9 digit student num
+			with ass1=5
+			D. 9 digit stud num
+			with calculated mark
+			less than 3
+
+9. assignment 2 mark	A. month and date that
+			give ass2 mark >5
+			B. month and date that
+			give calculated ass2 mark
+			less than 5. This will then
+			be adjusted.
+
+10. assignment 3	A. slept=true
+			B. slept=false
+			C. ass3 >=5
+			D. ass3 < 5
+			E. ass3 negative
+
+11. exam marks		A. exam mark >= 20
+			B. exam mark < 20			
+
+12. final grade		A. H1 final grade
+			B. H2A final grade
+			C. H2B final grade
+			D. H3 final grade
+			E. P final grade
+			F. N final grade
+			G. NCP final grade
+			H. N+ final grade
+
+13. comments		A. H1 grade => Excellent
+			B. H2A grade => Good Work.
+			C. H2B grade => You missed a few points here and there
+			D. H3 grade => You may have misunderstood some concepts
+			E. P grade => I recommend you work harder next semester
+			F. N grade => Im sorry. You did not pass the subject.
+			G. NCP grade => You just scraped through
+
+
+Equivalence class : 	1A
+input:			19634;Aug;15;robert;l;0;false
+expected output:	output line with student no.=19634
+obtained output:	19634;5;9;5;39;N+;I'm sorry. You failed the project hurdle.;
+result: 		passed
+
+Equivalence class : 	1B
+input:			196444;Aug;15;robert;l;0;false
+expected output:	output line with student no.=196444
+obtained output:	196444;4;9;5;39;N+;I'm sorry. You failed the project hurdle.;
+result: 		passed
+
+Equivalence class : 	1C
+input:			147621232;Aug;15;robert;l;0;false
+expected output:	output line with student no.=147621232
+obtained output:	147621232;4;9;5;39;N+;I'm sorry. You failed the project hurdle.;
+result: 		passed
+
+Equivalence class : 	1D
+input:			1431;Aug;15;robert;l;0;false
+expected output:	error message
+obtained output:	Exception - java.lang.Exception: Invalid student number.
+			1431;0;9;7;39;N+;I'm sorry. You failed the project hurdle.;
+result: 		failed
+
+Equivalence class : 	1E
+input:			1476521;Aug;15;robert;l;0;false
+expected output:	error message
+obtained output:	1476521;5;9;5;39;N+;I'm sorry. You failed the project hurdle.;
+result:			failed		
+
+Equivalence class : 	1F
+input:			1459064324;Aug;15;robert;l;0;false
+expected output:	error message
+obtained output:	Exception - java.lang.Exception: Invalid student number.
+			1459064324;0;9;7;39;N+;I'm sorry. You failed the project hurdle.;
+result:			failed
+
+Equivalence class : 	2A
+input:			14567;Aug;15;robert;l;0;false
+expected output:	An output line
+obtained output:	14567;5;9;5;39;N+;I'm sorry. You failed the project hurdle.;
+result:			passed
+
+Equivalence class : 	2B
+input:			14567;Au;15;robert;l;0;false
+expected output:	invalid month error message
+obtained output:	Exception - java.lang.Exception: Invalid birth month.
+result:			passed
+
+Equivalence class : 	2C
+input:			14567;Augu;15;robert;l;0;false
+expected output:	invalid month error message
+obtained output:	Exception - java.lang.Exception: Invalid birth month.
+result:			passed
+	
+Equivalence class : 	3A
+input:			91435;Jan;1;robert;l;0;false
+expected output:	An output line 
+obtained output:	91435;4;24;10;39;H2A;Good work.;
+result:			passed
+
+Equivalence class : 	3B
+input:			91435;Jan;32;robert;l;0;false
+expected output:	invalid date error message
+obtained output:	Exception - java.lang.Exception: Invalid birth date.
+result:			passed
+
+Equivalence class : 	3C
+input:			91435;Feb;1;robert;l;0;false
+expected output:	Output line 
+obtained output:	91435;4;23;9;39;H2A;Good work.;
+result:			passed
+
+Equivalence class : 	3D
+input:			91435;Feb;29;robert;l;0;false
+expected output:	invalid date error message
+obtained output:	91435;4;19;8;39;H2B;You missed a few points here and there.;
+result:			failed
+
+Equivalence class : 	3E
+input:			91435;Mar;1;robert;l;0;false
+expected output:	Output line 
+obtained output:	91435;4;22;9;39;H2B;You missed a few points here and there.;
+result:
+
+Equivalence class : 	3F
+input:			91435;Mar;32;robert;l;0;false
+expected output:	invalid date error message
+obtained output:	Exception - java.lang.Exception: Invalid birth date.
+result:			passed
+
+Equivalence class : 	3G
+input:			91435;Apr;1;robert;l;0;false
+expected output:	Output line 
+obtained output:	91435;4;21;9;39;H2B;You missed a few points here and there.;
+result:			passed
+
+Equivalence class : 	3H
+input:			91435;Apr;31;robert;l;0;false
+expected output:	invalid date error message
+obtained output:	91435;4;15;7;39;H3;You may have misunderstood some of the concepts.;
+result:			failed
+
+Equivalence class : 	3I
+input:			91435;May;1;robert;l;0;false
+expected output:	Output line 
+obtained output:	91435;4;20;8;39;H2B;You missed a few points here and there.;
+result:			passed
+
+Equivalence class : 	3J
+input:			91435;May;32;robert;l;0;false
+expected output:	invalid date error message
+obtained output:	Exception - java.lang.Exception: Invalid birth date.
+result:			passed
+
+Equivalence class : 	3K
+input:			91435;Jun;1;robert;l;0;false
+expected output:	Output line 
+obtained output:	91435;4;19;8;39;H2B;You missed a few points here and there.;
+result:			passed
+
+Equivalence class : 	3L
+input:			91435;Jun;31;robert;l;0;false
+expected output:	invalid date error message
+obtained output:	91435;4;21;9;39;H2B;You missed a few points here and there.;
+result:			failed
+
+Equivalence class : 	3M
+input:			91435;Jul;1;robert;l;0;false
+expected output:	Output line 
+obtained output:	91435;4;19;8;39;H2B;You missed a few points here and there.;
+result:			passed
+
+Equivalence class : 	3N
+input:			91435;Jul;32;robert;l;0;false
+expected output:	invalid date error message
+obtained output:	Exception - java.lang.Exception: Invalid birth date.
+result:			passed
+
+Equivalence class : 	3O
+input:			91435;Aug;1;robert;l;0;false
+expected output:	Output line 
+obtained output:	91435;4;17;7;39;H3;You may have misunderstood some of the concepts.;
+result:			passed
+
+Equivalence class : 	3P
+input:			91435;Aug;32;robert;l;0;false
+expected output:	invalid date error message
+obtained output:	Exception - java.lang.Exception: Invalid birth date.
+result:			passed
+
+Equivalence class : 	3Q
+input:			91435;Sep;1;robert;l;0;false
+expected output:	Output line 
+obtained output:	Exception - java.lang.Exception: Invalid birth month.
+result:			failed
+
+Equivalence class : 	3R
+input:			91435;Sep;31;robert;l;0;false
+expected output:	invalid date error message
+obtained output:	Exception - java.lang.Exception: Invalid birth month.
+result:			failed
+
+Equivalence class : 	3S
+input:			91435;Oct;1;robert;l;0;false
+expected output:	Output line 
+obtained output:	91435;4;25;10;39;H2A;Good work.;
+result:			passed
+
+Equivalence class : 	3T
+input:			91435;Oct;32;robert;l;0;false
+expected output:	invalid date error message
+obtained output:	Exception - java.lang.Exception: Invalid birth date.
+result:			passed
+
+Equivalence class : 	3U
+input:			91435;Nov;1;robert;l;0;false
+expected output:	Output line 
+obtained output:	91435;4;14;6;39;P;I recommmend you work harder next semester.;
+result:			passed
+	
+Equivalence class : 	3V
+input:			91435;Nov;31;robert;l;0;false
+expected output:	invalid date error message
+obtained output:	91435;4;22;9;39;H2B;You missed a few points here and there.;
+result:			failed
+
+Equivalence class : 	3W
+input:			91435;Dec;1;robert;l;0;false
+expected output:	Output line 
+obtained output:	91435;4;13;6;39;P;I recommmend you work harder next semester.;
+result:			passed
+
+Equivalence class : 	3X
+input:			91435;Dec;32;robert;l;0;false	
+expected output:	invalid date error message
+obtained output:	Exception - java.lang.Exception: Invalid birth date.
+result:			passed
+
+Equivalence class : 	4A
+input:			91435;Aug;15;robert;l;0;false
+expected output:	an output line
+obtained output:	91435;4;9;5;39;N+;I'm sorry. You failed the project hurdle.;
+result:			passed
+
+Equivalence class : 	4B
+input:			91435;Aug;15;robert6;l;0;false
+expected output:	invalid name error message
+obtained output:	91435;4;9;5;51;N+;I'm sorry. You failed the project hurdle.;
+result:			failed
+
+Equivalence class : 	5A
+input:			91435;Aug;15;robert;l;0;false
+expected output:	output line
+obtained output:	91435;4;9;5;39;N+;I'm sorry. You failed the project hurdle.;
+result:			passed
+
+Equivalence class : 	5B
+input:			91435;Aug;15;robert;lo;0;false
+expected output:	invalid surname warning message
+obtained output:	91435;4;9;5;39;N+;I'm sorry. You failed the project hurdle.;
+result:			failed
+
+Equivalence class : 	5C
+input:			91435;Aug;15;robert;5;0;false
+expected output:	invalid surname warning message
+obtained output:	Exception - java.lang.Exception: Invalid firstname or surname initial.
+result:			passed
+
+Equivalence class : 	6A
+input:			91435;Aug;15;robert;l;4;false
+expected output:	output line
+obtained output:	91435;4;9;5;39;N+;I'm sorry. You failed the project hurdle. It may help if you attended more lectures.;
+result:			passed
+
+Equivalence class : 	6B
+input:			91435;Aug;15;robert;l;-1;false
+expected output:	invalid number of lectures missed error message
+obtained output:	Exception - java.lang.Exception: Invalid number of missed lectures
+result:			passed
+
+Equivalence class : 	6C
+input:			91435;Aug;15;robert;l;13;false
+expected output:	invalid number of lectures missed error message
+obtained output:	Exception - java.lang.Exception: Invalid number of missed lectures.
+result:			passed
+
+Equivalence class : 	7A
+input:			91435;Aug;15;robert;l;0;true
+expected output:	output line
+obtained output:	91435;4;9;5;39;N+;I'm sorry. You failed the project hurdle. You may get more out of the lectures if you stay awake!;
+result:			passed
+
+Equivalence class : 	7B
+input:			91435;Aug;15;robert;l;0;xyz
+expected output:	invalid boolean value error message
+obtained output:	91435;4;9;5;39;N+;I'm sorry. You failed the project hurdle.;
+result:			failed
+
+Equivalence class : 	8A
+input:			91436;Aug;15;robert;l;0;false
+expected output:	output line with ass1 = 5
+obtained output:	91436;5;9;5;39;N+;I'm sorry. You failed the project hurdle.;
+result:			passed
+
+Equivalence class : 	8B
+input:			91432;Aug;15;robert;l;0;false
+expected output:	output line with ass1 = 3
+obtained output:	91432;4;9;5;39;N+;I'm sorry. You failed the project hurdle.;
+result:			failed
+
+Equivalence class : 	8C
+input:			246712331;Aug;15;robert;l;0;false
+expected output:	output line with ass1 = 5
+obtained output:	246712331;5;9;5;39;N+;I'm sorry. You failed the project hurdle.;
+result:			passed
+
+Equivalence class : 	8D
+input:			246712333;Aug;15;robert;l;0;false
+expected output:	output line with ass1 = 3
+obtained output:	246712333;4;9;5;39;N+;I'm sorry. You failed the project hurdle.;
+result:			failed
+
+Equivalence class : 	9A
+input:			91435;Aug;15;robert;l;0;false
+expected output:	output line with ass2 = 9
+obtained output:	91435;4;9;5;39;N+;I'm sorry. You failed the project hurdle.;
+result:			passed
+	
+Equivalence class : 	9B
+input:			91435;Aug;16;robert;l;0;false
+expected output:	output line with ass2 = 11
+obtained output:	91435;4;11;5;39;P;I recommmend you work harder next semester.;
+result:			passed
+
+Equivalence class : 	10A
+input:			91436;Aug;7;robert;l;3;true
+expected output:	output line with ass3 = 6
+obtained output:	91436;5;21;6;39;H2B;You missed a few points here and there.;
+result:			passed
+
+Equivalence class : 	10B
+input:			91436;Aug;7;robert;l;4;false
+expected output:	output line with ass3 = 7
+obtained output:	91436;5;21;7;39;H2B;You missed a few points here and there.;
+result:			passed
+
+Equivalence class : 	10C
+input:			91436;Aug;7;robert;l;0;false
+expected output:	output line with ass3 = 9
+obtained output:	91436;5;21;9;39;H2B;You missed a few points here and there.;
+result:			passed
+
+Equivalence class : 	10D
+input:			91436;Aug;7;robert;l;5;false
+expected output:	output line with ass3 = 14
+obtained output:	91436;5;21;7;39;H2B;You missed a few points here and there.;
+result:			failed
+
+Equivalence class : 	10E
+input:			91436;Feb;23;robert;l;12;true
+expected output:	output line with ass3 = 0
+obtained output:	Exception - java.lang.Exception: Invalid number of missed lectures.
+result:			failed
+
+Equivalence class : 	11A
+input:			91435;Aug;15;robert;l;0;false
+expected output:	output line with exam mark = 39
+obtained output:	91435;4;9;5;39;N+;I'm sorry. You failed the project hurdle.;
+result:			passed
+
+Equivalence class : 	11B
+input:			91435;Aug;15;robert;y;0;false
+expected output:	output line with exam mark = 9 + 25 = 34
+obtained output:	91435;4;9;5;26;NCP;You just scraped through...;
+result:			failed
+
+Equivalence class : 	12A
+input:			91435;Jan;27;robert;D;0;false
+expected output:	output line with final grade = H1
+obtained output:	91435;4;24;10;53;H1;Excellent;
+result:			passed
+
+Equivalence class : 	12B
+input:			91435;Jan;27;robert;S;0;false
+expected output:	output line with final grade = H2A
+obtained output:	91435;4;24;10;42;H1;Excellent;
+result:			failed
+
+Equivalence class : 	12C
+input:			91435;Jan;27;robert;e;0;false
+expected output:	output line with final grade = H2B
+obtained output:	91435;4;24;10;36;H2B;You missed a few points here and there.;
+result:			passed
+
+Equivalence class : 	12D
+input:			91435;Jan;27;robert;p;0;false
+expected output:	output line with final grade = H3
+obtained output:	91435;4;24;10;32;H2B;You missed a few points here and there.;
+result:			failed
+
+Equivalence class : 	12E
+input:			91435;Jan;10;robert;p;0;false
+expected output:	output line with final grade = P
+obtained output:	91435;4;15;7;32;P;I recommmend you work harder next semester.;
+result:			passed
+
+Equivalence class : 	12F
+input:			91435;Jan;20;robert;p;10;true
+expected output:	output line with final grade = N
+obtained output:	91435;4;15;-3;32;N;I'm sorry. You did not pass the subject. It may help if you attended more lectures. You may get more out of the lectures if you stay awake!;
+result:			passed
+
+Equivalence class : 	12G
+input:			91435;Jan;27;robert;C;0;false
+expected output:	output line with final grade = NCP
+obtained output:	91435;4;24;10;34;H2B;You missed a few points here and there.;
+result:			failed
+
+Equivalence class : 	12H
+input:			91435;Jan;27;robert;B;0;false
+expected output:	output line with final grade = N+
+obtained output:	91435;4;24;10;26;N+;I'm sorry. You failed the exam hurdle.;
+result:			passed
+
+Equivalence class : 	13A
+input:			91435;Jan;27;robert;D;0;false
+expected output:	output line with comment = "Excellent"
+obtained output:	91435;4;24;10;53;H1;Excellent;
+result:			passed
+
+Equivalence class : 	13B
+input:			91435;Jan;27;robert;S;0;false
+expected output:	output line with comment = "Good Work"
+obtained output:	91435;4;24;10;42;H1;Excellent;
+result:			failed
+
+Equivalence class : 	13C
+input:			91435;Jan;27;robert;e;0;false
+expected output:	output line with comment = "You missed a few points
+			here and there."
+obtained output:	91435;4;24;10;36;H2B;You missed a few points here and there.;
+result:			passed
+
+Equivalence class : 	13D
+input:			91435;Jan;27;robert;p;0;false
+expected output:	output line with comment = "You have misunderstood
+			some of the concepts."
+obtained output:	91435;4;24;10;32;H2B;You missed a few points here and there.;
+result:			failed
+
+Equivalence class : 	13E
+input:			91435;Jan;10;robert;p;0;false
+expected output:	output line with comment = "I recommend you work harder
+			next semester."
+obtained output:	91435;4;15;7;32;P;I recommmend you work harder next semester.;
+result:			passed
+
+Equivalence class : 	13F
+input:			91435;Jan;20;robert;p;10;false
+expected output:	output line with comment = "I'm sorry. You did not pass
+			the subject."
+obtained output:	91435;4;15;2;32;P;I recommmend you work harder next semester.;
+result:			failed
+
+Equivalence class : 	13G
+input:			91435;Jan;27;robert;c;0;false
+expected output:	output line with comment = "You just scraped through..."
+obtained output:	91435;4;24;10;34;H2B;You missed a few points here and there.;
+result:			failed
+
+
+
+
+
+
+

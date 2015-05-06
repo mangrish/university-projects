@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+
+<!DOCTYPE Enrolment SYSTEM 'file:DataFiles/Enrolment.dtd'>
+
+<Enrolment SubjectName="433-371 Interactive System Design">
+  <Day Name="Wednesday">
+    <Time StartTime="13:00" Duration="1" EnrolmentLimit="10"> 
+      <Enrolled>Paddy</Enrolled>
+      <Enrolled>Mick</Enrolled>
+			<Enrolled>Jang</Enrolled>
+      <Enrolled>Jobg</Enrolled>
+      <Enrolled>Aarig</Enrolled>
+			<Enrolled>Janh</Enrolled>
+      <Enrolled>Jobh</Enrolled>
+      <Enrolled>Aarih</Enrolled>
+		  <Enrolled>Jobhk</Enrolled>
+      <Enrolled>Aarihk</Enrolled>
+    </Time>
+    <Time StartTime="15:00" Duration="1" EnrolmentLimit="15"> 
+      <Enrolled>Eamon</Enrolled>
+      <Enrolled>Seamus</Enrolled>
+    </Time>
+  </Day>
+  <Day Name="Friday">
+    <Time StartTime="9:00" Duration="1" EnrolmentLimit="12"> 
+      <Enrolled>Jan</Enrolled>
+      <Enrolled>Job</Enrolled>
+      <Enrolled>Aari</Enrolled>
+    </Time>
+  </Day>
+</Enrolment>
+

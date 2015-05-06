@@ -1,0 +1,11 @@
+#!/bin/sh
+#set -x
+for var in `echo $PATH | tr ':' ' '`
+    do
+	if [ -r "$var/$1" ] 
+	   then
+		echo $var/$1
+   	fi
+    done
+
+

@@ -1,0 +1,12 @@
+#!/usr/local/bin/perl -w
+
+$pi = 3.141592654;
+
+print "Please enter a circle radius\n";
+chomp($radius = <STDIN>);
+
+$circumference = (2 * $pi) * $radius;
+
+print "The circumerence of a circle with radius ${radius} is ${circumference}.\n";
+
+

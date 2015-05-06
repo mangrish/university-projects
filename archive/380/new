@@ -1,0 +1,8 @@
+off ./ktests/krl-cube.off 1.0 1.0 1.0 10.0 -10.0 0.0 3.0 3.0 -6.0
+light 1.0 -1.0 0.0 0.0
+off ./ktests/head.off 0.2 0.2 0.2 20.0 20.0 0.0 3.0 -4.0 -6.0
+ambient 0.2
+off ./ktests/seashell.off 4.0 4.0 4.0 -30.0 30.0 0.0 -3.0 -3.0 -6.0
+light 1.0 0.0 1.0 0.0
+off ./ktests/x29_plane.off 0.1 0.1 0.1 45.0 0.0 180.0 -3.0 3.0 -6.0
+light 1.0 1.0 -1.0 1.0

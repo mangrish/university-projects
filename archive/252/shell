@@ -1,0 +1,89 @@
+
+WH:	finds all readable files that have the same name as the input
+
+#!/bin/sh
+#set -x
+for var in `echo $PATH | tr ':' ' '`
+    do
+        if [ -r "$var/$1" ]
+           then
+                echo $var/$1
+        fi
+    done
+
+
+REGTEST:	regression testing script
+
+#!/bin/sh
+#set -x
+
+trap "rm -f files$$ diffs$$;exit" 0 1 2 3 15
+success=0
+nosuccess=0
+echo > files$$
+echo > diffs$$
+
+for file in *.in
+    do
+        basefile=`basename $file .in`
+
+        $1 < $basefile.in > $basefile.out
+
+        diff $basefile.out $basefile.exp > $basefile.diff
+
+        if test -s $basefile.diff ;then
+            nosuccess=`expr "$nosuccess" + 1`
+            echo "$file" "\n">>files$$
+            echo "$basefile.diff" "\n">>diffs$$
+        else
+            success=`expr "$success" + 1`
+            rm "$basefile.diff"
+            rm "$basefile.out"
+        fi
+    done
+
+echo `expr "$success" + "$nosuccess"` testcases, "$success" succeeded, "$nosucce
+ss" failed "\n"
+echo FAILED TEST CASES "\n"
+cat files$$
+echo OUTPUT OF DIFF PROGRAM FOR FAILED CASES "\n"
+cat diffs$$
+
+
+
+NEWWH: expansion of wh, with geopts
+#!/bin/sh
+#set -x
+usage="Usage: wh [-af] [-p#] searchword..."
+
+option=x
+op2=one
+path=$PATH
+
+while getopts afp: flag; do
+    case $flag in
+        a) op2=all;;
+        f) op2=all;
+     option=f;;
+        p) op2=all;
+                 option=f;
+                 path=$OPTARG;;
+        \?) echo $usage;exit 1;;
+    esac
+done
+
+shift `expr "$OPTIND" - 1`
+
+for var in `echo $path | tr ':' ' '`
+        do
+                if [ -$option "$var"/"$1" ]
+                        then
+                                echo $var/$1
+                                if [ $op2 = one ]
+                                        then
+                                        break
+                                fi
+                fi
+        done
+
+

@@ -1,0 +1,62 @@
+main: 
+
+	PASS
+
+CalcAssignment1Mark:
+
+	Line 31: The "if" statement does not handle 5, 6, or 9 exclusively, it 
+  		handles 5 to 9 inclusively.	Transient Failure.
+(5/5)
+	Line 39: In the "while" loop the variable should be numDigits as opposed to be remainingDigits.	Programmer Error.
+(4/5)
+	Line 51: Adjustment amount is wrong, should be adding 2 as opposed to 3 when a1Mark is < 3.	Numerical Error.
+(4/5)
+CalcAssignment2Mark:		
+	Line 75: The else if clause is dependent on the number of days in the month.	Propagated Numerical Failure.
+(4/5)
+	Line 80: NOT according to specification.  As there is no variable p.	Programmer Error.
+(3/5)
+	Line 82: Incorrect comparison operator, used =< as opposed to just <.	Propagated Numerical Failure.
+(4/5)
+CalcAssignment3Mark:		
+	Line 105: Incorrect comparison operator, used >= as opposed to just >.	Propagated Numerical Failure.
+(4/5)
+	Line 113: NOT according to specification.  As there is no variable m.	Programmer Error.
+(3/5)
+	Line 116: NOT according to specification.  As there is no variable mark.	Programmer Error.
+(3/5)
+	Line 130: Incorrect statement as else if is not necessary, ONLY else is required.	Propagated Control Flow Failure.
+(4/5)
+calcExamMark:		
+	Line 151: Incorrect check, make sure the firstName variable contains ONLY alphabets as opposed to it's length.	Programmer Error.
+(4.5)
+	Line 170: NOT according to specification.  As there is no variable p.	Programmer Error.
+(3/5)
+	Line 171: NOT according to specification.  As there is no variable a.	Programmer Error.
+(3/5)
+calcExamMark:		
+	Line 204: Incorrect comparison operator used for upper bound, used < 64 as opposed to just <= 64.	Control Flow Failure.
+(4/5)
+getComment:		
+	Line 265: These comments are NOT in the specifications.	Programmer Error.
+(3/5)
+	Line 286: The if statement SHOULD NOT be there.	Control Flow Failure.
+(4/5)
+	Line 296 - 316: These comments are NOT in the specifications.	Programmer Error.
+(4/5)
+convertMonthStrToInt:		
+	Line 365: Incorrect assignment to monthInt variable, should be 7 as opposed to 6.	Numerical Failure.
+(4/5)
+	Line 377: Incorrect assignment to monthInt variable, should be 0 as opposed to 10.	Numerical Failure.
+(4/5)
+
+MarkReporter.java
+
+		Type and Severity
+main: 	PASS	
+generateReport: 	PASS	
+splitString:	PASS	
+generateString:		
+	Line 265: All should be initialised and all should be tried and caught.	Programmer Error.
+(5/5)
+

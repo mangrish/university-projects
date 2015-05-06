@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo 'Results for the subject "World goverment"'
+echo 'Student              Mark'
+cat /home/stude/data/252/lab/lab04/data

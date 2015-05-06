@@ -1,0 +1,8 @@
+199227173;May;26;Kevin;C;0;eddiemacguire
+12345;Jan;28;Joshua;B;2;truey
+89934;August;10;Michael;M;0;true
+52644;Jul;16;Cameron;J;2;false
+122034;nov;2;Frederick;H;0;true
+199043949;Jan;28;Casey;C;0;false
+23943;Feb;3;Sean;M;3;false
+19239;Dec;23;Harris;S;0;false

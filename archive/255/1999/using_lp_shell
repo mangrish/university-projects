@@ -1,0 +1,100 @@
+433-255 How to use lp_shell
+---------------------------
+
+
+1. At the unix prompt type:
+
+   lp_shell
+
+
+
+2. This will start SWI-prolog with the lp_shell environment. You will see the
+   SWI prompt which looks like:
+
+      ?-
+
+
+
+3. At the SWI prompt type:
+
+      go.
+
+
+
+4. You will see the following text:
+
+      =======================
+      LOGIC PROGRAMMING SHELL
+      =======================
+
+      1. Begin logged session
+      2. Begin unlogged session 
+
+      Enter choice:
+
+
+   lp_shell can keep a log file (in the current directory) of your session
+   with the shell. The log file will basically contain the text that you
+   see each time you type a query. This may be useful if you want to 
+   look over the results of your queries at a later time.
+
+   If you want a log file type:
+
+      1.
+
+   If you don't want a log file type:
+
+      2. 
+
+
+
+5. You will then see the lp_shell prompt:
+
+      >> Next command ('h' for help) ? 
+
+
+
+
+6. You should load and compile the prolog program that you are interested in.
+   For example if your program was called foo.pl type:
+
+      [foo].
+
+
+
+
+7. lp_shell will print a short message and then provide you with the
+   same prompt as in step 5. You may begin to enter queries at this point.
+   After each query you make there will be a trace of the resolution steps that
+   were made by lp_shell. Note that lp_shell does not perform backtracking.
+
+
+
+
+8. To quit lp_shell type:
+   
+      q.
+
+   This will return you to the SWI-prolog prompt. To quit SWI-prolog type:
+
+      halt.
+
+   or
+
+      control-d
+
+
+NOTES:
+
+   lp_shell is not very robust. If you type a command wrong it may exit
+   and return you to the SWI prompt. So be very careful with what you type.
+
+   Make sure you always end each command or query with a full-stop.
+
+
+   If you have any problems using lp_shell please contact:
+
+      Bernie Pope
+      bjpop@cs.mu.oz.au
+      L1.11 SEECS
+      9344-9122

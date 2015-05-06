@@ -1,0 +1,10 @@
+time at completion:		6066
+time spent idle:		1278
+number of requests:		105
+number of reads/writes:		54/51
+number of cache hits/misses:	0/53
+number of seeks executed:	106
+number of tracks travelled:	3795
+average time/request:		57.771
+average seeks/request:		1.010
+average tracks/seek:		35.802

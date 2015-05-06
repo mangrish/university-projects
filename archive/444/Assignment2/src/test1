@@ -1,0 +1,10 @@
+#!/bin/sh
+
+for item in `cat $2`
+do
+	echo "BV test case:" >> out
+	echo "Input given: ${item}" >> out
+	echo "Expected output:" >> out
+	echo "`java $1 $item`" >>out
+	echo >> out
+done

@@ -1,0 +1,659 @@
+APPENDIX A
+
+=======================================================
+CALC MARK DRIVERS
+=======================================================
+
+ /*
+ * The driver to test CalcAssignment1Mark method in CalcMarks class
+ *
+ * Compile it with : 'javac CalcAssignment1MarkDriver.java'
+ * Run it with     : 'java CalcAssignment1MarkDriver <student number>'.
+ */
+public class CalcAssignment1MarkDriver
+{
+    /**
+     * Test the calcAssignment1Mark() method in the CalcMarks class.
+     */
+    public static void main(String argv[])
+    {
+        //////////////////////////////////////////////////////////////////
+        // Read student number from the command line arguments.
+        //////////////////////////////////////////////////////////////////
+        long studentNumber = 0;
+        if (argv.length < 1)
+        {
+            System.err.println("Please specify a student number.");
+            System.exit(0);
+        }
+        else
+        {
+            try
+            {
+                studentNumber = Long.valueOf(argv[0]).longValue();
+            }
+            catch (Exception e)
+            {
+                System.err.println("Exception - " + e);
+                System.exit(0);
+            }
+        }
+
+        //////////////////////////////////////////////////////////////////
+        // Test using the value.
+        //////////////////////////////////////////////////////////////////
+
+        // Create the CalcMarks object.
+        CalcMarks calc = new CalcMarks();
+
+        // Test calcAssignment1Mark() with student number 199224950.
+        try
+        {
+            // This method may throw an exception, so we need to wrap it
+            // in a try-catch block.
+            int result = calc.calcAssignment1Mark(studentNumber);
+
+            // Print out the result to standard out.
+            System.out.println("Result: " + result);
+        }
+        catch (Exception e)
+        {
+            System.out.println("calcAssignment1Mark() threw an exception");
+            System.out.println(e);
+        }
+    }
+}
+
+ /*
+ * The driver to test CalcAssignment2Mark method in CalcMarks class
+ *
+ * Compile it with : 'javac CalcAssignment2MarkDriver.java'
+ * Run it with     : 'java CalcAssignment2MarkDriver <student number>'.
+ */
+public class CalcAssignment2MarkDriver
+{
+    /**
+     * Test the calcAssignment2Mark() method in the CalcMarks class.
+     */
+    public static void main(String argv[])
+    {
+	String month=null;
+	int date=0;	
+
+        if (argv.length < 2)
+        {
+            System.err.println("Incorrect command line argument.");
+            System.exit(0);
+        }
+        else
+        {
+		month = argv[0];
+		date = java.lang.Integer.parseInt(argv[1]);
+        }
+
+        //////////////////////////////////////////////////////////////////
+        // Test using the value.
+        //////////////////////////////////////////////////////////////////
+
+        // Create the CalcMarks object.
+        CalcMarks calc = new CalcMarks();
+
+        try
+        {
+            // This method may throw an exception, so we need to wrap it
+            // in a try-catch block.
+            int result = calc.calcAssignment2Mark(month, date);
+
+            // Print out the result to standard out.
+            System.out.println("Result: " + result);
+        }
+        catch (Exception e)
+        {
+            System.out.println("calcAssignment2Mark() threw an exception");
+            System.out.println(e);
+        }
+    }
+}
+ /*
+ * The driver to test CalcAssignment3Mark method in CalcMarks class
+ *
+ * Compile it with : 'javac CalcAssignment3MarkDriver.java'
+ * Run it with     : 'java CalcAssignment3MarkDriver <student number>'.
+ */
+public class CalcAssignment3MarkDriver
+{
+    /**
+     * Test the calcAssignment3Mark() method in the CalcMarks class.
+     */
+    public static void main(String argv[])
+    {
+	int lectsMissed = -1;
+	boolean didSleep = true;
+	long studentNum = 12345;
+	String birthMonth = "Jun";
+	int birthDate = 17;
+
+        if (argv.length < 2)
+        {
+            System.err.println("Incorrect command line.");
+            System.exit(0);
+        }
+        else
+        {
+		lectsMissed = java.lang.Integer.parseInt(argv[0]);
+		
+		if(argv[1].equalsIgnoreCase("true") )
+		{
+			didSleep = true;
+		}
+		else if(argv[1].equalsIgnoreCase("false"))
+		{
+			didSleep = false;
+		}
+		else
+		{
+			System.err.println("Error in command line.");
+			System.exit(0);
+		}
+
+        }
+
+        //////////////////////////////////////////////////////////////////
+        // Test using the value.
+        //////////////////////////////////////////////////////////////////
+
+        // Create the CalcMarks object.
+        CalcMarks calc = new CalcMarks();
+
+	//Initialise the assignment 1 and 2 marks so that the assignment 3
+	//mark can be tested. These marks can change depending on the test
+
+        // Test calcAssignment3Mark() with student number 199224950.
+        try
+        {
+            // This method may throw an exception, so we need to wrap it
+            // in a try-catch block.
+	    calc.calcAssignment1Mark(studentNum);
+	    calc.calcAssignment2Mark(birthMonth, birthDate);
+            int result = calc.calcAssignment3Mark(lectsMissed, didSleep);
+
+            // Print out the result to standard out.
+            System.out.println("Result: " + result);
+        }
+        catch (Exception e)
+        {
+            System.out.println("calcAssignment3Mark() threw an exception");
+            System.out.println(e);
+        }
+    }
+}
+ /*
+ * The driver to test CalcExamMark method in CalcMarks class
+ *
+ * Compile it with : 'javac CalcExamMarkDriver.java'
+ * Run it with     : 'java CalcExamMarkDriver <firstname, surnameInitial>'.
+ */
+public class CalcExamMarkDriver
+{
+    /**
+     * Test the calcExamMark() method in the CalcMarks class.
+     */
+    public static void main(String argv[])
+    {
+	String firstName  = null;
+	char surnameInitial = 'a';
+
+        if (argv.length < 2)
+        {
+            System.err.println("Incorrect command line.");
+            System.exit(0);
+        }
+        else
+        {
+		firstName = argv[0];
+		surnameInitial = argv[1].charAt(0);
+
+        }
+
+        //////////////////////////////////////////////////////////////////
+        // Test using the value.
+        //////////////////////////////////////////////////////////////////
+
+        // Create the CalcMarks object.
+        CalcMarks calc = new CalcMarks();
+
+        // Test calcExamMark() 
+        try
+        {
+            // This method may throw an exception, so we need to wrap it
+            // in a try-catch block.
+            int result = calc.calcExamMark(firstName, surnameInitial);
+
+            // Print out the result to standard out.
+            System.out.println("Result: " + result);
+        }
+        catch (Exception e)
+        {
+            System.out.println("calcAssignment1Mark() threw an exception");
+            System.out.println(e);
+        }
+    }
+}
+ /*
+ * The driver to test CalcGrade method in CalcMarks class
+ *
+ * Compile it with : 'javac CalcGradeDriver.java'
+ * Run it with     : 'java CalcGradeDriver <ass1 mark, ass2 mark, ass3 mark
+ *			exam mark, slept, lectures missed>
+ */
+public class CalcGradeDriver
+{
+    /**
+     * Test the calcGrade() method in the CalcMarks class.
+     */
+	static int lectsMissed = 1;
+	static boolean didSleep = true;
+	static long studentNum = 12345;
+	static String birthMonth = "Jun";
+	static int birthDate = 17;
+	static String firstName = "John";
+	static char surnameInitial = 'D';
+
+    public static void main(String argv[])
+    {
+
+        //////////////////////////////////////////////////////////////////
+        // Test using the value.
+        //////////////////////////////////////////////////////////////////
+
+        // Create the CalcMarks object.
+        CalcMarks calc = new CalcMarks();
+	
+        // Test calcExamMark() 
+		try {
+	  		calc.calcAssignment1Mark(studentNum);
+	    	calc.calcAssignment2Mark(birthMonth, birthDate);
+        	calc.calcAssignment3Mark(lectsMissed, didSleep);
+			calc.calcExamMark(firstName, surnameInitial);
+ 			String result = calc.calcGrade();
+
+			System.out.println("Result: " + result);
+		} catch (Exception e) {
+	    	System.out.println("calcAssignment3Mark() threw an exception");
+        	System.out.println(e);
+    	}
+
+    }
+}
+ /*
+ * The driver to test getComment method in CalcMarks class
+ *
+ * Compile it with : 'javac getCommentDriver.java'
+ * Run it with     : 'java getCommentDriver <final grade, passedExam, 
+			passedAssignment>
+ */
+public class getCommentDriver
+{
+    /**
+     * Test the getComment() method in the CalcMarks class.
+     */
+
+	static int lectsMissed = 1;
+	static boolean didSleep = true;
+	static long studentNum = 12345;
+	static String birthMonth = "Jun";
+	static int birthDate = 17;
+	static String firstName = "John";
+	static char surnameInitial = 'D';
+
+    public static void main(String argv[])
+    {
+
+        //////////////////////////////////////////////////////////////////
+        // Test using the value.
+        //////////////////////////////////////////////////////////////////
+
+        // Create the CalcMarks object.
+        CalcMarks calc = new CalcMarks();
+
+        // Test getComment() 
+
+        // This method may throw an exception, so we need to wrap it
+        // in a try-catch block.
+	try {
+	  	calc.calcAssignment1Mark(studentNum);
+	    	calc.calcAssignment2Mark(birthMonth, birthDate);
+        	calc.calcAssignment3Mark(lectsMissed, didSleep);
+		calc.calcExamMark(firstName, surnameInitial);
+ 		calc.calcGrade();
+        String result = calc.getComment();
+
+            // Print out the result to standard out.
+            System.out.println("Result: " + result);
+
+		} catch (Exception e) {
+	    	System.out.println("calcAssignment3Mark() threw an exception");
+        	System.out.println(e);
+    	}
+
+    }
+}
+ /*
+ * The driver to test convertLetterToInt method in CalcMarks class
+ *
+ * Compile it with : 'javac convertLetterToIntDriver.java'
+ * Run it with     : 'java convertLetterToIntDriver <letter> 
+ */
+public class convertLetterToIntDriver
+{
+    /**
+     * Test the convertLetterToInt(char letter) method in the CalcMarks class.
+     */
+    public static void main(String argv[])
+    {
+
+	if(argv.length != 1)
+	{
+		System.err.println("Commnad line error.");
+		System.exit(0);
+	}
+
+	char letter = argv[0].charAt(0);
+
+        //////////////////////////////////////////////////////////////////
+        // Test using the value.
+        //////////////////////////////////////////////////////////////////
+
+        // Create the CalcMarks object.
+        CalcMarks calc = new CalcMarks();
+
+        // Test convertMonthStrToInt() 
+
+        int result = calc.convertLetterToInt(letter);
+
+            // Print out the result to standard out.
+            System.out.println("Result: " + result);
+    }
+}
+ /*
+ * The driver to test convertMonthStrToInt method in CalcMarks class
+ *
+ * Compile it with : 'javac convertMonthStrToIntDriver.java'
+ * Run it with     : 'java convertMonthStrToInt <month> 
+ */
+public class convertMonthStrToIntDriver
+{
+    /**
+     * Test the convertMonthStrToInt(String Month) method in the CalcMarks class.
+     */
+    public static void main(String argv[])
+    {
+
+	if(argv.length != 1)
+	{
+		System.err.println("Commnad line error.");
+		System.exit(0);
+	}
+
+	String month = argv[0];
+
+        //////////////////////////////////////////////////////////////////
+        // Test using the value.
+        //////////////////////////////////////////////////////////////////
+
+        // Create the CalcMarks object.
+        CalcMarks calc = new CalcMarks();
+
+        // Test convertMonthStrToInt() 
+
+        int result = calc.convertMonthStrToInt(month);
+
+            // Print out the result to standard out.
+            System.out.println("Result: " + result);
+    }
+}
+===========================================================================
+===========================================================================
+MARK REPORTER DRIVERS
+===========================================================================
+===========================================================================
+
+
+/**
+ * A simple example test driver.
+ *
+ * Compile it with : 'javac generateReportDriver.java'
+ * Run it with     : 'java generateReportDriver <infile> <outfile>'.
+ */
+
+import java.io.*;
+import java.util.*;
+
+public class generateReportDriver 
+{
+    /**
+     * Test the generateReport() method in the CalcMarks class.
+     */
+    public static void main(String argv[])
+    {
+        ///////////////////////////////////////////////////////////////////////
+        // Read the input and output filenames from the command line arguments.
+        ///////////////////////////////////////////////////////////////////////
+        String inF = "";
+        String outF = ""; 
+        if (argv.length < 2)
+        {
+            System.err.println("Please enter valid filenames.");
+            System.exit(0);
+        }
+        else
+        {
+            try
+            {
+                inF = argv[0];
+                outF = argv[1];
+            }
+            catch (Exception e)
+            {
+                System.err.println("Exception - " + e);
+                System.exit(0);
+            }
+        }
+
+        //////////////////////////////////////////////////////////////////
+        // Test using the value.
+        //////////////////////////////////////////////////////////////////
+
+        // Create the CalcMarks object.
+        MarkReporter mark = new MarkReporter();
+
+        // Test generateReport().
+        try
+        {
+            // This method may throw an exception, so we need to wrap it
+            // in a try-catch block.
+            mark.generateReport(inF,outF);
+
+            // Print out the result to standard out.
+            System.out.println("Result: Success");
+        }
+        catch (Exception e)
+        {
+            System.out.println("generateReport() threw an exception");
+            System.out.println(e);
+        }
+    }
+}
+/**
+ * A simple example test driver.
+ *
+ * Compile it with : 'javac generateStringDriver.java'
+ * Run it with     : 'java generateStringDriver '.
+ */
+
+import java.io.*;
+import java.util.*;
+
+public class generateStringDriver 
+{
+    /**
+     * Test the generateString() method in the CalcMarks class.
+     */
+    public static void main(String argv[])
+    {
+        ///////////////////////////////////////////////////////////////////////
+        // Read the valid from the command line arguments.
+        ///////////////////////////////////////////////////////////////////////
+        String output = ""; 
+        
+        long sNum = 0;
+        String bMth = "";
+        int bDate = 0;
+        String fName = "";
+        char sInit = ' ';
+        int numMissed = 0;
+        boolean slept = false;
+        
+        if (argv.length < 7)
+        {
+            System.err.println("Please enter valid arguments.");
+            System.exit(0);
+        }
+        else
+        {
+            try
+            {
+                String sNS = (String) argv[0];
+                sNum = Long.valueOf(argv[0]).longValue();
+                
+                bMth = (String) argv[1];
+
+                String bDS = (String) argv[2];
+                bDate = Integer.valueOf(bDS).intValue();
+                
+                fName = (String) argv[3];
+               
+                String sS = (String) argv[4];
+                sInit = sS.charAt(0);
+                
+                String nMS = (String) argv[5];
+                numMissed = Integer.valueOf(nMS).intValue();
+                
+                String sSt = (String) argv[6];
+                slept = Boolean.valueOf(sSt).booleanValue();
+
+            }
+            catch (Exception e)
+            {
+                System.err.println("Exception - " + e);
+                System.exit(0);
+            }
+        }
+
+        //////////////////////////////////////////////////////////////////
+        // Test using the value.
+        //////////////////////////////////////////////////////////////////
+
+        // Create the CalcMarks object.
+        MarkReporter mark = new MarkReporter();
+
+        // Test generateReport().
+        try
+        {
+            // This method may throw an exception, so we need to wrap it
+            // in a try-catch block.
+            output = mark.generateString(sNum, bMth, bDate, fName,
+                                         sInit, numMissed, slept);
+
+            // Print out the result to standard out.
+            System.out.println("Result: " + output);
+        }
+        catch (Exception e)
+        {
+            System.out.println("generateString() threw an exception");
+            System.out.println(e);
+        }
+    }
+}
+/**
+ * A simple example test driver.
+ *
+ * Compile it with : 'javac SplitStringDriver.java'
+ * Run it with     : 'java SplitStringDriver <String>'.
+ */
+
+import java.io.*;
+import java.util.*;
+
+public class SplitStringDriver
+{
+    /**
+     * Test the splitString() method in the CalcMarks class.
+     */
+    public static void main(String argv[])
+    {
+        //////////////////////////////////////////////////////////////////
+        // Read the String from the command line arguments.
+        //////////////////////////////////////////////////////////////////
+        String str = "";
+        if (argv.length < 1)
+        {
+            System.err.println("Please enter a string.");
+            System.exit(0);
+        }
+        else
+        {
+            try
+            {
+                str = argv[0];
+            }
+            catch (Exception e)
+            {
+                System.err.println("Exception - " + e);
+                System.exit(0);
+            }
+        }
+
+        //////////////////////////////////////////////////////////////////
+        // Test using the value.
+        //////////////////////////////////////////////////////////////////
+
+        // Create the MarkReporter object.
+        MarkReporter mark = new MarkReporter();
+        Vector vect = new Vector();
+
+        // Test splitString().
+        try
+        {
+            // This method may throw an exception, so we need to wrap it
+            // in a try-catch block.
+            mark.splitString(str,vect);
+
+            // Print out the result to standard out.
+            for(int i = 0; i < vect.size(); i ++)
+            {
+                System.out.println("Result: " + vect.elementAt(i));
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("splitString() threw an exception");
+            System.out.println(e);
+        }
+    }
+}
+================================================================
+AUTOTEST SCRIPT
+================================================================
+
+
+#!/bin/sh
+
+for item in `cat $2`
+do
+	echo "BV test case:" >> out
+	echo "Input given: ${item}" >> out
+	echo "Expected output:" >> out
+	echo "`java $1 $item`" >>out
+	echo >> out
+done

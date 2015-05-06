@@ -1,0 +1,61 @@
+
+10th April
+
+There was a minor error in the code for the fcfs_schedule function.
+When a cache hit was recorded, the disk arm was incorrectly moved
+to a new track (it shouldn't have moved at all in this situation).
+A corrected version of the code in disk.c is given below.
+The only change is that the statement ``curr_track = this->track;''
+has been moved back a few lines, to within the `if' test.
+
+Please apply this change to your disk.c file. You can either
+
+-(re)copy the source code for the modified version of disk.c from
+/home/stude/data/332/p1/disk.c
+
+or  
+
+-apply the change yourself by moving the affected statement in your own
+version of the file.
+
+
+
+
+----------
+Fragment of fcfs_schedule function OLD VERSION
+
+        /* decide if we have to move the disk head */
+        /* note that we are not doing write-behind caching */
+        if ((this->type == Write) || !in_cache)
+                mustmove = abs(curr_track-this->track);
+        num_tracks += mustmove;
+        if(mustmove > 0) {
+                num_seeks++;
+                *delay = mustmove*track_cost + start_cost;
+        } else
+                *delay = 0;
+        /* (Getting data from the cache or the current track takes "no time") */
+        curr_track = this->track;
+        *nextproc = this->proc;
+        free(this);
+
+-----------
+Fragment of fcfs_schedule function NEW VERSION
+
+        /* decide if we have to move the disk head */
+        /* note that we are not doing write-behind caching */
+        if ((this->type == Write) || !in_cache)
+                mustmove = abs(curr_track-this->track);
+        num_tracks += mustmove;
+        if(mustmove > 0) {
+                num_seeks++;
+                *delay = mustmove*track_cost + start_cost;
+        	curr_track = this->track; /* ****this line was moved *** */
+        } else
+                *delay = 0;
+        /* (Getting data from the cache or the current track takes "no time") */
+        *nextproc = this->proc;
+        free(this);
+} /* fcfs_schedule() */
+
+

@@ -1,0 +1,23 @@
+[mangr@holly] proj1 [1:186] proj1 test0
+time at completion:             210
+time spent idle:                119
+number of requests:             6
+number of reads/writes:         4/2
+number of cache hits/misses:    0/4
+number of seeks executed:       4
+number of tracks travelled:     51
+average time/request:           35.000
+average seeks/request:          0.667
+average tracks/seek:            12.750
+[mangr@holly] proj1 [1:187] proj1 test1
+time at completion:             645
+time spent idle:                339
+number of requests:             8
+number of reads/writes:         5/3
+number of cache hits/misses:    0/5
+number of seeks executed:       8
+number of tracks travelled:     226
+average time/request:           80.625
+average seeks/request:          1.000
+average tracks/seek:            28.250
+

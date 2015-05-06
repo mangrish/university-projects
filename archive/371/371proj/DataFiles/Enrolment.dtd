@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+  <!ELEMENT Enrolment (Day+)>
+  <!ATTLIST Enrolment
+    xml:space (default|preserve) 'preserve'
+    SubjectName CDATA #REQUIRED >
+  <!ELEMENT Day (Time+)>
+  <!ATTLIST Day
+    Name (Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday) #REQUIRED >
+  <!ELEMENT Time (Enrolled*)>
+  <!ATTLIST Time
+    StartTime CDATA #REQUIRED
+    Duration CDATA "1"
+    EnrolmentLimit CDATA "20">
+  <!ELEMENT Enrolled (#PCDATA)>

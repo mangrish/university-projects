@@ -1,0 +1,33 @@
+#!/bin/sh
+#set -x
+
+trap "rm -f files$$ diffs$$;exit" 0 1 2 3 15 
+success=0
+nosuccess=0
+echo > files$$
+echo > diffs$$
+
+for file in *.in 
+    do
+	basefile=`basename $file .in`
+
+	$1 < $basefile.in > $basefile.out
+
+	diff $basefile.out $basefile.exp > $basefile.diff
+
+	if test -s $basefile.diff ;then 
+	    nosuccess=`expr "$nosuccess" + 1`
+	    echo "$file" "\n">>files$$
+	    echo "$basefile.diff" "\n">>diffs$$
+	else
+	    success=`expr "$success" + 1`
+	    rm "$basefile.diff"
+	    rm "$basefile.out"
+	fi
+    done
+
+echo `expr "$success" + "$nosuccess"` testcases, "$success" succeeded, "$nosuccess" failed "\n" 
+echo FAILED TEST CASES "\n"
+cat files$$
+echo OUTPUT OF DIFF PROGRAM FOR FAILED CASES "\n"
+cat diffs$$

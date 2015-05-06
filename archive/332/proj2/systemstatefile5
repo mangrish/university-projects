@@ -1,0 +1,56 @@
+Process 1 p 3 h 3 6 r 1
+Process 2 p 2 h 1 7 r 3
+Process 3 p 1 h * r 2 7 9
+Process 4 p 7 h 4 r 5 38
+Process 5 p 6 h 5 r 4
+Process 6 p 5 h 8 r 39
+Process 7 p 8 h * r *
+Process 8 p 11 h 2 9 r 1
+Process 9 p 10 h 10 r 3
+Process 10 p 9 h * r 2 7 9
+Process 11 p 15 h 11 r 5
+Process 12 p 14 h 12 r 4
+Process 13 p 13 h 13 r *
+Process 14 p 16 h * r *
+Process 15 p 19 h 14 r 17
+Process 16 p 18 h 15 r 3
+Process 17 p 17 h * r 2 7 9
+Process 18 p 23 h 16 r 5 44
+Process 19 p 22 h 17 r 22 19
+Process 20 p 21 h 18 r *
+Process 21 p 24 h * r *
+Process 22 p 27 h 19 r 14
+Process 23 p 26 h 20 r 3 4
+Process 24 p 25 h * r 2 7 9
+Process 25 p 31 h 21 r 5
+Process 26 p 30 h 22 r 31
+Process 27 p 29 h 23 r *
+Process 28 p 28 h * r *
+Process 29 p 35 h 24 25 r 1
+Process 30 p 34 h 26 r 3
+Process 31 p 33 h * r 2 7 9
+Process 32 p 39 h 27 r 5
+Process 33 p 38 h 28 r 4
+Process 34 p 37 h 29 r *
+Process 35 p 40 h * r *
+Process 36 p 43 h 30 r 1
+Process 37 p 42 h 31 r 34
+Process 38 p 41 h * r 2 7 9
+Process 39 p 47 h 32 r 5
+Process 40 p 46 h 33 r 4
+Process 41 p 45 h 34 r 40
+Process 42 p 48 h * r *
+Process 43 p 51 h 35 r 1
+Process 44 p 50 h 36 r 3
+Process 45 p 49 h * r 2 7 9
+Process 46 p 55 h 37 r 5
+Process 47 p 54 h 38 r 4 50
+Process 48 p 53 h 39 r 16
+Process 49 p 56 h 50 r 20
+Process 50 p 59 h 40 r 17
+Process 51 p 58 h 41 r 3
+Process 52 p 57 h * r 2 7 9
+Process 53 p 63 h 42 r 5
+Process 54 p 62 h 43 r 4
+Process 55 p 61 h 44 r 8
+Process 56 p 64 h * r *

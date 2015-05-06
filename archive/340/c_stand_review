@@ -1,0 +1,315 @@
+================================
+COMMENTS
+===============================
+
+I would estimate that this document should take no longer than 1 or 2 hous to i
+correct, as all corrections are easily fixed. 
+
+
+The following are sections missing from the document.
+
+
+MISSING SECTIONS
+-  Files names
+   - file suffixs
+   - Common file names
+
+-  File Organisation
+   - Java source files
+     - Beginning Comments
+     - Package and Import Statements
+     - Class and Interface Declarations
+
+-  Comments
+   - Implementation COmment Formats
+     - Block comments
+     - Singles Line COmments
+     - Trailing COmments
+     - End of Line Comments
+   -Documentation Comments
+
+- Statements
+    - Compund statements
+    - return statements
+
+- A Code Example
+---------------------------------------------------------------
+I think there needs to be a bigger look into this document.  Again it was
+only handled by one or two ppl and due to unfortunate circumstances, we
+have not been able to inspect it as a team.
+
+I started just reading through this document quickly to see how it was,
+but to my surprise, it still needs some more work put into it, therefore i
+started doing a formal review of it (half so far).
+This document should be easy marks.  No loose ends, and thats basically
+what we have.  A LOT OF LOOSE ENDS.  All this document really needs is
+some reformatting, referencing, and some more elaboration.
+
+Id say this should take one person about 2 hours to fix, if they follow
+the suggestions, and more importantly the java conventions, since we are
+programming java (der).
+
+Generally, there are no reasons for using the "defined" java coding
+standards.  None of them are referenced.  If you made up a standard
+yourself, where is your justification? etc.
+
+Remember these conventions are also being used for maintanance and should
+therefore be very descriptive, and not leave room for the introduction of
+a foreign coding style/s.  It should be very rigid.  At the moment this is
+lacking.
+
+
+==================================================
+START OF FORMAL REVIEW - PART 1
+==================================================
+Reviewer: mangr
+Date: 4/10/01
+
+-Section 2.1 
+--------------
+-is talking about file names but is called file
+organisation.  File organisation refers to the structure of a file.
+
+-Section 2.1.2 
+-----------------
+-makes absolutly no sence at all. Is what your talking about
+currently even right?
+
+-Since java source is talked about, what are java binaries called?
+
+-No talk about how build/make files are to look like.  Are they free to
+say anything or are they to be called something special..any suffixs etc.?
+
+-Suggest reading the java conventions pertaining to the naming of suffixs
+etc.
+
+-Naming conventions make programs more understandable by making them
+easier to read. 
+
+-Section 2.2.1
+------------------
+-formatting error in the example
+
+- Why is that package structure chosen?  Is it
+nessessary? Special? Explanation required.
+
+Say something maybe like, according to (ref) package structures should
+begin with one of the top level domain names, and then reflect the
+organizations own package structure.  Since adacel did not have such a
+convention, the package prefix to the trainingworks system is ... eg ...
+
+-Section 2.2
+--------------
+- Where did files come from all of a sudden?  Arnt we just
+dealing with classes?
+
+-it is very clumsy in its conveyance of its point.  Maybe use the java
+conventions definition? (repeated here:
+Class names should be nouns, in mixed case with the first letter of each
+internal word capitalized. All class names simple and
+descriptive. Only whole words will be used -avoiding acronyms and
+abbreviations (unless the
+abbreviation is much more widely used than the long form, such as URL or
+HTML). )
+
+Section 2.2.3
+--------------- 
+-Again talk of files (what files?)
+-Interfaces are EXACTLY the same as classes, and always begin with a
+CAPITAL LETTER.
+-examples given are INCORRECT.  These are METHOD names, not
+class/interface/abstract class names.
+-there is now talk of methods.  What is this section methods or
+interfaces?
+-Methods should be verbs, in mixed case with the first letter lowercase,
+with the first letter of each internal word capitalized. 
+-get and set are simple properties under the umbrella of design
+patterns.  Make mention of this.  They are only conventions used in the
+introspection of java beans, not regular java. eg
+ public <PropertyType> get<PropertyName>();
+ public void set<PropertyName>(PropertyType a);
+Therefore the boolean properties, with the use of our adopted design
+pattern is:
+ public boolean is<PropertyName>();
+
+-a method that begins with SET is known asa MUTATOR not an accessor
+
+-how did you come up with all those database method names? Does that mean
+database acces have no return types, and never take arguments?  Too many
+loose ends here.  Must justify why these words were used.
+
+-Section 2.2.4 
+---------------
+-too much room to move again here.
+-Can veriables start with OS reserved symbols, or symbols such as #, $, %,
+which are all legitimate symbols?
+- maybe use the java convention again (repeated here:
+Except for variables, all instance, class, and class constants are in
+mixed case with a lowercase first letter. Internal words start with
+capital letters. Variable names should not start with underscore _ or
+dollar sign $ characters, even though both are allowed. 
+
+Variable names should be short yet meaningful. The choice of a variable
+name should be mnemonic- that is, designed to indicate to the casual
+observer the intent of its use. One-character variable names should be
+avoided except for temporary "throwaway" variables. Common names for
+temporary variables are i, j, k, m, and n for integers; c, d, and e for
+characters. )
+
+Section 2.3
+------------
+-Formatting? of what?
+-Do you mean Indention to be the heading? (which makes sence).
+
+Section 2.3.1
+-------------
+-"...of the structure of your methods... ", Is this code standard also
+meant to be a tutorial on programming practise?
+
+-According to the offical java convention.."Four spaces should be used as
+the unit of indentation. The exact construction of the indentation (spaces
+vs. tabs) is unspecified. Tabs must be set exactly every 8 spaces (not
+4)."
+Now you need to say why tabs arnt being used.  Saying "i dont know how to
+set tab stops" is a pretty poor excuse.  It would be a wonder how any
+previous code of ppl using that excuse would look!  Also the statement is
+contradictory. ALL EDITORS TREAT TABS THE SAME.  Its the USER who dictates
+how the tab is set (hence tabstop=x for vi etc).
+
+Section 2.3.2 (should be 2.3.1 Line Length)
+-------------------------------
+- SAy why code cant be more than 80 lines (terminal/telnet setup is 80
+lines etc).  That is all that is needed for this section
+
+(should now have a section 2.3.2 Wrapping Lines rather than a
+continuation)
+
+-there should be one final principle (at the end)
+"If the above rules lead to confusing code or to code that's squished up
+against the right margin, just indent 8 spaces instead."
+
+-For examples of indenting method declarations, why was the java standard
+ignored?  What is given is highly unorthadox, with no explanation.  Either
+an explanation should be given or the use of the standard.  (Repeated here
+
+Following are two examples of indenting method declarations. The first is
+the conventional case. The second would shift the second and third lines
+to the far right if it used conventional indentation, so instead it
+indents only 8 spaces. 
+
+//CONVENTIONAL INDENTATION
+someMethod(int anArg, Object anotherArg, String yetAnotherArg,
+           Object andStillAnother) {
+    ...
+}
+
+//INDENT 8 SPACES TO AVOID VERY DEEP INDENTS
+private static synchronized horkingLongMethodName(int anArg,
+        Object anotherArg, String yetAnotherArg,
+        Object andStillAnother) {
+    ...
+}
+
+-WHY ARNT IF AND TERNARY STATEMENT INDENTATION HANDLED HERE IN
+INDENTATION?!?!?!?!
+
+- refer to java conventions for the "conventional way of how to do these"
+
+-Section 2.3.3
+---------------
+-Why are you talking about braces when they are only used for
+COMPOUND STATEMENTS.
+-Even unlear about the use of braces.  Id read this to have braces around
+'every' statement, even single staements, such as:
+{var = methodA();}
+{method2();} etc.
+- Grammer error starting at "When using.." Should maybe enclose them in
+parenthese at the start somewhere.
+-this section is in the wrong area.  Place it under the STATEMENTs
+heading.
+
+-Section 2.3.4
+---------------
+-What on earth do comments have to do with the indention of code?
+-Comments, all stuff related to comments, should go in the COMMENTS
+section.
+
+-Why is this paragraph so big? Formatting.
+-Even the reading toward the latter end of this mega paragraph is awkward
+-Again have moved from a descriptive tone to a dictative tone. (you ,
+your)
+
+-This is a pretty piss poor desciption of how to comment this project.
+Use the java convention more thouraghly, and remember to reference.
+http://java.sun.com/docs/codeconv/html/CodeConventions.doc4.html#385
+
+
+====================================
+Continuation from last review sent
+===================================
+Section 3
+---------
+-Why is there a seperate section?  There is no clear division amongt the coding conventions.  
+-Suggest removal of this heading.
+
+Section 3.1
+-----------
+-There should be a heading here called "Number per line" for section 3.2.1
+- SInce at the moment its under the heading of specific code examples, why not 
+have what is not preferred as well. Ie.
+is preferred over 
+
+int level, size;
+Do not put different types on the same line. Example: 
+
+ 
+		      int foo,  fooarray[]; //WRONG!
+
+-Also, what about the amount of space between variables and thir types?
+- Can a person say put "int a" or is it acceptable to do this "int	a"(tab) etc.
+
+Section 3.1.2
+---------------
+-What is the definition of a block of code?
+A block is any code surrounded by curly braces "{" and "}".
+
+Section 3.1.3
+--------------
+-Formatting with the bullets. the "{" are one per line for some reason
+
+Section 3.2
+-----------
+- The definition of what compound statements are should be here instead of 
+earlier.
+
+- Where is the section for return statements?  Is it acceptable to return 
+expression evaluators which calculate the return value on the fly?
+
+Section 3.2.2
+--------------
+- Again mention why if statements dont follow java convention.  Lack of 
+referencing.  Say why or reference where the standard came from.
+
+Section 3.2.7
+--------------
+- I think that has to be the ugliest way i have ever seen try catches written!
+- On this one, just follow the convention.  Try catch is synonomous with java
+and its not for us to change a convention that has been written into millions 
+of programs.
+- Also whoever wrote this wrote the try catch finally statement in the convetion
+So whats it going to be?
+
+Section 3.3.1
+--------------
+- A blank line should also appear before a block  or 
+single-line comment 
+
+- Section 3.2.2
+----------------
+- Typo, on third dot point. ( Has two dots)
+
+- Format, a decrement is -- not -.
+
+=============================
+END OF FORMAL REVIEW
+===============================

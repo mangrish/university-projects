@@ -1,0 +1,45 @@
+This is BibTeX, Version 0.99c (Web2C 7.3.1)
+The top-level auxiliary file: ecommerce.aux
+The style file: alpha.bst
+Database file #1: ecommerce.bib
+You've used 3 entries,
+            2543 wiz_defined-function locations,
+            574 strings with 4685 characters,
+and the built_in function-call counts, 827 in all, are:
+= -- 78
+> -- 24
+< -- 3
++ -- 6
+- -- 6
+* -- 35
+:= -- 140
+add.period$ -- 9
+call.type$ -- 3
+change.case$ -- 15
+chr.to.int$ -- 3
+cite$ -- 3
+duplicate$ -- 33
+empty$ -- 76
+format.name$ -- 11
+if$ -- 173
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 0
+newline$ -- 18
+num.names$ -- 9
+pop$ -- 26
+preamble$ -- 1
+purify$ -- 18
+quote$ -- 0
+skip$ -- 34
+stack$ -- 0
+substring$ -- 21
+swap$ -- 3
+text.length$ -- 3
+text.prefix$ -- 2
+top$ -- 0
+type$ -- 24
+warning$ -- 0
+while$ -- 6
+width$ -- 5
+write$ -- 38

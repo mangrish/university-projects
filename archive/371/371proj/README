@@ -1,0 +1,39 @@
+Building and Running the 371 Project Framework
+==============================================
+
+In the 371 www directory
+(/local/dept/w3/subjects/current/371/proj) you'll find a
+file called 371proj.jar or use the
+http://www.cs.mu.oz.au/371 web page link to download it.
+Copy this to somewhere on queeg or on your own machine if
+you've installed the jdk1.3.  (If you possibly can I
+STRONGLY recommend you install the jdk1.3 on your own
+machine as it will be much faster).
+
+On queeg you'll have to add /usr/java1.3/bin to your path and put
+'ulimit -S -v 180000' to your .bash_profile.
+
+If you're on a PC you'll also have to add the jdk1.3\bin dir to your
+path... add it to the start of your path because otherwise an older
+implementation of java will be picked up first.
+
+Then do a:
+
+jar xf 371proj.jar
+cd 371proj
+
+Then if you're on 'n'x:
+
+make
+make run
+
+Or if you're on PC:
+
+build
+run
+
+and remember to read the stuff under the help menu
+
+Goodluck
+
+Tim D.

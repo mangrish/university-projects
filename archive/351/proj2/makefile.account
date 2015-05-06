@@ -1,0 +1,7 @@
+
+# for use with account.sc
+# usage: make -f makefile.account
+
+account: account.sc
+	esqlc account.sc
+	gcc -g -o account account.c -L $II_SYSTEM/ingres/lib -linterp.1 -lframe.1 -lq.1 -lcompat.1 -lm -lc -lsocket -lelf

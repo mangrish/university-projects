@@ -1,0 +1,30 @@
+#!/bin/sh
+#set -x
+
+PEOPLE='nhall alberty varun caley rlogozzo rasika rmsubr matjazl kspc cont dmend tmds cjg teapen myw'
+RESULT='People online:\n'
+ONLINE=no
+ 
+HOSTS='murree murang mungee queeg cat holly toaster'
+
+echo Looking for: $PEOPLE
+printf "please wait "  
+
+for PERSON in $PEOPLE ; do
+	for HOST in $HOSTS ; do
+                RLINE=`rsh $HOST w -h $PERSON`
+                if [ "$RLINE" ] ; then
+			RESULT=$RESULT$PERSON" is on "$HOST"\n"
+			ONLINE=yes
+                fi
+		printf "."  
+	done
+done
+
+echo
+if [ $ONLINE = 'yes' ] ; then
+	echo $RESULT
+else
+	echo No one is online.
+fi
+

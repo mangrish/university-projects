@@ -1,0 +1,24 @@
+#
+#  Simple make file
+#
+
+
+CC	=	mpicc
+POBJ	=	matmul	
+PSRC	=	mpi_mm.c
+SOBJ	=	ser_mm
+SSRC	=	ser_mm.c 
+OPTIONS	=	-g 
+
+all: ${POBJ} ${SOBJ}
+
+$(POBJ) :  $(PSRC)
+	$(CC) $(OPTIONS) $(PSRC) -o $(POBJ) 
+
+
+$(SOBJ) :  $(SSRC)
+	$(CC) $(OPTIONS) $(SSRC) -o $(SOBJ) 
+
+clean:
+	/bin/rm -f *.o ${POBJ} ${SOBJ} *PI 
+

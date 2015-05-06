@@ -1,0 +1,9 @@
+#!/usr/local/bin/perl -w
+
+print "Please enter the text you would like repeated\n";
+$text = <STDIN>;
+
+print "Please enter the number of times you would like the text repeated\n";
+chomp($num_times = <STDIN>);
+
+print $text x $num_times . "\n";

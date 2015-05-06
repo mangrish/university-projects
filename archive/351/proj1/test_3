@@ -1,0 +1,5 @@
+select regonumber
+from AGENT
+where agname = 'Minnie Mouse'
+\g
+

@@ -1,0 +1,75 @@
+============================================
+vis/mangr0.out
+17:11:59_Wednesday_04_April_2001
+============================================
+433-351 Submission Results for Project 1
+User:  mangr
+
+Filename		Status
+--------		------
+
+q1.sql			File found
+q2.sql			File not found!
+q3.sql			File not found!
+q4.sql			File not found!
+q5.sql			File not found!
+q6.sql			File not found!
+q7.sql			File not found!
+
+Explanation of Status:
+
+File found - Submitted file was found *but* may
+	or may not be correct.  Check the generated output
+	yourself for correctness.
+File not found! - No file was submitted.
+Terminating \g missing! - Each .sql file must end
+	with a \g followed by optional whitespace so that
+	the query will execute. Insert a \g at the end of
+	the .sql file and re-submit ALL of your files again.
+============================================
+vis/mangr1.out
+17:11:59_Wednesday_04_April_2001
+============================================
+Execution of Queries
+====================
+==================================================
+File: q1.sql
+==================================================
+INGRES TERMINAL MONITOR Copyright (c) 1981, 1998 Computer Associates Intl, Inc.
+Ingres x86 SOLARIS Version II 2.0/9808 (sui.us5/00) login
+Wed Apr  4 17:11:59 2001
+
+continue
+* * * * * Executing . . .
+
+
++----------------------------------------+-------------+
+|agname                                  |regonumber   |
++----------------------------------------+-------------+
+|Aladdin                                 |          102|
+|Belle                                   |          132|
+|Daisy Duck                              |           20|
+|Donald Duck                             |            3|
+|Donald Duck                             |           21|
+|Goofy                                   |            5|
+|Jasmine                                 |          101|
+|Mickey Mouse                            |            1|
+|Minnie Mouse                            |            2|
+|Pluto                                   |            4|
+|Tigger                                  |           74|
+|Winnie the Pooh                         |          100|
++----------------------------------------+-------------+
+(12 rows)
+continue
+* 
+Ingres Version II 2.0/9808 (sui.us5/00) logout
+Wed Apr  4 17:11:59 2001
+============================================
+src/q1.sql
+17:11:58_Wednesday_04_April_2001
+============================================
+select distinct agname, agent.regonumber
+ from AGENT, WORKS
+ where not agent.regonumber = works.regonumber 
+order by agname
+\g

@@ -1,0 +1,508 @@
+%!PS-Adobe-3.0
+%%Creator: A2ps version 4.3
+%%CreationDate: Tue Sep 12 14:07:35 2000
+%%Pages: (atend)
+%%DocumentFonts: Courier Courier-Bold Helvetica Helvetica-Bold
+%%EndComments
+% Copyright (c) 1993, 1994, Miguel Santana, M.Santana@frgu.bull.fr
+
+/$a2psdict 100 dict def
+$a2psdict begin
+
+% General macros.
+/xdef {exch def} bind def
+/getfont {exch findfont exch scalefont} bind def
+
+% Create Courier backspace font
+/backspacefont {
+    /Courier findfont dup length dict begin
+	{ % forall
+	    1 index /FID eq { pop pop } { def } ifelse
+	} forall
+	currentdict /UniqueID known { % if
+	    /UniqueID UniqueID 16#800000 xor def
+	} if
+	CharStrings length 1 add dict begin
+	    CharStrings { def } forall
+	    /backspace { -600 0 0 0 0 0 setcachedevice } bind def
+	    currentdict
+	end
+	/CharStrings exch def
+	/Encoding Encoding 256 array copy def
+	Encoding 8 /backspace put
+	currentdict
+    end
+    definefont pop
+} bind def
+
+% FUNCTIONS
+
+% Function filename: Initialize file printing.
+/fn
+{ /filenm xdef
+  /filenmwidth filenm stringwidth pop def
+  /filenmfont
+       filenmwidth fns gt
+       {
+	       filenmfontname
+	       fnfs fns mul filenmwidth div
+	     getfont
+       }
+       { sfnf }
+     ifelse
+  def
+} bind def
+
+% Function header: prints page header. no page
+% is passed as argument.
+/hp
+  { x sd get  y sd get hs sub 1 add  moveto
+    df setfont
+    gsave
+      x sd get y sd get moveto
+      0 hs 2 div neg rmoveto 
+      hs setlinewidth
+      0.95 setgray
+      pw 0 rlineto stroke
+    grestore
+    gsave
+      dfs hm rmoveto
+      d show				% date/hour
+    grestore
+    gsave
+      pnum cvs pop				% page pop up
+        pw (Page 999) stringwidth pop sub
+        hm
+	  rmoveto
+      (Page ) show pnum show		% page number
+    grestore
+    empty pnum copy pop
+    gsave
+      filenmfont setfont
+         fns filenm stringwidth pop sub 2 div dw add
+          bm 2 mul 
+        add 
+        hm
+      rmoveto
+        filenm show			% file name
+      grestore
+    } bind def
+
+% Function border: prints border page
+/border 
+{ x sd get y sd get moveto
+  gsave				% print four sides
+    0.7 setlinewidth		% of the square
+    pw 0 rlineto
+    0 ph neg rlineto
+    pw neg 0 rlineto
+    closepath stroke
+  grestore
+} bind def
+
+% Function hborder: completes border of the header.
+/hborder 
+{ gsave
+	0.7 setlinewidth
+	0 hs neg rmoveto
+	pw 0 rlineto
+	stroke
+  grestore
+} bind def
+
+% Function sheetnumber: prints the sheet number.
+/sn
+    { snx sny moveto
+      df setfont
+      pnum cvs
+	  dup stringwidth pop (0) stringwidth pop sub neg 0 rmoveto show
+      empty pnum copy pop
+    } bind def
+
+% Function loginprint: prints the login id of the requestor.
+/lgp
+    { lx ly moveto
+      df setfont
+      dup stringwidth pop neg 0 rmoveto show
+    } bind def
+
+% Function currentdate: prints the current date.
+/cd
+    { dx dy moveto
+      df setfont
+      (Printed: ) show
+      td show
+    } bind def
+
+% Function filename_footer: prints the file name at bottom of page.
+/fnf
+    { fnx fny moveto
+      df setfont
+      filenm center show
+    } bind def
+
+% Function center: centers text.
+/center
+    { dup stringwidth pop
+      2 div neg 0 rmoveto
+    } bind def
+
+% Function s: print a source line
+/s  { show
+      /y0 y0 bfs sub def
+      x0 y0 moveto
+    } bind def
+
+% Functions b and st: change to bold or standard font
+/b  { show
+      bdf setfont
+    } bind def
+/st { show
+      bf setfont
+    } bind def
+
+% Strings used to make easy printing numbers
+/pnum 12 string def
+/empty 12 string def
+
+% Global initializations
+
+/CourierBack backspacefont
+/filenmfontname /Helvetica-Bold def
+/inch {72 mul} bind def
+
+%
+% Meaning of some variables and functions (coded names)
+%
+%	twp:		twinpages?
+%	sd:		sheet side
+%	l:		line counter
+%	c:		column counter
+%	d:		date
+%	td:		current date (for today)
+%	lg:		login name
+%	fn:		filename printing function
+%	sn:		sheetnumber printing function
+%	cd:		current date printing function
+%	fnf:		filename footer printing function
+%	lgp:		login printing function
+%	hp:		header printing function
+%	y:		y coordinate for the logical page
+%	x:		x coordinate for the logical page
+%	sny:		y coordinate for the sheet number
+%	snx:		x coordinate for the sheet number
+%	dy:		y coordinate for the date
+%	dx:		x coordinate for the date
+%	ly:		y coordinate for the login
+%	lx:		x coordinate for the login
+%	scx:		x coordinate for the sheet center
+%	fny:		y coordinate for the filename (footer)
+%	fnx:		x coordinate for the filename (footer)
+%	fnfs:		filename font size
+%	bfs:		body font size
+%	dfs:		date font size
+%	bfs:		body font size
+%	df:		date font
+%	bf:		body font
+%	bdf:		bold font
+%	sfnf:		standard filename font
+%	dw:		date width
+%	pw:		page width
+%	sw:		sheet width
+%	ph:		page height
+%	sh:		sheet height
+%	hm:		header margin
+%	tm:		top margin
+%	bm:		body margin
+%	rm:		right margin
+%	lm:		left margin
+%	hs:		header size
+%	fns:		filename size
+
+% Initialize page description variables.
+/x0 0 def
+/y0 0 def
+/sh 11.64 inch def
+/sw 8.27 inch def
+/margin 1.4 inch def
+/rm margin 3 div def
+/lm margin 2 mul 3 div def
+/d () def
+/td (Sep 12 2000 14:07) def
+/lg (Printed by dwyer from mundook.cs.mu.OZ.AU) def
+%%EndProlog
+
+/docsave save def
+%%Page: 1 1
+/pagesave save def
+/twp true def
+/fnfs 11 def
+/dfs fnfs 0.8 mul def
+/df /Helvetica dfs getfont def
+/dw df setfont td stringwidth pop def
+/sfnf filenmfontname fnfs getfont def
+/hm fnfs 0.25 mul def
+/hs 0.22 inch def
+/bfs 6.8 def
+/bdf /Courier-Bold bfs getfont def
+/bm bfs 0.7 mul def
+/bf /CourierBack bfs getfont def
+/l 69 def
+/c 89 def
+/pw
+   bf setfont (0) stringwidth pop c mul bm dup add add
+   def
+/ph
+   bfs l mul bm dup add add hs add
+   def
+/fns
+      pw
+      fnfs 4 mul dw add (Page 999) stringwidth pop add
+    sub
+  def
+/tm margin twp {3} {2} ifelse div def
+/sd 0 def
+/y [ rm ph add bm add
+          dup ] def
+/sny dfs dfs add def
+/snx sh tm dfs add sub def
+/dy sny def
+/dx tm dfs add def
+/x [ tm			% left page
+          dup 2 mul pw add	% right page
+        ] def
+/scx sh 2 div def
+/fny dy def
+/fnx scx def
+/ly fnfs 2 div y sd get add def
+/lx snx def
+/d (Aug 27 2000 21:17) def
+( Enroller.java ) fn
+sw 0 translate
+90 rotate
+1 hp
+border
+hborder
+/x0 x 0 get bm add def
+/y0 y 0 get bm bfs add hs add sub def
+x0 y0 moveto
+bf setfont
+( package enroller;^M) s
+( ^M) s
+( import utils.*;^M) s
+( import javax.swing.JInternalFrame;^M) s
+( import javax.swing.JDesktopPane;^M) s
+( import javax.swing.JMenu;^M) s
+( import javax.swing.JMenuItem;^M) s
+( import javax.swing.JMenuBar;^M) s
+( import javax.swing.JFrame;^M) s
+( import javax.swing.JFileChooser;^M) s
+( ^M) s
+( import java.awt.event.*;^M) s
+( import java.awt.*;^M) s
+( ^M) s
+( public class Enroller extends JFrame {^M) s
+(   JDesktopPane desktop;^M) s
+(   String fileName;^M) s
+(   String userName;^M) s
+( ^M) s
+(   static final Integer FRAMELAYER = new Integer\(6\);^M) s
+(   static final Integer HELPLAYER = new Integer\(7\);^M) s
+(   static final String DATAFILEPATH = new String\("DataFiles"\);^M) s
+(   static final String HTMLHELPPATH = new String\("HelpFiles/toc.html"\);^M) s
+( ^M) s
+(   public Enroller\(String userName\) {^M) s
+(     super\("Enroller"\);^M) s
+(     this.userName = userName;^M) s
+( ^M) s
+(     //Make the big window be indented 50 pixels from each edge ^M) s
+(     //of the screen.^M) s
+(     int inset = 50;^M) s
+(     Dimension screenSize = Toolkit.getDefaultToolkit\(\).getScreenSize\(\);^M) s
+(     setBounds\(inset, inset, ^M) s
+(           640, //screenSize.width - inset*2, ^M) s
+(           400\);//screenSize.height-inset*2\);^M) s
+( ^M) s
+(     //Quit this app when the big window closes.^M) s
+(     addWindowListener\(new WindowAdapter\(\) {^M) s
+(       public void windowClosing\(WindowEvent e\) {^M) s
+(         System.exit\(0\);^M) s
+(       }^M) s
+(     }\);^M) s
+( ^M) s
+(     //Set up the GUI.^M) s
+(     desktop = new JDesktopPane\(\); //a specialized layered pane^M) s
+(     setContentPane\(desktop\);^M) s
+(     setJMenuBar\(createMenuBar\(\)\);^M) s
+( ^M) s
+(     //Make dragging faster:^M) s
+(     desktop.putClientProperty\("JDesktopPane.dragMode", "outline"\);^M) s
+(   }^M) s
+( ^M) s
+(   protected JMenuBar createMenuBar\(\) {^M) s
+(     JMenuBar menuBar = new JMenuBar\(\);^M) s
+( ^M) s
+(     JMenu fileMenu = buildFileMenu\(\);^M) s
+(     JMenu helpMenu = buildHelpMenu\(\);^M) s
+(     menuBar.add\(fileMenu\);^M) s
+(     menuBar.add\(helpMenu\);^M) s
+( ^M) s
+(     return menuBar;^M) s
+(   }^M) s
+( ^M) s
+(   protected JMenu buildFileMenu\(\) {^M) s
+(     JMenu menu = new JMenu\("File"\);^M) s
+(     menu.setMnemonic\(KeyEvent.VK_F\);^M) s
+(     JMenuItem openMenuItem = new JMenuItem\("Open"\);^M) s
+(     JMenuItem exitMenuItem = new JMenuItem\("Exit"\);^M) s
+(     openMenuItem.setMnemonic\(KeyEvent.VK_O\);^M) s
+/sd 1 def
+2 hp
+border
+hborder
+/x0 x 1 get bm add def
+/y0 y 1 get bm bfs add hs add sub def
+x0 y0 moveto
+bf setfont
+(     exitMenuItem.setMnemonic\(KeyEvent.VK_X\);^M) s
+(     openMenuItem.addActionListener\(new ActionListener\(\) {^M) s
+(       public void actionPerformed\(ActionEvent e\) {^M) s
+(         openFile\(\);^M) s
+(       }^M) s
+(     }\);^M) s
+(     exitMenuItem.addActionListener\(new ActionListener\(\) {^M) s
+(       public void actionPerformed\(ActionEvent e\) {^M) s
+(         quit\(\);^M) s
+(       }^M) s
+(     }\);^M) s
+(     menu.add\(openMenuItem\);^M) s
+(     menu.add\(exitMenuItem\);^M) s
+(     return menu;^M) s
+(   }^M) s
+( ^M) s
+(   protected JMenu buildHelpMenu\(\) {^M) s
+(     JMenu menu = new JMenu\("Help"\);^M) s
+(     menu.setMnemonic\(KeyEvent.VK_H\);^M) s
+(     JMenuItem helpMenuItem = new JMenuItem\("Open Help Window"\);^M) s
+(     helpMenuItem.addActionListener\(new ActionListener\(\) {^M) s
+(       public void actionPerformed\(ActionEvent e\) {^M) s
+(         openHelpWindow\(\);^M) s
+(       }^M) s
+(     }\);^M) s
+(     menu.add\(helpMenuItem\);^M) s
+(     return menu;^M) s
+(   }^M) s
+( ^M) s
+(   protected void openHelpWindow\(\) {^M) s
+(     JInternalFrame help = new HelpFrame\(HTMLHELPPATH\);^M) s
+(     desktop.add\(help, HELPLAYER\);^M) s
+(     try {^M) s
+(       help.setVisible\(true\);^M) s
+(       help.setSelected\(true\);^M) s
+(     } catch \(java.beans.PropertyVetoException e\) {}^M) s
+(   }^M) s
+( ^M) s
+(   protected void createFrame\(\) {^M) s
+(     EnrolmentFrame frame = new EnrolmentFrame\(fileName, userName\);^M) s
+(     frame.setVisible\(true\); //necessary as of kestrel^M) s
+(     desktop.add\(frame, FRAMELAYER\);^M) s
+(     try {^M) s
+(       frame.setSelected\(true\);^M) s
+(     } catch \(java.beans.PropertyVetoException e\) {}^M) s
+(   }^M) s
+( ^M) s
+(   public static void main\(String[] args\) {^M) s
+(     Enroller frame = new Enroller\(args[0]\);^M) s
+(     frame.setVisible\(true\);^M) s
+(   }^M) s
+( ^M) s
+(   protected void openFile\(\) {^M) s
+(     JFileChooser chooser = new JFileChooser\(DATAFILEPATH\);^M) s
+(     ExampleFileFilter filter = new ExampleFileFilter\(\);^M) s
+(     filter.addExtension\("xml"\);^M) s
+(     chooser.setFileFilter\(filter\);^M) s
+(     int returnVal = chooser.showOpenDialog\(this\);^M) s
+(     if\(returnVal == JFileChooser.APPROVE_OPTION\) {^M) s
+(       fileName = DATAFILEPATH + java.io.File.separator + chooser.getSelectedFile\(\).getNa) s
+( me\(\);^M) s
+(     }^M) s
+(     createFrame\(\);^M) s
+(   }^M) s
+( ^M) s
+(   protected void quit\(\) {^M) s
+(     System.exit\(0\);^M) s
+(   }^M) s
+( }^M) s
+/sd 0 def
+1 sn
+fnf
+lg lgp
+pagesave restore
+showpage
+%%Page: 2 2
+/pagesave save def
+/twp true def
+/fnfs 11 def
+/dfs fnfs 0.8 mul def
+/df /Helvetica dfs getfont def
+/dw df setfont td stringwidth pop def
+/sfnf filenmfontname fnfs getfont def
+/hm fnfs 0.25 mul def
+/hs 0.22 inch def
+/bfs 6.8 def
+/bdf /Courier-Bold bfs getfont def
+/bm bfs 0.7 mul def
+/bf /CourierBack bfs getfont def
+/l 69 def
+/c 89 def
+/pw
+   bf setfont (0) stringwidth pop c mul bm dup add add
+   def
+/ph
+   bfs l mul bm dup add add hs add
+   def
+/fns
+      pw
+      fnfs 4 mul dw add (Page 999) stringwidth pop add
+    sub
+  def
+/tm margin twp {3} {2} ifelse div def
+/sd 0 def
+/y [ rm ph add bm add
+          dup ] def
+/sny dfs dfs add def
+/snx sh tm dfs add sub def
+/dy sny def
+/dx tm dfs add def
+/x [ tm			% left page
+          dup 2 mul pw add	% right page
+        ] def
+/scx sh 2 div def
+/fny dy def
+/fnx scx def
+/ly fnfs 2 div y sd get add def
+/lx snx def
+/d (Aug 27 2000 21:17) def
+( Enroller.java ) fn
+sw 0 translate
+90 rotate
+3 hp
+border
+hborder
+/x0 x 0 get bm add def
+/y0 y 0 get bm bfs add hs add sub def
+x0 y0 moveto
+bf setfont
+( ^M) s
+( ^M) s
+/sd 1 def
+/sd 0 def
+2 sn
+fnf
+lg lgp
+pagesave restore
+showpage
+
+%%Trailer
+%%Pages: 2
+docsave restore end

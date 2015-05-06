@@ -1,0 +1,397 @@
+============================================
+vis/mangr0.out
+16:59:10_Wednesday_11_April_2001
+============================================
+433-351 Submission Results for Project 1
+User:  mangr
+
+Filename		Status
+--------		------
+
+q1.sql			File found
+q2.sql			Terminating \g missing!
+q3.sql			File found
+q4.sql			File found
+q5.sql			File found
+q6.sql			File found
+q7.sql			File found
+
+Explanation of Status:
+
+File found - Submitted file was found *but* may
+	or may not be correct.  Check the generated output
+	yourself for correctness.
+File not found! - No file was submitted.
+Terminating \g missing! - Each .sql file must end
+	with a \g followed by optional whitespace so that
+	the query will execute. Insert a \g at the end of
+	the .sql file and re-submit ALL of your files again.
+============================================
+vis/mangr1.out
+16:59:10_Wednesday_11_April_2001
+============================================
+Execution of Queries
+====================
+==================================================
+File: q1.sql
+==================================================
+INGRES TERMINAL MONITOR Copyright (c) 1981, 1998 Computer Associates Intl, Inc.
+Ingres x86 SOLARIS Version II 2.0/9808 (sui.us5/00) login
+Wed Apr 11 16:59:09 2001
+
+continue
+* * * * * * * * * * * * * * * * * * * * * * Executing . . .
+
+
++----------------------------------------+
+|agname                                  |
++----------------------------------------+
+|Tigger                                  |
+|Winnie the Pooh                         |
++----------------------------------------+
+(2 rows)
+continue
+* 
+Ingres Version II 2.0/9808 (sui.us5/00) logout
+Wed Apr 11 16:59:09 2001
+==================================================
+File: q3.sql
+==================================================
+INGRES TERMINAL MONITOR Copyright (c) 1981, 1998 Computer Associates Intl, Inc.
+Ingres x86 SOLARIS Version II 2.0/9808 (sui.us5/00) login
+Wed Apr 11 16:59:09 2001
+
+continue
+* * * * * * * * * * * * * * * * * * * * Executing . . .
+
+
++----------------------------------------+--------------------+
+|cname                                   |total               |
++----------------------------------------+--------------------+
+|Bugs Bunny                              |             $145.00|
+|Daffy Duck                              |            $1250.00|
+|Jerry                                   |             $829.99|
+|Sylvester                               |             $500.00|
+|Tom                                     |             $960.00|
+|Tweety                                  |             $470.00|
++----------------------------------------+--------------------+
+(6 rows)
+continue
+* 
+Ingres Version II 2.0/9808 (sui.us5/00) logout
+Wed Apr 11 16:59:09 2001
+==================================================
+File: q4.sql
+==================================================
+INGRES TERMINAL MONITOR Copyright (c) 1981, 1998 Computer Associates Intl, Inc.
+Ingres x86 SOLARIS Version II 2.0/9808 (sui.us5/00) login
+Wed Apr 11 16:59:09 2001
+
+continue
+* * * * * * * * * * * * * * * * * * * * * * * * * Executing . . .
+
+
++----------------------------------------+-------------+
+|agname                                  |regonumber   |
++----------------------------------------+-------------+
+|Donald Duck                             |            3|
+|Donald Duck                             |           21|
+|Minnie Mouse                            |            2|
+|Pluto                                   |            4|
++----------------------------------------+-------------+
+(4 rows)
+continue
+* 
+Ingres Version II 2.0/9808 (sui.us5/00) logout
+Wed Apr 11 16:59:09 2001
+==================================================
+File: q5.sql
+==================================================
+INGRES TERMINAL MONITOR Copyright (c) 1981, 1998 Computer Associates Intl, Inc.
+Ingres x86 SOLARIS Version II 2.0/9808 (sui.us5/00) login
+Wed Apr 11 16:59:09 2001
+
+continue
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * Executing . . .
+
+
++----------------------------------------+----------------------------------------+----------------------------------------+-------------------------+-------------------------+----------------------------------------+-------------------------+-------------------------+
+|cname                                   |csuburb                                 |hname                                   |startdate                |enddate                  |hname                                   |startdate                |enddate                  |
++----------------------------------------+----------------------------------------+----------------------------------------+-------------------------+-------------------------+----------------------------------------+-------------------------+-------------------------+
+|Bugs Bunny                              |Box Hill                                |Ritz Hotel                              |01-jul-2001              |04-jul-2001              |Ritz Motel                              |03-jul-2001              |07-jul-2001              |
+|Daffy Duck                              |Carlton                                 |Queens Hotel                            |30-oct-2001              |03-nov-2002              |Ritz Hotel                              |01-dec-2001              |04-dec-2002              |
+|Daffy Duck                              |Carlton                                 |Ritz Hotel                              |30-sep-2001              |03-oct-2002              |Queens Hotel                            |30-oct-2001              |03-nov-2002              |
+|Daffy Duck                              |Carlton                                 |Ritz Hotel                              |30-sep-2001              |03-oct-2002              |Ritz Hotel                              |01-dec-2001              |04-dec-2002              |
+|Daffy Duck                              |Carlton                                 |L`Hotel Sur Le Seine                    |31-dec-2001              |02-jan-2002              |Queens Hotel                            |30-oct-2001              |03-nov-2002              |
+|Daffy Duck                              |Carlton                                 |L`Hotel Sur Le Seine                    |31-dec-2001              |02-jan-2002              |Ritz Hotel                              |01-dec-2001              |04-dec-2002              |
+|Daffy Duck                              |Carlton                                 |L`Hotel Sur Le Seine                    |31-dec-2001              |02-jan-2002              |Ritz Hotel                              |30-sep-2001              |03-oct-2002              |
+|Tom                                     |South Yarra                             |L`Hotel Sur Le Seine                    |04-aug-2001              |09-aug-2001              |Queens Hotel                            |04-aug-2001              |09-aug-2001              |
++----------------------------------------+----------------------------------------+----------------------------------------+-------------------------+-------------------------+----------------------------------------+-------------------------+-------------------------+
+(8 rows)
+continue
+* 
+Ingres Version II 2.0/9808 (sui.us5/00) logout
+Wed Apr 11 16:59:09 2001
+==================================================
+File: q6.sql
+==================================================
+INGRES TERMINAL MONITOR Copyright (c) 1981, 1998 Computer Associates Intl, Inc.
+Ingres x86 SOLARIS Version II 2.0/9808 (sui.us5/00) login
+Wed Apr 11 16:59:09 2001
+
+continue
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * Executing . . .
+
+
++----------------------------------------+----------------------------------------+--------------------+------+
+|client                                  |agent                                   |outstanding         |weekst|
++----------------------------------------+----------------------------------------+--------------------+------+
+|Bugs Bunny                              |Disneyland Travel                       |             $595.00|    11|
+|Daffy Duck                              |Disneyland Travel                       |          $330900.00|    33|
+|Daffy Duck                              |EuroDisneyland Adventures               |          $176440.00|    24|
+|Jerry                                   |Disneyland Travel                       |             $190.00|    10|
+|Jerry                                   |Disneyland Travel                       |             $405.00|    25|
+|Jerry                                   |Disneyland Travel                       |             $645.00|    26|
+|Jerry                                   |Disneyworld Tours Pty/Ltd.              |             $360.00|    14|
+|Tom                                     |Disneyland Travel                       |            $1200.00|    22|
++----------------------------------------+----------------------------------------+--------------------+------+
+(8 rows)
+continue
+* 
+Ingres Version II 2.0/9808 (sui.us5/00) logout
+Wed Apr 11 16:59:09 2001
+==================================================
+File: q7.sql
+==================================================
+INGRES TERMINAL MONITOR Copyright (c) 1981, 1998 Computer Associates Intl, Inc.
+Ingres x86 SOLARIS Version II 2.0/9808 (sui.us5/00) login
+Wed Apr 11 16:59:10 2001
+
+continue
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * Executing . . .
+
+
++----------------------------------------+
+|cname                                   |
++----------------------------------------+
+|Daffy Duck                              |
+|Tom                                     |
++----------------------------------------+
+(2 rows)
+continue
+* 
+Ingres Version II 2.0/9808 (sui.us5/00) logout
+Wed Apr 11 16:59:10 2001
+============================================
+src/q1.sql
+16:59:08_Wednesday_11_April_2001
+============================================
+/*=========================*/
+/*-------------------------*/
+/*---- Question 1 ---------*/
+/*-------------------------*/
+/*=========================*/
+/*
+**File: q1.sql
+**Coder: Mark Angrish
+**Login: mangr
+**Date: 11th April 2001
+*/
+
+/* question 1: This query lists all agents alphebetically who are registered, 
+	 but not currently with an agency*/
+
+select distinct agname /*select the agent name...*/
+ from AGENT		/* from the agent relation... */
+ where regonumber not in (select distinct regonumber /*where the agents registration number*/
+		 												from WORKS)							 /*is not in all the registration numbers*/ 
+																										 /*in the WORKS relation..*/
+ order by agname	/*and order alphebetically by agent name.*/
+\g
+============================================
+src/q2.sql
+16:59:08_Wednesday_11_April_2001
+============================================
+/*=========================*/
+/*-------------------------*/
+/*---- Question 2 ---------*/
+/*-------------------------*/
+/*=========================*/
+/*
+**File: q2.sql
+**Coder: Mark Angrish
+**Login: mangr
+**Date: 11th April 2001
+*/
+
+/* Question 2: this query lists each agent whose year to date bookings are greater than the 
+	 						 average year to date bookings for all agents in the registry */
+
+select	distinct agname /* select the agent...*/
+from		AGENT		/* from agent...*/
+where 	ytd_bookings > (select avg(ytd_bookings) /*where the year to date bookings */
+											from AGENT)								 /*for that agent is greater than the */
+\g																							 /* average year to date bookings for all */
+																								 /* agents.*/
+============================================
+src/q3.sql
+16:59:08_Wednesday_11_April_2001
+============================================
+/*=========================*/
+/*-------------------------*/
+/*---- Question 3 ---------*/
+/*-------------------------*/
+/*=========================*/
+/*
+**File: q3.sql
+**Coder: Mark Angrish
+**Login: mangr
+**Date: 11th April 2001
+*/
+/* question 3: this query lists each client name and the toal amount of money paid
+	 					   to all agencys so far. */
+
+select distinct cname , sum(amtpaid) as Total /* select the client name , and the */
+																							/* sum of the amounts paid and call */ 
+																							/* the group Total. */
+from BOOKING	/* from the Booking relation */
+group by cname /* and group the result by client name */
+\g
+============================================
+src/q4.sql
+16:59:08_Wednesday_11_April_2001
+============================================
+/*=========================*/
+/*-------------------------*/
+/*---- Question 4 ---------*/
+/*-------------------------*/
+/*=========================*/
+/*
+**File: q4.sql
+**Coder: Mark Angrish
+**Login: mangr
+**Date: 11th April 2001
+*/
+
+/* question 4: this query lists all the agents who work for more than one
+	 						 agency, and their registration numbers in alphabetical order
+							 with a secondary ordering on registration number */
+
+select distinct agname , AGENT.regonumber /* select the agent name and the registration number*/
+																				  /* from agent */
+from AGENT, WORKS 	/* from agent and works */
+where AGENT.regonumber = WORKS.regonumber /* where the agent regonumber equals the works regonumber */
+group by agname, AGENT.regonumber  /* group that result by agent name and agent regonumber */
+having  count(WORKS.regonumber) > 1 /* having the condition that the number of regonumbers is more */
+																		/* than one, indicating that the agent works for more than 1 agency */
+order by agname , AGENT.regonumber asc /* order alphabetically by agent name then , the regonumber ascending*/
+\g
+============================================
+src/q5.sql
+16:59:08_Wednesday_11_April_2001
+============================================
+/*=========================*/
+/*-------------------------*/
+/*---- Question 5 ---------*/
+/*-------------------------*/
+/*=========================*/
+/*
+**File: q5.sql
+**Coder: Mark Angrish
+**Login: mangr
+**Date: 11th April 2001
+*/
+
+/* question 5: this query lists the client names and their suburbs who have double bookings 
+	 							(as defined in the specifications)) along with the hotels and start and end date
+								of each booking */
+
+/* select */
+select A.cname , A.csuburb , A.hname , A.startdate , A.enddate , B.hname , B.startdate , B.enddate
+from BOOKING  A , BOOKING  B
+where A.cname = B.cname and
+			A.csuburb = B.csuburb and
+			((A.enddate < B.enddate and
+				A.enddate > B.startdate) or
+			 (A.hname <> B.hname and
+				A.hname < B.hname and
+			  (A.startdate = B.startdate or
+				 A.enddate = B.enddate)
+			 )
+			)
+\g
+============================================
+src/q6.sql
+16:59:08_Wednesday_11_April_2001
+============================================
+/*=========================*/
+/*-------------------------*/
+/*---- Question 6 ---------*/
+/*-------------------------*/
+/*=========================*/
+/*
+**File: q6.sql
+**Coder: Mark Angrish
+**Login: mangr
+**Date: 11th April 2001
+*/
+
+/* question 6: This query lists all the unconfimed bookings (as stated on the spec sheet) for the
+	 Ritz Hotel by client name, agency , amount outstanding, and weeks till arrival */
+
+/* select the client name, the agency used, the amount paid - the no. of people times by the price 
+	 of a regular room times by the number of days stayed, and the remaining interval from 'today' till 
+	 the date specified */
+(select distinct cname as Client, BOOKING.aname as Agent, ((numberofpeople*regprice*interval('days', (enddate - startdate))) - amtpaid) as Outstanding , int2(interval('week' , startdate - date('today'))) as WeeksToArr
+from BOOKING , HOTEL  /* from the Booking and Hotel relation */
+where BOOKING.hname = 'Ritz Hotel' and /* where the Booking hotel name is the Ritz hotel*/
+			HOTEL.hname = 'Ritz Hotel' and /* where the Hotel hotel name is also the Ritz Hotel */
+			(roomtype='regular' and /* and where for a regular room, and the amount due is more than half the required bill */
+			 (numberofpeople*regprice*int4(interval('days' ,(enddate - startdate)))) / 2 >= amtpaid)
+)
+
+union  /* this adds all the luxury rooms with the regular rooms, and removes the duplicates */
+
+/* all the same as above, except now we are using luxury rooms */
+(select distinct cname as Cliet, BOOKING.aname as Agent, ((numberofpeople*luxprice * interval('days', (enddate - startdate))) - amtpaid) as Outstanding , int2(interval('week' , startdate - date('today'))) as WeeksToArr
+ from BOOKING , HOTEL
+ where BOOKING.hname = 'Ritz Hotel' and
+ 			 HOTEL.hname= 'Ritz Hotel' and
+			 (roomtype='luxury' and
+			  (numberofpeople*luxprice*int4(interval('days' , (enddate - startdate)))) / 2 >= amtpaid)
+)
+\g
+============================================
+src/q7.sql
+16:59:08_Wednesday_11_April_2001
+============================================
+/*=========================*/
+/*-------------------------*/
+/*---- Question 7 ---------*/
+/*-------------------------*/
+/*=========================*/
+/*
+**File: q7.sql
+**Coder: Mark Angrish
+**Login: mangr
+**Date: 11th April 2001
+*/
+
+/* question 7: this query lists all the clients who have bookings with all agencies that
+	 						 Minnie Mouse works for */
+
+select distinct  BOOKING.cname /* select the client name */
+from AGENT , WORKS , BOOKING /* from the relations agent booking and works */
+where AGENT.agname = 'Minnie Mouse' and /*where... the agent name is minnie mouse and..*/
+			AGENT.regonumber = WORKS.regonumber and /* her agent regonumber is the same as her works regonumber*/
+			WORKS.aname = BOOKING.aname /*and .. her agency name , is the same as the booking name */
+group by BOOKING.cname /* group this result by the client name */
+
+/* having the condition on that group that the number of distinct booking agency names is the same as
+	 the number (count) of agency Minnie mouse works for */
+having count(distinct BOOKING.aname) = (select count(distinct WORKS.aname)
+																				from AGENT, WORKS
+																				where AGENT.agname = 'Minnie Mouse' and
+																					    AGENT.regonumber = WORKS.regonumber
+																				)
+\g

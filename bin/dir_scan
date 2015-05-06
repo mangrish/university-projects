@@ -1,0 +1,67 @@
+#!/bin/sh
+
+# Preparation:  Copy all "dir_name_scan_x.l" files to the base of the
+#             directory tree you wish to scan.
+# Usage:  Run this script at the base of the directory tree you wish to
+#       scan.
+# Outputs:  Three files:
+#         dir_name_anomalies_x_[login].txt --- has all of that login's
+#                         directories which violate that naming convention.
+#         file_name_anomalies_x_[login].txt --- 
+#                         
+#         anomalous_directories.txt --- has a list of directories with
+#                         incorrect permissions (hence which couldn't be
+#                         searched).
+
+PEOPLE='alberty caley cjg cont dmend kspc mangr matjazl myw nhall rasika rlogozzo rmsubr teapen tmds varun'
+
+
+# First, get a file of all of the directories in the tree, putting all
+# errors into their own file.
+ls -AlR 2> error_dir_names.txt | egrep "^./|^d|^$" > raw_dir_names.txt
+
+
+# Second, remove workspaces (not covered by Team Hydra standards, despite
+# their location in the shared directory) from the file of all unsearchable
+# directories.
+egrep -v "./workspaces/" error_dir_names.txt > anomalous_directories.txt
+
+
+# Find the number of directories examined:
+echo "Number of directories examined: "
+cat raw_dir_names.txt | egrep "drwx" | wc -l
+
+
+
+# Scan the directory names to ensure that they obey the conventions.
+
+lex remove_excess_dirs.l
+gcc -ll -o trim_dirs lex.yy.c
+
+lex remove_excess_newlines.l
+gcc -ll -o trim_nwls lex.yy.c
+
+# Separate the directories by login:
+for PERSON in $PEOPLE ; do
+	`egrep "^./|^$|$PERSON" raw_dir_names.txt > raw_dir_names_$PERSON.txt`
+
+	`egrep "^./|^$|^d.....-..-" raw_dir_names_$PERSON.txt | trim_dirs | trim_nwls > bad_dir_names_$PERSON.txt`
+
+	`cat bad_dir_names_$PERSON.txt | sed 's/drwx.................................................//' > dir_names_$PERSON.txt`
+
+done
+
+
+
+# Character Composition:
+
+
+
+rm lex.yy.c
+rm trim_nwls trim_dirs
+rm raw_dir_names.txt
+rm raw_dir_names_*.txt
+rm bad_dir_names_*.txt
+rm error_dir_names.txt
+
+

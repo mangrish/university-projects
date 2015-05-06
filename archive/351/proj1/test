@@ -1,0 +1,4 @@
+select startdate , enddate , roomtype 
+from BOOKING
+where cname = 'Daffy Duck'
+\g

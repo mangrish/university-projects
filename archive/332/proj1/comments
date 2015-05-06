@@ -1,0 +1,50 @@
+---------------------------------------
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+\/\/\/\/\/\/\/  Part B  \/\/\/\/\/\/\/\ 
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+---------------------------------------
+
+   | Question 1:
+-------------------
+The important benefit of this approach compared to SSTF, CSCAN
+and VSCAN is that it does not suffer as badly from starvation
+problems, and has also has good throughput.
+With SSTF, it is possible that some remote requests  on the far end
+f the disk will never
+be serviced. CSCAN and VSCAN do not suffer from starvation problems as badly
+as SSTF does, but the specified approach improves on them both (especially
+for small values of N)
+
+   | Question 2:
+-------------------
+For large values of N the algorithm will behave similarly to SCAN (ie. N-SCAN(1)= SCAN).
+Thus, it will
+visit the middle tracks twice as often as the outer tracks, and will not be
+fair. However, it will be efficient as it has high throughput.
+
+For small values of N the algorithm will behave much like the First Come
+First Served (FCFS) algorithm (ie. N-SCAN(0) = FCFS). It would not be suited to heavily loaded systems;
+it increases the variability of the disk's response time.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

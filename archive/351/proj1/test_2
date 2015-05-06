@@ -1,0 +1,3 @@
+select regonumber , aname
+from WORKS
+\g

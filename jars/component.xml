@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<componentmetadata>
+<name>twoInputSummer</name>
+<componenttype>JavaProcessable</componenttype>
+<input>
+<method>inputTwo</method>
+<name>inputTwo</name>
+<range>1-100</range>
+<type>java.lang.Integer</type>
+</input>
+<input>
+<method>inputOne</method>
+<name>inputOne</name>
+<range>1-100</range>
+<type>java.lang.Integer</type>
+</input>
+<output>
+<method>outputCounter</method>
+<name>outputCounter</name>
+<range>1-100</range>
+<type>java.lang.Integer</type>
+</output>
+<author>Corey Gregson</author>
+<created>September</created>
+<category>none</category>
+<description>Test Class two input, adds the two inputs as an output</description>
+</componentmetadata>

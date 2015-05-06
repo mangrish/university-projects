@@ -1,0 +1,29 @@
+#!/bin/sh
+#set -x
+usage="Usage: orderscores [-flm] searchword..."
+
+option=x
+op2=one
+path=$PATH
+
+while getopts afp: flag; do
+    case $flag in
+    f) op2=all;;
+    l) op2=all;
+			 option=f;;
+		m) op2=all;
+			 option=f;
+			 path=$OPTARG;;   
+		\?) echo $usage;exit 1;; 
+    esac
+done
+
+
+
+
+
+
+
+
+
+

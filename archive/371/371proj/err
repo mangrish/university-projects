@@ -1,0 +1,30 @@
+javadoc: warning - utils.ExampleFileFilter.accept(File): Tag @see: can't find accepts in javax.swing.filechooser.FileFilter
+javadoc: warning - Tag @see: Class or Package not found: setDescription
+javadoc: warning - Tag @see: Class or Package not found: setExtensionListInDescription
+javadoc: warning - Tag @see: Class or Package not found: isExtensionListInDescription
+javadoc: warning - Tag @see: Class or Package not found: setDescription
+javadoc: warning - Tag @see: Class or Package not found: setExtensionListInDescription
+javadoc: warning - Tag @see: Class or Package not found: isExtensionListInDescription
+javadoc: warning - Tag @see: Class or Package not found: getDescription
+javadoc: warning - Tag @see: Class or Package not found: setDescription
+javadoc: warning - Tag @see: Class or Package not found: isExtensionListInDescription
+javadoc: warning - Tag @see: Class or Package not found: getDescription
+javadoc: warning - Tag @see: Class or Package not found: setDescription
+javadoc: warning - Tag @see: Class or Package not found: setExtensionListInDescription
+enroller/EnrolmentFrame.java:51: cannot resolve symbol
+symbol  : constructor JPanel  (java.lang.String)
+location: class javax.swing.JPanel
+		getContentPane().add(new JPanel("Button 1 (NORTH)"), BorderLayout.NORTH);
+                                     ^
+enroller/EnrolmentFrame.java:52: cannot resolve symbol
+symbol  : constructor JPanel  (java.lang.String)
+location: class javax.swing.JPanel
+		getContentPane().add(new JPanel("Button 2 (CENTER)"), BorderLayout.CENTER);
+                                     ^
+enroller/EnrolmentFrame.java:53: cannot resolve symbol
+symbol  : constructor JPanel  (java.lang.String)
+location: class javax.swing.JPanel
+		getContentPane().add(new JPanel("Button 3 (SOUTH)"), BorderLayout.SOUTH);
+                                     ^
+3 errors
+make: *** [enroller/EnrolmentFrame.class] Error 1

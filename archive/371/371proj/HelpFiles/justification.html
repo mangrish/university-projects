@@ -1,0 +1,121 @@
+<HTML>
+
+<HEAD>
+  <TITLE>Justification</TITLE>
+</HEAD>
+
+<BODY>
+
+<H2>Welcome to the Justification for Tute Enrol version 1.0</H2>
+
+<P>This document will justify why the implementation of my GUI interface
+for the tute enrol program has been designed the way it has.  For ease of
+understanding, the justification has been split into topics.
+</P>
+<P></P>
+
+<H3>The overall design</H3>
+<P>The program is setup as a wizard, where a user can select a subject offered from
+a collection of subjects to enrol in. A window showing the available timeslots available
+for that tute, along with the users enrolment status, and information regaurding the 
+selected tute, with buttons to enrol or unenrol from a tute.  A final confirmation screen
+is then brought up with a concise summary of what tute the user has enrolled in
+</P>
+
+<H3>General Features of the program</H3>
+<P> The JInternalFrame has been set so the user cannot edit the size of the frame, or
+maximise the frame. The user also, cannot quit from the  frame from the title bar.
+This is to restrict the user in the amount of ways they can proceed through the program.
+</P>
+<P> The use of tooltips are used, as this is an important feature needed to aid user
+interactivity, and it is also conventional.
+</P>
+<P>
+The handling of keyboard interaction with the program is taken care of with the use of
+key mnemonics, which involve the user pressing  the alt key and a character.  It is 
+important to handle this case, as even though all computers have working mice, there might
+be some that dont. It is therefore important to cater for as many different interaction that
+users that might use to run the program. 
+program.
+</P>
+<P>
+The importance of an attractive and understandable colour scheme is extremely importannt.
+This program follows a fairly conventional colour layout, with the light gray background for
+JInternalFrame windows, and a light matte blue for JLabel text (which was pretty much the 
+default).  Buttons are also in black text.  There is an importance in changing colours,
+when important events occur( for example when a tutorial is full, or if you are enrolled 
+ or not).  Important events should be bold and in either a red or green colour ( the human
+eye sees these colours as more intense than blues). 
+<P>
+<P>Each screen has a quit button (which brings up
+dialog box to warn the user they have not enrolled in the subject if they arent enrolled
+in the subject), a next or back button, and a cancel button (which brings the user back
+to the main menu). 
+</P>
+
+<H3>There should be no File chooser when the program is started....the selection
+window in the wizard...</H3>
+<P> Ideally, the tute enrol program shouldnt display the underlying data, but merely
+create a graphical user interface that avoids such low level interaction with the user.
+The file chooser which appears when the user opens an instance of the program is 
+therefore a bad idea, as the user has to select .xml files which can be confusing, 
+especially for a new student.  There is also the oversite of a user being allowed to
+navigate through the chooser, and select a totally irrelevent .xml file.  Although my 
+program does not overcome this problem explicitly( ie. has not removed the file chooser
+from the program), it has offered a graphical easy to use interface to select a subject, 
+which is meant to be a replacement interface/screen for the file chooser.
+I feel this is a must of the program, as the user does not have to have any idea about
+what data structures are used underneath the program, or have a potentially difficult
+time understand which /.xml file to select. 
+</P>
+
+<H3>The main window in the wizard...</H3>
+The GridLayout was implemented in the left pane of a JSplitPane, with
+a status area in the right of the Pane. The implementation of the grid was an easy choice,
+compared to presenting the user with any or JTabbedPane or even explicet referneces to 
+available days available days via lists or combo boxes. The user can see in a clear, and
+importantly simple way, which times on which days are available.  This is a beneficial
+design for the user as they can simply look in their diary etc. to see what times are 
+good for them.  The available tutorials are displayed in JComboBox's. This was 
+used over the implementation of buttons, as buttons, cannot handle more than one event
+occuring at the same place in a simple or program stabilising way(multiple buttons, reak
+havoc on a gridLayout!). The JComboBox handles multiple events in an attractive and
+importantly functional way.
+</P>
+<P>
+When a user selects a tutorial from any of the JComboBoxes, the details are brought up
+in the the Status area.  At the top is the title of the Status area, where you will notice
+that if a user is enrolled, the colour of the title is green, or if the user is unenroled
+the title is in red.  This simple colour schematic is designed just like a known interface,
+being traffic lights. Red usually indates something is not on or in this case enrolled,
+and green is used to say that the user is.  A simple gridbag layout is used with JLabels
+and JTextArea's which are importantly uneditable (do not want a user making their own 
+feilds up!).  This area is designed with readability in mind, by not using confliting
+colours, or different orientations of the data presented.  At the bottom of the status area
+are the important enrol/unenrol buttons, and a clash resolution form button.  These buttons
+were intended to be as large as the witdh of the right pane, so the user can see these 
+buttons clearly.  The use of enabling/disabling buttons is intended to restrict the user
+from unerolling enrolling in non existant tutes.
+</P>
+<P>When a user enrols/unenrols in an available timeslot, the status area changes
+accordingly, to display the data for that tute. If enrolling the next button is also
+activated to move to the confirmation window (vice versa for unenrolling).  This is intended
+ to maintain a flow of control for the user. The clash resolution button is for students
+who cannot enrol in an already full tute. A dialog box is brought up to inform the user
+that a clash form will be sent to their email address if they want to (ie. it has options
+in the dialog box).
+</P>
+
+<H3>The confirmation screen in the wizard...</H3>
+<P>The confirmation is the final screen displays the users login and selected data from
+the tutorial they selected in a similar way to the status area of the main screen
+and utilises the same
+reasoning behind them.  The purpose of this screen is to give the user a final clear
+picture of what they are about to enrol in. In case the user wants to change their minds
+they can click on back, or if they are happy, they can save and exit.
+</P>
+<P></P>
+<P><A HREF="toc.html"><IMG SRC="back.gif" WIDTH="42" HEIGHT="22" ALIGN="BOTTOM" NATURALSIZEFLAG="3" BORDER="0">Back</A>
+</P>
+</BODY>
+</HTML>

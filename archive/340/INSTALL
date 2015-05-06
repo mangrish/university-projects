@@ -1,0 +1,374 @@
+#!/bin/sh
+# ADACEL TRAININGWORKS INSTALLER PROGRAM
+# Team G Group Project
+# Author: Mark Angrish (mangr)
+# Date: 8/10/2001
+# KNOWN BUGS: doesnt not handle empty input for accepting the default java installation
+
+# Enable set -x to debug
+#set -x
+
+#rather than using shell programming style, all used variables will be
+#declared at the top
+
+more <<"EOF"
+
+
+|----------------------------------------------------------|
+|  WELCOME TO THE ADACEL TRAININGWORKS INSTALLER PROGRAM.  |
+|----------------------------------------------------------|
+
+This program will install TrainingWorks to your system.
+Please make sure you have read and understood the installation
+manual before progressing.
+
+You must be root to install Adacel TrainingWorks
+
+Do you wish to proceed? yes/no
+EOF
+printf "> " 
+
+read response
+
+
+while [ !  -z $response -a $response != "yes" -a $response != "no" ] 
+    do
+	echo "Please type yes or no if you would like to proceed"
+	printf "> "
+	read response 
+    done
+
+if [ $response = "no" ]
+    then
+    	echo "\nEXIT: Adacel TrainingWorks Installer\n\n"
+	exit 1
+fi
+
+
+INSTALL_HOME=`pwd`
+more <<"EOF"
+
+1. SELECT WHICH DIRECTORY YOU WILL BE USING
+---------------------------------------------
+TrainingWorks can install directly off your CD-ROM device.
+
+Your installation directory (The location of this file) was found to be:
+
+EOF
+echo "${INSTALL_HOME}\n"
+
+echo "Is that the location of the installation files?" 
+printf "> "
+
+read response
+
+while [ !  -z $response -a $response != "yes" -a $response != "no" ]
+    do
+	echo "Please type yes or no if you would like to proceed"
+	printf "> "
+	read response
+    done
+				
+if [ $response = "no" ]
+    then
+	echo "ENTER SOURCE DIRECTORY"
+	echo "Please enter the absolute path to the installation files"
+	printf "> "
+
+	read INSTALL_HOME
+
+	while [ ! -s ${INSTALL_HOME}/.install -o ! -d ${INSTALL_HOME} -o ! -z ${INSTALL_HOME} ]
+	    do
+    		echo "The path given does not exist, please re-enter your installation"
+		echo "path:"
+		printf "> "
+		read INSTALL_HOME
+	    done
+fi
+
+more <<"EOF"
+
+
+2. INSTALL JAVA.
+----------------
+If you have Java (at least 1.2.2) on your system already, you may
+skip this step
+
+If not you will be required to install it.  Both  Java 1.2.2 and 1.3
+are provided in this instalation
+
+
+Do you wish to install Java? (yes/no)
+EOF
+printf "> "
+
+read response
+
+while [ !  -z $response -a $response != "yes" -a $response != "no" ] 
+    do
+	echo "Please type yes or no if you would like to proceed"
+	printf "> "
+	read response 
+    done
+
+if [ $response = "no" ]
+    then
+    	echo "\nYou have selected not to install Java 1.2.2 or Java 1.3.1\n"
+	echo "You must still enter the path to the location of the Java heirachy"
+	echo "you wish to echo use (your path should begin with a / and no" 
+	echo "trailing / is required):"
+	printf "> "
+
+	read JAVA_HOME
+
+
+else
+	echo "\nYou have chosen to install Java"
+	echo "Please select which version of java you would like to install:\n"
+
+	echo "1.\tJava v1.2.2"
+	echo "2.\tJava v1.3.1"
+
+	echo "Please select either 1 or 2:"
+	printf "> "
+
+	read java_version
+
+	while [ ! -z $java_version -a $java_version != "1" -a $java_version != "2" ]
+	    do
+	    	echo "Please type only either 1 or 2:"
+		printf "> "
+
+		read java_version
+	    done
+	
+	if [ $java_version = "1" ]
+	    then
+	    	echo "\nJava 1.2.2 will now be installed"
+		echo "The default directorys for installation of java is /usr and"
+		echo "at /usr/local. Please select an existing directory where you would like to"
+		echo "install the top of the java heirachy."
+		printf "> "
+		read java_target 
+
+		while [ ! -d ${java_target} -o ! -z ${java_target} -a `expr ${java_target} : '\(.\)' \| ${java_target}` != "/" ]
+   	    	    do
+   			echo "ERROR: Please make sure your path to java begins with a / (no / at the"
+			echo "end), or the directory for installation exists:"
+			printf "> "
+			read java_target
+   	    	    done
+
+		echo "\n\nNow installing java...\n"
+
+		cd ${java_target}
+		cp ${INSTALL_HOME}/java/jdk-1_2_2_009-linux-i386[1].tar.gz .
+		gunzip ./jdk-1_2_2_009-linux-i386[1].tar.gz
+		tar -xvf ./jdk-1_2_2_009-linux-i386[1].tar
+		/usr/bin/rm -rf ./jdk-1_2_2_009-linux-i386[1].tar
+		JAVA_HOME="${java_target}/java1.2.2_09"
+		ADD_TO_PATH="${java_target}/java1.2.2_09/bin"
+
+
+	else
+		echo "\nJava 1.3.1 will now be installed"
+		echo "The Red Hat Package Manager will now unpack and install the java heirachy to the"
+		echo "directory  /usr/java/jdk1.3.1_01."
+		echo "Press enter to continue\n"
+		printf "--Waiting-- "
+		read tmp
+
+		echo "\n\nNow installing java...\n"
+
+		cd /usr
+#fix the checking of existing dir
+		mkdir java
+		cd java
+		cp ${INSTALL_HOME}/java/j2sdk-1_3_1_01-linux-i386-rpm.bin .
+		./j2sdk-1_3_1_01-linux-i386-rpm.bin
+		rpm -iv ./j2sdk-1.3.1_01-linux.i386.rpm
+		JAVA_HOME="/usr/java/jdk1.3.1_01"
+		ADD_TO_PATH="/usr/java/jdk1.3.1_01/bin"
+	fi
+
+fi
+
+echo "\n\n2. INSTALL JAKARTA TOMCAT."
+echo "--------------------------\n"
+echo "Tomcat 3.2.3 is REQUIRED for Adacel TrainingWorks."
+echo "If it is already installed you may skip this step.\n"
+echo "Do you wish to install Jakarta Tomcat 3.2.3?"
+printf "> "
+
+read response
+
+while [ !  -z $response -a $response != "yes" -a $response != "no" ] 
+    do
+	echo "Please type yes or no if you would like to proceed"
+	printf "> "
+	read response 
+    done
+
+if [ $response = "no" ]
+    then
+    	echo "\nYou have selected not to install Jakarta Tomcat 3.2.3."
+	echo "Remeber it is version 3.2.3 is required to run TrainingWorks\n"
+
+	echo "You must now enter the path to the location of the Tomcat heirachy"
+	echo "(your path should begin with a / and no trailing / is required):"
+	printf "> "
+
+	read TOMCAT_HOME 
+
+else
+	echo "\nYou have chosen to install Jakarta Tomcat\n"
+	echo "Tomcat will now be installed as a stand alone container on your system"
+	echo "You will now be required to enter an existing destination directory where"
+	echo "Tomcat will install itself."
+
+	echo "Please enter where you would like to install the top of the Tomcat heirachy:"
+	printf "> "
+
+	read tomcat_target
+
+	while [ ! -d ${tomcat_target} -a ! -z ${tomcat_target} ]
+   	    do
+   		echo "ERROR: Please make sure your path you are trying to use exists "
+		printf "> "
+		read tomcat_target
+   	    done
+
+	echo "\n\nNow installing tomcat...\n"
+
+	cd ${tomcat_target}
+	cp ${INSTALL_HOME}/tomcat/jakarta-tomcat-3.2.3.tar.gz .
+	gunzip ./jakarta-tomcat-3.2.3.tar.gz
+	tar -xvf ./jakarta-tomcat-3.2.3.tar
+	/usr/bin/rm -rf ./jakarta-tomcat-3.2.3.tar
+	TOMCAT_HOME="${tomcat_target}/jakarta-tomcat-3.2.3"
+fi
+
+echo "\n\n2. INSTALL MySQL."
+echo "--------------------------\n"
+echo "MySQL version 3.23.42 is REQUIRED for Adacel TrainingWorks."
+echo "If it is already installed you may skip this step.\n"
+echo "Do you wish to install MySQL 3.23.42?"
+printf "> "
+
+read response
+
+while [ !  -z $response -a $response != "yes" -a $response != "no" ] 
+    do
+	echo "Please type yes or no if you would like to proceed"
+	printf "> "
+	read response 
+    done
+
+if [ $response = "no" ]
+    then
+    	echo "\nYou have selected not to install MySQL 3.23.42."
+	echo "Remeber it is version 3.23.42 is required to run TrainingWorks\n"
+
+	echo "You must now enter the absolute path to the location of the mySQL heirachy"
+	printf "> "
+
+	read MYSQL_HOME 
+
+else
+	echo "\nYou have chosen to install mySQL\n"
+	echo "mySQL will now be installed on your system"
+	echo "You will now be required to enter an existing destination directory where"
+	echo "mySQL will install itself."
+
+	echo "Please enter where you would like to install the top of the mySQL heirachy:"
+	printf "> "
+
+	read mysql_target
+
+	while [ ! -d ${mysql_target} -a ! -z ${mysql_target} ]
+   	    do
+   		echo "ERROR: Please make sure your path you are trying to use exists "
+		printf "> "
+		read mysql_target
+   	    done
+
+	echo "\n\nNow installing mysql...\n"
+
+	cd ${mysql_target}
+	cp ${INSTALL_HOME}/mysql/mysql-3.23.42-pc-linux-gnu-i686.tar.gz .
+	gunzip ./mysql-3.23.42-pc-linux-gnu-i686.tar.gz
+	tar -xvf ./mysql-3.23.42-pc-linux-gnu-i686.tar
+	mv ./mysql-3.23.42-pc-linux-gnu-i686 ./mysql-3.23.42
+	/usr/bin/rm -rf ./mysql-3.23.42-pc-linux-gnu-i686.tar
+	MYSQL_HOME="${mysql_target}/mysql-3.23.42"
+fi
+
+echo "\n\nThe TrainingWorks System software will now be installed.\n"
+echo "All executable files will be located in the\n"
+echo "${TOMCAT_HOME}/webapps/trainingWorks\n"
+echo "directory.\n"
+
+echo "Please enter the path where you would like to install the source"
+echo "files and the associated TrainingWorks developing tools."
+printf "> "
+
+read tw_source_target
+	
+while [ ! -d ${tw_source_target} -a ! -z ${tw_source_target} ]
+    do
+	echo "ERROR: Please make sure your path you are trying to use exists "
+	printf "> "
+	read tw_source_target
+    done
+
+TW_SOURCE_HOME="${tw_source_target}/trainingWorks"
+
+echo "\n\nNow installing TrainingWorks...\n"
+
+#Create .t_worksrc
+echo "export TOMCAT_HOME=${TOMCAT_HOME}\nexport JAVA_HOME=${JAVA_HOME}\nexport CLASSPATH=${TOMCAT_HOME}/webapps/trainingWorks/WEB-INF/lib/mysql:${TW_SOURCE_HOME}/lib/mysql:${CLASSPATH}\nexport PATH=${MYSQL_HOME}/bin:${JAVA_HOME}/bin:${TOMCAT_HOME}/bin:${PATH}" >> ~root/.t_worksrc
+
+echo "source .t_worksrc" >> ~root/.bash_profile
+
+source ~/.bash_profile
+cd ${TW_SOURCE_HOME}
+cp ${INSTALL_HOME}/trainingWorks/trainingWorks.jar .
+jar xvf ./trainingWorks.jar
+
+cp ${INSTALL_HOME}/trainingWorks/trainingWorks.war ${TOMCAT_HOME}/webapps/.
+
+cd ${MYSQL_HOME}
+./scripts/mysql_install_db
+./bin/safe_mysqld -u root &
+sh ${INSTALL_HOME}/mysql/trainingWorks.mysql.createUsers.sh > ./trainingWorks.mysql.users.sql
+mysqladmin -u root create TrainingWorks
+mysql -u root TrainingWorks < ${INSTALL_HOME}/mysql/trainingWorks.mysql.tables.sql
+mysql -u root mysql < ./trainingWorks.mysql.users.sql
+/usr/bin/rm -rf ./trainingWorks.mysql.users.sql
+mysql --user=trainingWorks --password=bismarck TrainingWorks < ${INSTALL_HOME}/mysql/trainingWorks.mysql.userProfiles
+
+cd ${TOMCAT_HOME}/conf
+chmod a+x server.xml
+cd .. ; chmod a+x ./bin/*
+
+echo "Would you like to start TrainingWorks now and watch it crash?"
+printf "> "
+
+read response
+
+while [ !  -z $response -a $response != "yes" -a $response != "no" ] 
+    do
+	echo "Please type yes or no if you would like to proceed"
+	printf "> "
+	read response 
+    done
+
+if [ $response = "no" ]
+    then
+    	echo "Thank you for installing TrainingWorks\n\n"
+	echo "Enjoy.\n\n\tTrainingWorks Development Team\n\n"
+
+else
+	startup.sh
+	echo "\nPress Enter to continue\n\n"
+fi

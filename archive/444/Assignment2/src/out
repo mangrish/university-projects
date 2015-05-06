@@ -1,0 +1,43 @@
+BV test case: 1A
+Input given: 12345
+Expected output: 3
+Result: 3
+Status: PASS
+
+BV test case: 1B
+Input given: 123456
+Expected output: 3
+Result: 3
+Status: PASS
+
+BV test case: 1C
+Input given: 123456789
+Expected output: 3
+Result: 3
+Status: PASS
+
+BV test case: 1D
+Input given: 1234
+Expected output: Exception invlid number
+Result:calcAssignment1Mark() threw an exception
+java.lang.Exception: Invalid student number.
+Status: PASS
+
+BV test case: 1E
+Input given: 1234567
+Expected output: Exception invalid number
+Result: 4
+Status: FAIL
+
+BV test case: 1F
+Input given: 12345678
+Expected output: Exception invalid number
+Result: 3
+Status: FAIL
+
+BV test case: 1G
+Input given: 1234567890
+Expected output: Exception invalid number
+Result:calcAssignment1Mark() threw an exception
+java.lang.Exception: Invalid student number.
+Status: PASS

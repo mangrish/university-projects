@@ -1,0 +1,52 @@
+FAQ for 351 proj 2
+
+Last updated 15 May.
+
+_____________________________________________
+
+Q: Should we do the searching for owners in SQL or dump the data into
+   a data structure and do it in C.
+
+A: If you think about the potential number of database accesses you might
+   have to make by searching for each owner in each chain using SQL,
+   you will see that it is more efficient in terms of disk accesses to
+   put all the data in a data structure and process it in an 
+   in-memory data structure.
+
+   While in this case you will need to dump the whole table, so it
+   may seem like you are throwing away all the potential of relational
+   database searching, in most real-world situations the select statement
+   would include a condition that leads it to capture only a small
+   fraction of the data, which would then be searched in-memory;
+   in this situation the time savings is even more significant.  
+
+_____________________________________________
+
+
+Q: How long should we make character strings which access the database?
+
+A: You may make them the length of the string as defined in the
+   database schema plus 1 (to account for the null character), just 
+   as account.sc has done, or use a length of 30 for them (which 
+   includes the null character).
+
+_____________________________________________
+
+
+Q: The specification says that hotels can only have one owner.  Can other
+   companies have more than one owner?
+
+A: No, to simplify the programming you can assume that each company only
+   has one owner.  
+
+_____________________________________________
+
+
+Q: Do we have to check whether cycles exist in the ownership, e.g. company
+   A owns part of company B, and company B owns part of company A?
+
+A: No, there is no need to check for cycles.   You can assume that there 
+   are no cycles in the data.
+
+_____________________________________________
+

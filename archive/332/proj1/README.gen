@@ -1,0 +1,46 @@
+The files you need to test the simulator are:
+
+test[01]:	A small test data set for initial debugging.
+
+proc[0-3]:	A bigger test data set for testing the effectiveness
+		of your algorithms. These files are the output of gen1
+		with the default options.
+
+gen1:		A program for generating more test data sets if you
+		wish. The rest of this file acts as your manual for
+		gen1.
+
+The test data generator is called gen1. When it runs, it produces
+several files, whose names are of the form procN for some number N.
+These files can be given directly to a project 1 program.
+
+Gen1 is self-contained, but it has several options.
+
+By default, gen1 produces the same files every time it is invoked
+with identical options; the -c option causes it to "go chaotic" and
+produce different results.
+
+The -n option specifies the number of test data files to generate;
+the default is 4.
+
+Gen1 assumes that the disk has 128 tracks, numbered 0 through 127;
+the option -t can change this.
+
+The -d option adjusts the maximum delay between disk requests by
+a process; the delays are uniformly distributed between 0 and this
+number. The default is 100.
+
+The -r option specifies the number of disk requests made by an average
+process; the default is 50. The number of requests made by any one
+process may vary from this by a certain amount. You can specify this
+amount via the -v option; the default is a variation of 5 (i.e. the
+number of requests will be in the range 45-55).
+
+Gen1 assumes that each process biases its accesses towards an area
+of the disk. The center of this area is a random track; its extent
+is also random. The size of extents can be controlled by two options,
+-l and -u: these specify the lower and upper bounds respectively on
+the "spread" of each area, i.e. the number of tracks between the edges
+of the area and the center. By default, the min and max spreads are
+10 and 50.
+

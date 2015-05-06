@@ -1,0 +1,22 @@
+  The documents that will be produced in the course of this
+	project include:
+		- The Project Plan
+		- The Software Quality Assurance Plan (SQAP) [this document]
+		- The Software Requirements Specification (SRS)
+	  - The Software Design Document (SDD)
+	  - The Software Test Plan (TP)
+		- The Traceability Document (TD)
+	  - The User Manual (on-line help)
+		- The Progress Report
+		- The Design Notebook
+
+	Referances used for this project include:
+
+		- Arnold, T et al "Software Engineering Project Manual",
+		1999, Department of Computer Science and Software Engineering, University of Melbourne.
+
+		- Gabric, Time et al "Student Manual Volume B" 1999, Department of Computer Science and Software Engineering, University of Melbourne.
+
+		- Sondergaard H., "433-343 Professional Issues LATEX Material", 1999 Computer Science and Software Engineering, University of Melbourne.
+
+

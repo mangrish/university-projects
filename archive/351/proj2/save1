@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "/usr/include/sys/socket.h"
+#include "dbname.h"
+
+
+#define PARENT_NAME_LENGTH 12
+#define PARENT_CITY_LENGTH 11
+#define CHILD_NAME_LENGTH 22 
+#define CHILD_CITY_LENTGH 11
+
+#define CONAME_LENGTH 12
+#define COCITY_LENGTH 11
+
+#define HNAME_LENGTH 22
+#define HCITY_LENGTH 10
+
+EXEC SQL INCLUDE SQLCA;
+EXEC SQL WHENEVER SQLERROR STOP;
+
+int main(int argc, char *argv[])
+{
+	EXEC SQL BEGIN DECLARE SECTION
+
+	struct {
+		char parent_name[PARENT_NAME_LENGTH];
+		char parent_city[PARENT_CITY_LENGTH];
+		char child_name[CHILD_NAME_LENGTH];
+		char child_city[CHILD_CITY_LENGTH];
+		float fraction;
+	} Owners;
+
+	struct {
+		char company_name[CONAME_LENGTH];
+		char company_city[COCITY_LENGTH];
+	} Companys;
+
+	struct {
+		char hotel_name[HNAME_LENGTH];
+		char hotel_city[COCITY_LENGTH];
+	} Hotels
+
+	short null_indicator[3];
+
+	EXEC SQL END DECLARE SECTION
+
+
+	EXEC SQL DECLARE cursor1 CURSOR FOR
+	SELECT hname, hcity
+	FROM hotel;
+
+	EXEC SQL CONNECT DBNAME;
+
+	EXEC SQL OPEN cursor1;
+	while (sqlca.sqlcode == 0) {
+		EXEC SQL FETCH cursor1 INTO :Hotels INDICATOR
+		:null_indicator;
+		if (sqlca.sqlcode == 0) {
+			printf("%s ", Hotels.hotel_name);
+
+			if (null_indicator[1]) 
+				printf("NULL ");
+			else
+				printf("%s ", Hotels.hotel_city);
+		}
+	}
+	EXEC SQL CLOSE cursor1;
+	EXEC SQL commit SQL DISCONNECT;
+	exit(EXIT_SUCCESS);
+}

@@ -1,0 +1,83 @@
+This is TeX, Version 3.14159 (Web2C 7.3.1) (format=latex 2001.10.8)  21 MAY 2002 19:19
+**ecommerce
+(ecommerce.tex
+LaTeX2e <1999/12/01> patch level 1
+Babel <v3.6Z> and hyphenation patterns for american, french, german, ngerman, n
+ohyphenation, loaded.
+(/local/solaris86/apps/tetex-1.0.7/share/texmf/tex/latex/base/article.cls
+Document Class: article 1999/09/10 v1.4a Standard LaTeX document class
+(/local/solaris86/apps/tetex-1.0.7/share/texmf/tex/latex/base/size10.clo
+File: size10.clo 1999/09/10 v1.4a Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/local/solaris86/apps/tetex-1.0.7/share/texmf/tex/latex/ntgclass/a4.sty
+Package: a4 1999/03/03 v1.2f A4 based page layout
+)
+(/local/solaris86/apps/tetex-1.0.7/share/texmf/tex/latex/misc/url.sty
+Package: url 1999/03/02  ver 1.4  Verb mode for urls, email addresses, and file
+ names
+)
+(ecommerce.aux)
+\openout1 = `ecommerce.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 14.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 14.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 14.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 42.
+
+(/local/solaris86/apps/tetex-1.0.7/share/texmf/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 42.
+
+[1
+
+]
+Overfull \hbox (14.59505pt too wide) in paragraph at lines 82--90
+\OT1/cmr/m/n/10 Security in-cludes au-then-ti-cat-ing busi-ness trans-ac-tors, 
+con-trol-ling ac-cess to re-sources(eg.
+ []
+
+(ecommerce.bbl
+Underfull \hbox (badness 10000) in paragraph at lines 4--7
+[]\OT1/cmr/m/n/10 R. Clarke.  Elec-tonic com-merce def-i-ni-tions.
+ []
+
+[2]) [3] (ecommerce.aux) ) 
+Here is how much of TeX's memory you used:
+ 302 strings out of 10901
+ 3395 string characters out of 71772
+ 49108 words of memory out of 263001
+ 3285 multiletter control sequences out of 10000+0
+ 7587 words of font info for 27 fonts, out of 400000 for 1000
+ 14 hyphenation exceptions out of 1000
+ 23i,6n,19p,181b,267s stack positions out of 300i,100n,500p,50000b,4000s
+
+Output written on ecommerce.dvi (3 pages, 8700 bytes).

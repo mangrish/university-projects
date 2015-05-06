@@ -1,0 +1,299 @@
+\documentclass[11pt,a4paper,twoside,notitlepage]{article}
+
+% Add additional packages here, if you require them
+\usepackage{a4wide,url}
+
+\begin{document}
+
+\begin{center}
+
+\textsc{\large The University of Melbourne\\
+	\large Department of Computer Science\\
+	\large 433-343 Professional Issues in Computing, 2000\\}
+
+\vspace{5cm}
+
+{\huge Risk-e-business: on-line trade and cybercrime.}
+
+\vspace{.5cm}
+
+{\Large \input{authornames}}
+
+\date{\today}
+
+\vspace{4cm}
+
+\end{center}
+
+\begin{abstract}
+
+The Internet and E-commerce are revolutionising the way companies and consumers interact,
+contradicting the precedents set by traditional business.  With enormous increases
+in sales figures in the last three years, e-commerce is fast becoming one of the most
+viable means to promote and conduct business.  However, a recent spate of security breaches
+has highlighted the risks consumers face when shopping on-line.  Events like these
+have raised a plethora of issues surrounding security.  New strategies and
+technologies are being introduced to combat the problems of cybercrime, and minimise its
+effect on the e-commerce industry.
+
+
+
+\end{abstract}
+
+\newpage
+
+Australia is rapidly emerging as a major player in the e-commerce industry.
+Out of all the developed countries in the world, Australia is 6th in the world in
+computers per capita, and 7th in the world in both connections to the Internet
+and new information technology\cite{WCY:wcy99}.  By 1988 there were 2 million Internet households in Australia and by 2002 it is estimated that
+5.8 million of us will be on-line.  In three years' time, the country is expected to be generating
+\$6.7billion in e-commerce\cite{Horadam:Age99}.
+Even so, it only represents a small percentage of the total number of purchases in 
+the e-commerce market.
+Electronic commerce (EC, e-commerce) is essentially defined as the conduct of commerce
+(buying and selling) in goods and services, with the use of telecomunications, and 
+telecomunications-based tools (ie. the internet, and espcially the World Wide Web)\cite{Clarke:url99}.
+So what is holding the Australian consumer back from using e-commerce to purchase goods?
+It simply comes down to \textit{trust}.
+
+Up to 50\% of on-line Australians are not using e-commerce to purchase goods as they simply 
+\textit{do not trust} it with their credit card details and to a lesser extent sensitive information\cite{anon:ABF00}.  This is a well justified stance since the
+recent shutdowns of Yahoo.com, eBay and other leading websites in February, which have boosted public
+awareness of the need to address cybercrime. Also,  Australians are different from people in other countries such as the US in that
+they are more concerned with security than with the actual prices e-commerce
+offers\cite{anon:ABF00}.
+
+
+Therefore, to fully realise the benefits of e-commerce, it is imperitive that organisations put in place
+security solutions that offer the same level of trust and confidentiality as signed, legal documents and 
+contracts, and that customers are confident in the level of security offered.  E-commerce in any business
+requires strong security measures, that provide water-tight confidentiality, authentication, access control
+data integrity and accountablitity.
+
+The aim of this paper is to show that the latest technologies -- specifically SET
+-- will go a long way in addressing the current lack of security and associated dangers involved
+in online transactions, 
+thereby hopefully curtailing cybercrime.
+
+\section*{What are the risks of e-commerce?}
+
+ E-commerce, by its very nature, is a risky business.  To conduct a transaction online
+ you have to send private, and potentially damaging, information over an unsecure
+ network.  A person with the right tools and a malicious intent can intercept any
+ data as it travels over the internet, exposing companies to major liabilities.  
+
+ Compared to ``normal'' crime, it is easier for hackers to get away with their crimes.
+ Lack of collateral evidence means that common methods for catching most criminals is 
+ redundant as no fingerprints or eyewitnesses etc. can be traced\cite{Phillips:Age99}.
+
+ According to the Computer Security Institute, financial losses attributed to computer
+ crime in the United States have doubled in the past year, to an estimated
+ \$16.5 billion \cite{anonLA:Age00}.  This is mainly attributable to financial
+ fraud and theft of proprietary information.  CSI also found that 59\% of companies
+ they surveyed said they had experienced attacks initiated from the internet, compared
+ to 38\% from computers within their organisation\cite{anonLA:Age00}.
+ 
+ The theft of valuable information is a major risk.  Hackers have developed sophisticated 
+ software that constantly checks different sites for weak points by which they can
+ gain entry.  If they find a system that they can enter, they can take information
+ that is valuable to the company.  They could then sell it to an unscrupulous rival,
+ or try to extort payments from the company.
+
+ A hacker could also try to damage a company by altering or crashing their website.
+ By altering the site to provide false information, or making the site unavailable to
+ customers, the hackers damage the company's reputation.
+
+ Consumers have low confidence in the security of the internet, particularly in relation
+ to sending credit card details to conduct a transaction (which many outlets currently
+ require).  Consumers are understandably worried about using their credit cards online,
+ partly because it isn't clear what would happen if fraud occurs\cite{Sinclair:Age00}.
+ In Europe alone, credit card fraud cost Visa banks \pounds 150 million last
+ year, and in the US, a 43\% rise in online crime was reported \cite{August:Comp00}.
+ It is because of this large amount of cybercrime that consumers are put off.
+ Up to 50\% of Australian consumers say that their major concern with online shopping
+ is the security of credit card information \cite{anon:ABF00}.  
+ 
+ The risk involved with credit card fraud on the internet, though, is greater for
+ the seller than it would otherwise be.  This is because they are forced to wear
+ the cost of the fraud.  That is, when someone fraudulently uses anothers' 
+ credit card details to buy online, and then that person disputes the fact that
+ they made the purchase, then vendor must pay up, leaving them out of pocket.  
+ The only way they can re-coup costs is if the offender is caught.  It is this fact
+ which makes it dangerous to trade online, especially for small business, where 
+ such fraud could even force them out of business.
+
+ The risk to the consumer has lowered, however, with Visa in the US announcing that
+ consumers will have no liability if their card is stolen online\cite{Sinclair:Age00}.  
+  
+
+
+\section*{What strategies are in place to fight cybercrime?}
+
+Security is the backbone of e-commerce because the critical issue is establishing trust between
+parties, says Tom Shuster, RSA Security seniorVicepresident. Security should be the major IT
+issue for companies in e-business if research on the rapid increase in cybercrime is to be 
+heeded\cite{Whitby:BD00}. 
+Basically, to do this, five security principles can be applied to e-commerce transactions.  Although each focuses on securing a 
+distinct aspect of a transaction, all five must work together to provide a truly secure e-commerce application. The security principles are listed below:
+
+\begin{itemize}
+	\item Authentication ensures both parties are who they say they are.  Forms of authentication include smartcards,
+digital certificates and perhaps eventually biometrics.
+
+	\item The privacy of confidential information is protected by using various forms of cryptography. Cryptograpy is a way of
+scrambling data so that it can't be read by an unauthorised party.  Privacy in e-commerce transactions
+must be a two way street.  Customers on one hand want to protect their purchasing information, account information,
+credit card numbers etc.  Financial institutions on the other hand will want to protect internal information.
+At the moment, the RSA algorithm is the most accepted way to encrypt data.
+
+	\item Authorisation ensures that each party is allowed to enter the commitment.
+
+	\item Integrity ensures that a transaction  has not been altered or destroyed while the communication is in transit.
+
+	\item And finally, non-repudiation, provides evidence for both parties that the transition actually occured.
+In essence, it provides an electronic receipt of the transaction\cite{anon:ABF00}.
+\end{itemize}
+There are also organisations involved in fighting crime online.  CERT (originally Computer Emergency Response
+Team) in the UK is a centre dedicated to the research and development of new ways to tackle internet crime\cite{August:Comp00}.
+
+Here in Australia, the Australian Securities and Investments Commission (ASIC) has the job of
+ensuring consumer confidence, commercial certainty, efficiency and market integrity across all
+mediums, including the internet.  In this role, they are developing a range of countermeasures that
+may help deal with the challenges of the internet.  Recently ASIC created an Electronic Enforcement
+Unit to extend its internet enforcement work.  This unit released the Electronic Funds Transfer Code
+of Conduct and is working with industry and government to review and broaden the EFT code to cover
+all financial electronic transactions.  ASIC is actively pushing for greater coordination and 
+cooperation of regulatory bodies, both internationally and domestically\cite{Phillips:Age99}. 
+
+English Home Secretary Jack Straw has fulfilled his promise to set up a
+cybercrime unit, announcing that he was giving the National Criminal
+Intelligence Service \pounds 337,000 to draw up a detailed plan for a
+high-tech crime squad\cite{August:Comp00}.
+
+These strategies will improve the confidence in the consumers mind to shop online, if enforced tenaciously and monitored successfully.  These small steps that companies undertake will increase patronage to a vendors' site, add to the e-commerce boom, and decrease the dangers involved with shopping online. 
+
+
+
+
+\section*{What technologies are available to combat cybercrime?}
+
+
+Ever since version 2.0 of both Netscape Navigator and Microsoft Internet Explorer, transactions have been 
+encrypted using Secure Sockets Layer(SSL), a protocol that creates a secure connection to the server, protecting
+the data as it travels over the internet.  SSL uses public key encryption, one of the stronger encryption methods
+around.  It is a powerful tool, and forms the basis for a lot of other emerging security technologies. 
+
+
+An up and coming technology being used to provide secure financial transactions on
+the internet is Secure Electronic Transaction (SET). 
+
+ 
+SET was supported initially by Mastercard, Visa, Microsoft, Netscape, and is now being incorporated into
+other companies, most recently that being American Express.
+As Mastercard (which own 25\% of the market) and Visa(50\%), have large influence in payment mechanisms,
+there is a greater dedication to the efficient running of the SET protocol\cite{Clarke:url99}.
+
+
+With SET, a user is given a digital certificate and a transaction is
+conducted and verified using a combination of digital certificates and digital signatures among the purchaser, a merchant, and the purchaser's
+bank in a way that ensures privacy and confidentiality. SET makes use of Netscape's Secure Sockets Layer (SSL), Microsoft's Secure
+Transaction Technology (STT), and Terisa System's Secure Hypertext Transfer Protocol (S-HTTP).  SET uses some but not all aspects of a
+public key infrastructure (PKI).  That is, as long as the
+consumer uses one of these browsers, they can take advantage of the safest and
+best technology around for securing transactions without worrying about security
+breaches.
+ 
+
+Here's how SET works: 
+
+Assume that a customer has a SET-enabled browser such as Netscape or Microsoft's Internet Explorer and that the transaction provider (bank,
+store, etc.) has a SET-enabled server. 
+\begin{enumerate}
+\item    	The customer opens a Mastercard or Visa bank account. Any issuer of a credit card is some kind of bank. 
+\item     The customer receives a digital certificate. This electronic file functions as a credit card for online purchases or other transactions. It includes a public key with
+       an expiration date. It has been digitally signed by the bank to ensure its validity. 
+\item     Third-party merchants also receive certificates from the bank. These certificates include the merchant's public key and the bank's public key. 
+\item     The customer places an order over a Web page, by phone, or some other means. 
+\item    The customer's browser receives and confirms from the merchant's certificate that the merchant is valid. 
+\item    The browser sends the order information. This message is encrypted with the merchant's public key, the payment information, which is encrypted with the
+       bank's public key (which can't be read by the merchant), and information that ensures the payment can only be used with this particular order. 
+\item    The merchant verifies the customer by checking the digital signature on the customer's certificate. This may be done by referring the certificate to the bank
+       or to a third-party verifier. 
+\item    The merchant sends the order message along to the bank. This includes the bank's public key, the customer's payment information (which the merchant can't
+       decode), and the merchant's certificate. 
+\item    The bank verifies the merchant and the message. The bank uses the digital signature on the certificate with the message and verifies the payment part of the
+       message. 
+\item   The bank digitally signs and sends authorization to the merchant, who can then fill the order. 
+\end{enumerate}
+
+The primary principle of SET is the way it manipulates data using cryptology.
+SET uses the Public key encrytion algorithm to encrypt and decrypt the data. 
+
+	In public key cryptography, a public and private \emph{key} are created
+simultaneously using the same algorithm (a popular one is known as RSA, researched and developed by the company with
+the same name--RSA Security)
+by a certificate authority (CA), like a bank or trusted third party\cite{Horadam:Age99}.
+A key is a variable value (ie password passphrase etc.) that is applied using an algorithm 
+to a string or block 
+of unencrypted text to produce encrypted text. The
+length of the key generally determines how difficult it will be to decrypt the text in a given message.
+
+ SET is quickly becoming an industry standard, as it encodes
+the credit card
+numbers that sit on vendors' servers so that only banks and credit card companies can read the 
+numbers\cite{Clarke:url99}.
+
+SET has been designed with credit-card transactions in mind, and does not support transmission of PINs.
+The early versions of SET can therefore not be used to
+support debit-card transactions (at least in countries like Australia for which PIN protection is obligatory).
+On the other hand, SET transactions are potentially
+more secure than PIN-based transactions, and SET could in due course become accepted as a means of conducting
+payments against a revolving line of credit,
+or the card-holder's own funds.
+It promises secure transmission, and a considerable level of confidence that the participants have the authority to undertake the transaction.
+
+
+However, there are few guarantees.  The security of many systems depends on unproven (but believeable)
+assumptions.  The size of the RSA public key needed to underpin user confidence grows with each 
+improvement in the theoretical attacks on computer power\cite{Horadam:Age99}.
+
+The scheme is complex, and depends on many participants conforming with the specification, and also
+contains nothing that manages participants' private keys. It appears that these will need to be stored on 
+participants' workstations and servers, or
+additional peripherals installed on workstations and servers to handle a secure token (probably a chip-card).
+
+The scheme says nothing about the apportionment of responsibility for losses. A great deal of this 
+is already addressed
+in the existing systems. However the
+payment-processing organisations and banks may seek to make card-holders responsible for transactions undertaken
+using the card-holder's private key. Given
+that no workable solution exists whereby card-holders can secure their private keys, consumers would be at risk of 
+someone breaking into their premises, or
+taking control of their workstation from a remote site, and spending the card-holder's money without their knowledge, 
+and without recourse.
+
+Other known protocols being developed are the 
+IPSec (Internet Protocol Security protocol), and the virtual private network (VPN). 
+IPSec is concerned with security at the network level, rather than the entire internet, and is useful for companies, where their employees can use dial-up connections to their network.
+VPN is also based more for company usage.
+
+The SET technology, which is steadily being implemented around the world, will tempt consumers to shop online.  However, the public must understand the concepts behind SET in order to trust it with their credit cards.  It is imperitive that education of the public is carried out fully, for with this new technology will come more profit for online traders.
+
+
+\section*{Conclusion}
+To realise the full potential of e-commerce, it is critical that the emerging infrastructure support or 
+uphold security principles.
+To do so, business will need to implement a variety of network security functions, along with a solid security
+policy.
+On the technology front, there are currently a number of solutions that are critical enablers of e-commerce
+transactions, those being the implementation of the SET protocol and following the five
+principles defining the strategy to combat cybercrime.
+Digital certificates address the need for authentication and authorisation, as well as privacy with the implementation
+of public key cryptography to protect the information contained within.
+These measures will hopefully encourage consumers to purchase online, with the trust and confidence of a secure data transfer, and alleviate the dangers inherent in online trade.
+
+\bibliographystyle{alpha}
+\bibliography{assignment2c}
+
+\end{document}
+

@@ -1,0 +1,30 @@
+***********************************************************
+
+              433-498: Cluster and Grid Computing
+		               ASSIGNMENT 1
+               Client Server Architecture Report
+
+	Student Name: Mark Angrish (mangr)
+	Student Number: 74592 
+
+***********************************************************
+
+SYSTEM ARCHITECTURE
+-------------------
+
+The system architecture used is as appears in figure 1.  It is a basic
+multithreaded client server architecture, with a client calling the server,
+the server socket listener taking the request, and creating a new thread to
+handle the client.
+
+PROTOCOL
+--------
+
+The client server protocol is described in figure 2.  Basically, a 
+client issues a request to the server using two String output streams
+as defined by the system specifications handed out by the lecturer.
+The Server is expecting a newline delimiter, so the client must implement
+this to ensure compatibility. Likewise the Client expects the return string
+to be delimited by a newline.  To ensure cross language support of byte
+representations on a wire, the common Network Byte Order protocol is assumed.
+

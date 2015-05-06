@@ -1,0 +1,119 @@
+\documentclass[22pt, a4paper]{article}
+\usepackage{epsfig}
+\hbadness 5000
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1ex}
+\textwidth 17cm
+\textheight 24.5cm
+\oddsidemargin 0.0cm
+\evensidemargin 0.0cm
+
+\begin{document}
+
+\begin{Large}
+
+\section{Design Decision Summary}
+
+\subsection{Introduction}
+\subsubsection{Document Aim}
+
+To record details of design decisions in a single document.
+
+\subsubsection{Project Design Aims}
+The design aims of the project are:
+\begin{enumerate}
+\item Satisfy the functional requirements
+	\begin{itemize}
+	\item create a consistent and complete design based upon the
+	requirements specified in the SRS.
+	\item document any design decisions related to satisfying the
+	functional requirements
+	\end{itemize}
+\item Satisfy the non-functional requirements.  Ensure that the following
+quality attributes are satisfied: \\
+{\bf Usability:} specific processes will be used to test the system is
+usable.  Because our project is aimed at novice users this is the most
+important quality attribute. \\
+{\bf Performance:} in order to achieve the performance required we will
+perform some tests and build some prototypes. \\
+\end{enumerate}
+
+\subsubsection{Executive Summary}
+So far we have made design decisions about all of our functional
+requirements.  Of non-functional we have only made choices for usability.
+
+\pagebreak
+
+\subsection{Functional Requirements}
+
+\subsubsection{Database backend functionality}
+For a more detailed description of each functional requirement please refer
+to section 1 of the SRS.
+\begin{enumerate}
+\item
+{\bf Activity: } Nadia did research on {\bf Date:} 6/4/01 \\
+{\bf SRS items:} 1.1.1 through 1.1.25. \\
+{\bf Aim:} Investigate various database technologies to check what
+functionality they provide and ensure that the database interaction we have
+in the SRS can be achieved.  Specifically looked at mySQL, MS-ACCESS and
+Ingres.  (See minutes of team meeting on 4/4/01 online or in the
+repository).  \\
+{\bf Tradeoffs:} All of the the database alternatives have the
+functionality we required (according to the documentation).  Ingres is
+only supported on UNIX systems, MS-ACCESS on Windows and mySQL on Linux and
+Windows.  Only mySQL is free.  Our clients wants something that is free,
+although if the functionality is not there then we will select another
+database technology.  Our client only has experience with MS-ACCESS. \\
+{\bf Result:} I built a test mySQL database (see prototypes directory under
+CVS).  I then performed all the database interactions listed in 1.1.1
+through 1.1.25 on this test database.  mySQL will satisfy most of our
+requirements.  This will require additional documentation and training
+material for the client but we could create an "MS-like" interface.
+\end{enumerate}
+
+\subsubsection{Statistical functionality}
+For a more detailed description of each functional requirement please refer
+to section 2 of the SRS.
+\begin{enumerate}
+\item
+{\bf Activity:} Deepak researched languages for implementation to aid in
+bottom up design process on {\bf Date:} 6/4/01 \\
+{\bf SRS items:} 2.1.1 through 2.1.13. \\
+{\bf Aim:} Investigate various languages to implement statistical functions
+listed in SRS items.  The options that the team has brainstormed are C, C++
+and Java. \\
+{\bf Tradeoffs:} There are free statistical libraries available for each
+language.  This allows us a bit of flexibility for other design decisions.\\ 
+{\bf Result:} I read documentation on each library and checked that they
+satisfy the SRS items.  We can use any of the libraries for our project.
+\end{enumerate}
+
+\pagebreak
+
+\subsection{Non-Functional Requirements}
+
+Design decisions for each section of the functional requirements in the SRS.
+
+\subsubsection{Usability}
+For a more detailed description of the non-functional requirements
+associated with usability see section 7 of the SRS. \\
+\begin{enumerate}
+\item
+{\bf Activity:} Chuen created a paper prototype on {\bf Date:} 6/4/01 \\
+{\bf SRS items:} 7.1.1 through 7.1.8. \\
+{\bf Aim:} Create a basic paper prototype of the user interface to show the
+client.  Use feedback from the client to refine the interface. \\
+{\bf Result:} Created prototype.  These are labelled "1st Draft UI" in
+design notebook/folder. \\
+\item
+{\bf Activity:} Ko-Chen demonstrated paper prototype to client on {\bf
+Date:} 11/4/01 \\
+{\bf SRS items:} 7.1.1 through 7.1.8. \\
+{\bf Aim:} Gather feedback on the design of user interface. \\
+{\bf Result:} Ammended paper prototype.  These are labelled "2nd Draft UI"
+in design notebook/folder. \\
+\end{enumerate}
+
+\end{Large}
+\end{document}

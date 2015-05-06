@@ -1,0 +1,38 @@
+This document will describe the standards, practices, procedures and conventions
+, and any other relevent information, pertaining to the software engineering process to the completion of the software system Training Works.
+
+The aim of this project is the development of a database system to manage 
+trainees as they progress through various courses provided by various 
+institutions.  This package will deal with  two seperate users, namely administrators, who will manage the content of the system, and trainees who will be able to moniter their progress.
+
+At this stage, the languages used and the operating systems intended have not been finalised.
+
+The software items used during the course of this project include(footnote:these have been the items used at this point in time):
+
+-UNIX (operating system)
+-MS Windows 98 (operating system)
+-CVS (version control and configuration management)
+-LATEX (document typesetting)
+-latex2html (document converter)
+-dvips ( file format converter)
+-ghostview (postscript format viewer)
+-netscape (internet browser)
+
+The client for this project is:
+     Ricardo Fiusco
+		 Adacel Technologies Ltd.
+		 250 Bay Street,
+		 Brighton VIC 3186
+		 Ph: (03) 8530 7777
+		 Email: ricardo@adacel.com.au
+
+The team for this project is team G consisting of:
+     Dan Tully (dtt)		Ph:	(03) 9348 0040 / 0408 551 475 (Project Manager)
+	   Mark Angrish (mangr)		Ph: (03) 9338 6075 / 0414 978 075
+		 Flynn Connor (frc)		Ph: (03) 9457 7530 / 0409 577 530
+		 Kevin McDonald (kem)		Ph: (03) 9397 2795
+		 Sylvia Syamanond (vss) Ph: (03)
+
+The Supervisor for this project is:
+     Kendall Lister (krl)		Ph: (03) xxxx xxxx
+

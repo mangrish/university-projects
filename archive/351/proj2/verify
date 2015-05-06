@@ -1,0 +1,724 @@
+============================================
+vis/mangr-compile.out
+13:28:27_Wednesday_30_May_2001
+============================================
+===== Begin Compiling Log =====
+cp owners.e tmp.c
+cp gethotels.e tmp2.c
+cp getowners.e tmp3.c
+cp build.e tmp4.c
+cp /home/stude/data/351/proj2/dbname.h .
+gcc -E tmp.c > owners.sc
+gcc -E tmp2.c > gethotels.sc
+gcc -E tmp3.c > getowners.sc
+gcc -E tmp4.c > build.sc
+esqlc owners.sc gethotels.sc getowners.sc build.sc
+ESQL owners.sc:
+ESQL gethotels.sc:
+ESQL getowners.sc:
+ESQL build.sc:
+gcc -g -o owners owners.c gethotels.c getowners.c build.c -L I_SYSTEM/ingres/lib -linterp.1 -lframe.1 -lq.1 -lcompat.1 -lm -lc -lsocket -lelf
+rm tmp*
+============================================
+vis/mangr-stderr.out
+13:28:28_Wednesday_30_May_2001
+============================================
+===== Begin Error Log =====
+===== Begin Compiling =====
+===== Begin testing =====
+===== Finish testing =====
+===== Begin bonus mark testing =====
+===== Finish bonus mark testing =====
+============================================
+vis/mangr.out
+13:28:28_Wednesday_30_May_2001
+============================================
+433-351 Submission Results for Project 2
+User:  mangr
+
+
+Report on hotel owners
+======================
+Regent Hotel,  Sydney:
+	Telstra, Melbourne (50.0%)
+	LindaLand, Melbourne (31.2%)
+Queens Hotel,  London:
+	Optus, Melbourne (10.0%)
+	Microsoft, Seattle (1.0%)
+	LindaLand, Melbourne (1.0%)
+Ritz Motel,  New York:
+	Qantas, Brisbane (71.4%)
+Ritz Hotel,  New York:
+	Coles Myer, Sydney (23.7%)
+	Qantas, Brisbane (5.6%)
+L`Hotel Sur Le Seine,  Paris
+L`Hotel de Paris,  Paris:
+	LindaLand, Sydney (47.7%)
+	Apple Inc., San Jose (8.2%)
+
+===== Begin bonus mark testing =====
+Note: This test is irrelevant to you if you have not done the bonus question.
+
+Report on hotel owners
+======================
+Ritz Hotel,  New York:
+	Coles Myer, Sydney (23.7%)
+	Qantas, Brisbane (5.6%)
+
+===== Finish bonus mark testing =====
+============================================
+src/makefile
+13:28:18_Wednesday_30_May_2001
+============================================
+
+
+owners:	owners.e gethotels.e getowners.e build.e owners.h 
+	cp owners.e tmp.c
+	cp gethotels.e tmp2.c
+	cp getowners.e tmp3.c
+	cp build.e tmp4.c
+	cp /home/stude/data/351/proj2/dbname.h .
+	gcc -E tmp.c > owners.sc
+	gcc -E tmp2.c > gethotels.sc
+	gcc -E tmp3.c > getowners.sc
+	gcc -E tmp4.c > build.sc
+	esqlc owners.sc gethotels.sc getowners.sc build.sc
+	gcc -g -o owners owners.c gethotels.c getowners.c build.c -L $II_SYSTEM/ingres/lib -linterp.1 -lframe.1 -lq.1 -lcompat.1 -lm -lc -lsocket -lelf
+	rm tmp*
+============================================
+src/owners.h
+13:28:18_Wednesday_30_May_2001
+============================================
+/******************************************************************************/
+/*----------------------------------------------------------------------------*/
+/*
+**  Program : owners.h:
+**  For     : 433 -351: Databases;
+**            PROJECT 2
+**  Written : Mark Angrish, Student number: 74592
+**            May 2001;
+**  Input   : No input 
+**  Output  : No output 
+** 
+*/
+/*----------------------------------------------------------------------------*/
+/******************************************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <strings.h>
+#include "/usr/include/sys/socket.h"  /* for lcompat */
+#include "dbname.h"
+
+/*
+ * These lengths are the length of the string defined in the
+ * database schema + 1 for the null (string terminating) character.
+ */
+#define PARENT_NAME_LENGTH 12
+#define PARENT_CITY_LENGTH 11
+#define CHILD_NAME_LENGTH 22 
+#define CHILD_CITY_LENGTH 11
+#define CONAME_LENGTH 12
+#define COCITY_LENGTH 11
+#define HNAME_LENGTH 22
+#define HCITY_LENGTH 10
+
+/*=====================*/
+/*typedefs for structs */
+/*=====================*/
+
+typedef struct owners Owners_record;/*a struct for the owners table in the DB*/
+typedef struct hotels Hotels_record;/* a struct for the hotels table in the DB*/
+typedef struct company Company; /* a struct for the output struct with company
+																	 names and cities */
+typedef struct output Output; /*a struct for the output */
+
+
+/*=====================*/
+/*     structs         */
+/*=====================*/
+
+struct owners {
+		char parent_name[PARENT_NAME_LENGTH];
+		char parent_city[PARENT_CITY_LENGTH];
+		char child_name[CHILD_NAME_LENGTH];
+		char child_city[CHILD_CITY_LENGTH];
+		float fraction;
+		Owners_record *next;
+	};
+
+struct hotels {
+	char hotel_name[HNAME_LENGTH];
+	char hotel_city[HCITY_LENGTH];
+	Hotels_record *next;
+	};
+
+ /*company name and city and %ownership*/
+struct company {
+	char company_name[CONAME_LENGTH]; 
+	char company_city[COCITY_LENGTH];
+	double percentage;
+	Company *next;
+	};
+
+/* made for the output with a linked list of companies a hotel is owned by*/
+struct output {
+	char hotel_name[HNAME_LENGTH];
+	char hotel_city[HCITY_LENGTH];
+	Company *company_head;
+	Output *next;
+	};
+	
+/* 
+ * Some instructions to SQL about error messages and error conditions.
+*/
+EXEC SQL INCLUDE SQLCA;
+EXEC SQL WHENEVER SQLERROR STOP;
+
+/* GLOBAL FUNCTION PROTOTYPES */
+Owners_record *getowners( void);
+Hotels_record *gethotels( void);
+Output *build(Owners_record *, Hotels_record *);
+============================================
+src/owners.e
+13:28:18_Wednesday_30_May_2001
+============================================
+/******************************************************************************/
+/*----------------------------------------------------------------------------*/
+/*
+**  Program : owners.e:
+**  For     : 433 -351: Databases;
+**            PROJECT 2
+**  Written : Mark Angrish, Student number: 74592
+**            May 2001;
+**  Input   : owners [-h "Hotel Name" "Hotel City"]: either no input is given
+**						or a -h option with a corresponding hotel name and city.
+**  Output  : To stdout: output in the form of:
+**						Report on hotel owners
+**						======================
+**						Regent Hotel,  Sydney:
+**							Telstra, Melbourne (50.0%)
+**							LindaLand, Melbourne (31.2%)
+**						Queens Hotel,  London:
+**			        Optus, Melbourne (10.0%)
+**						L`Hotel Sur Le Seine,  Paris
+**						etc...
+**						with a single entry given for a -h options hotel
+*/
+/*----------------------------------------------------------------------------*/
+/******************************************************************************/
+
+#include "owners.h"
+
+/*---------------------------*/
+/* LOCAL FUNCTION PROTOTYPES */
+/*---------------------------*/
+
+void usage(char *);
+Hotels_record *getopthotel(char *, char *);
+void print_out(Output *);
+
+/*---------------------------*/
+
+
+int main(int argc, char *argv[])
+{
+	char *prog_name = argv[0]; /*name of the program executable*/
+	char *hotel_name; /* for the -h option, holds the hotel name*/
+	char *hotel_city; /* for the -h option, holds the hotel city*/
+	Owners_record *owners; /* linked list of the owners in the owners table*/
+	Hotels_record *hotels; /*linked list of all the hotels in the hotels table
+												  or the hotel from the -h option */
+	Output *output; /*linked list of all the hotels and owners for outputting*/
+
+	/* display the usage to the user if the program is incorrectly invoked */
+	if (argc != 1 && (argc != 4 || strcmp(argv[1],"-h") != 0)) 
+		usage(prog_name);
+
+	/* if there are no command line arguments.... */
+	if (argc == 1) 
+		hotels = gethotels();/* get the hotels from the database..*/
+	 /*.. otherwise get the command line arguments, and make them the only
+		 hotel to be used */
+	else {
+		hotel_name = argv[2];
+		hotel_city = argv[3];
+		hotels = getopthotel(hotel_name, hotel_city);
+	}
+
+	owners = getowners(); /*get the owners from the owners list in the database*/
+	output = build(owners, hotels);/*find all the hotels and their respective 
+																	 owners */
+	print_out(output); /* print the output to the user */
+
+	return 0;
+}
+
+
+/*==============================================================================
+** usage: displays the usage to the user if the program is incorrectly invoked.
+**	input- the string of the program executable name.
+**	output- usage message for correct program invokation to stderr.
+**============================================================================*/
+
+void usage(char *prog_name)
+{
+	fprintf(stderr, "Usage: %s [-h \"Hotel name\" \"Hotel city\"]\n", prog_name);
+	exit(EXIT_FAILURE);
+}
+
+
+/*==============================================================================
+** getopthotel: takes the command line arguments and turns them into a 
+**							Hotels_record node.
+**	input- a hotel name string, and a hotel city string.
+**	output- a node of type Hotels_record, with the input as its values.
+**============================================================================*/
+
+Hotels_record *getopthotel(char *hotel_name, char *hotel_city)
+{
+	Hotels_record *node;	
+
+	node = malloc(sizeof(Hotels_record));
+
+	strcpy(node->hotel_name, hotel_name);
+	strcpy(node->hotel_city, hotel_city);
+	node->next = NULL;
+
+	return node;
+}
+
+
+/*==============================================================================
+** print_out: prints out the linked list of output nodes in the format as
+**						specified in the spec sheet and at the header of this file.
+**	input- the linked list of output nodes (see owners.h).
+**	output- to stdout: the output as demonstated in the header of this file.
+**============================================================================*/
+
+void print_out(Output *output)
+{
+	Output *curr_ptr ;
+	Company *company_curr ;
+
+	printf("\nReport on hotel owners\n");
+	printf("======================\n");
+
+	curr_ptr = output;
+
+	while (curr_ptr != NULL) {
+		printf("%s,  %s",curr_ptr->hotel_name, curr_ptr->hotel_city);
+		if (curr_ptr->company_head == NULL)
+			printf("\n");
+		else {
+			printf(":\n");
+			company_curr = curr_ptr->company_head;
+			while (company_curr != NULL) {
+				printf("\t%s, %s (%.1f%\%)\n",company_curr->company_name, company_curr->company_city, 
+							 company_curr->percentage);
+				company_curr = company_curr->next;
+			}
+		}
+		curr_ptr = curr_ptr->next;
+	}
+	printf("\n");
+
+	return;
+}
+============================================
+src/getowners.e
+13:28:18_Wednesday_30_May_2001
+============================================
+/******************************************************************************/
+/*----------------------------------------------------------------------------*/
+/*
+**  Program : getowners.e:
+**  For     : 433 -351: Databases;
+**            PROJECT 2
+**  Written : Mark Angrish, Student number: 74592
+**            May 2001;
+**  Purpose: this module opens the database and copies the tuple from the database
+**					 to a C defined data structure.
+*/
+/*----------------------------------------------------------------------------*/
+/******************************************************************************/
+
+#include "owners.h"
+
+/*---------------------------*/
+/* LOCAL FUNCTION PROTOTYPES */
+/*---------------------------*/
+
+Owners_record *add_orecord(Owners_record *, char *, char *, char *, char *, float);
+
+/*---------------------------*/
+
+
+Owners_record *getowners(void)
+{
+	Owners_record *head = NULL;/* our C defined data structure ptr o its head*/
+
+	/* 
+  * All variables (and their corresponding structures) that will be
+  * used by SQL. 
+  */
+
+	EXEC SQL BEGIN DECLARE SECTION;
+
+	struct {
+		char parentname[PARENT_NAME_LENGTH];
+		char parentcity[PARENT_CITY_LENGTH];
+		char childname[CHILD_NAME_LENGTH];
+		char childcity[CHILD_CITY_LENGTH];
+		float fraction;
+	} Owners;
+
+	short null_indicator[5];
+
+	EXEC SQL END DECLARE SECTION;
+
+	/* execute the SQL statement by declaring a cursor so we can step through the tuples
+		 one at a time */
+	EXEC SQL DECLARE cursor1 CURSOR FOR
+	SELECT *
+	FROM owners;
+
+	EXEC SQL CONNECT DBNAME;/*connect to the database */
+
+	/*as long as there is no error code (ie more tuples available for reading ).. */
+	EXEC SQL OPEN cursor1 for readonly;
+	while (sqlca.sqlcode == 0) {
+		EXEC SQL FETCH cursor1 INTO :Owners INDICATOR :null_indicator;
+		if (sqlca.sqlcode == 0) {
+			/*copy the record to the owners structure defined by us (ie c data structure)*/	
+			head = add_orecord(head, Owners.parentname, Owners.parentcity, Owners.childname,
+												Owners.childcity, Owners.fraction);
+		}
+	}
+	EXEC SQL CLOSE cursor1;/*close the cursor */
+	EXEC SQL commit;/* Commit releases the read lock on the table */
+	EXEC SQL DISCONNECT;/* disconnect from the database before finishing.*/
+
+	return head;/*return the head of the C data structure for owners table */
+}
+
+
+/*==============================================================================
+** add_orecord:adds a new Owners_reecord node to the end of the C linked list 
+**  input- ptr to head of the owners table, the parent name, parent city, child 
+**				 name and chid city, and the fration of ownership.
+**  output- the head of the owners linked list, with the new node added to the end.
+**============================================================================*/
+
+Owners_record *add_orecord(Owners_record *head, char *parent_name, char *parent_city,
+													char *child_name, char *child_city, float fraction)
+{
+
+	Owners_record *new_record;
+	Owners_record *curr_ptr = head;
+	Owners_record *prv_ptr = NULL;
+
+	new_record = malloc(sizeof(Owners_record ));
+	
+	strcpy(new_record->parent_name, parent_name);
+	strcpy(new_record->parent_city, parent_city);
+	strcpy(new_record->child_name, child_name);
+	strcpy(new_record->child_city, child_city);
+	new_record->fraction = fraction;
+	new_record->next = NULL;
+
+	/*if the head of the linked list is NULL, then add the node there, otherwise put it
+		at the end of the linked list*/
+	if (head == NULL)
+		head = new_record;
+
+	else {
+		while (curr_ptr != NULL) {
+			prv_ptr = curr_ptr;
+			curr_ptr = curr_ptr->next;
+		}
+		prv_ptr->next = new_record;
+	}
+
+	return head;
+}
+============================================
+src/gethotels.e
+13:28:18_Wednesday_30_May_2001
+============================================
+/******************************************************************************/
+/*----------------------------------------------------------------------------*/
+/*
+**  Program : gethotels.e:
+**  For     : 433 -351: Databases;
+**            PROJECT 2
+**  Written : Mark Angrish, Student number: 74592
+**            May 2001;
+**  Purpose: this module opens the database and copies the tuple from the database
+**					 to a C defined data structure.
+*/
+/*----------------------------------------------------------------------------*/
+/******************************************************************************/
+
+#include "owners.h"
+
+/*---------------------------*/
+/* LOCAL FUNCTION PROTOTYPES */
+/*---------------------------*/
+
+Hotels_record *add_hrecord(Hotels_record *, char *, char *);
+
+/*---------------------------*/
+
+
+Hotels_record *gethotels(void)
+{
+	Hotels_record *head  = NULL;/* our C defined data structure ptr to its head*/
+
+	/* 
+  * All variables (and their corresponding structures) that will be
+  * used by SQL. 
+  */
+
+	EXEC SQL BEGIN DECLARE SECTION;
+
+	struct {
+		char hname[HNAME_LENGTH];
+		char hcity[COCITY_LENGTH];
+	} Hotels;
+
+	short null_indicator[2];
+
+	EXEC SQL END DECLARE SECTION;
+
+	/* execute the SQL statement by declaring a cursor so we can step through the tuples
+		 one at a time */
+	EXEC SQL DECLARE cursor2 CURSOR FOR
+	SELECT hname, hcity
+	FROM hotel;
+
+	EXEC SQL CONNECT DBNAME;/*connect to the database */
+
+	/*as long as there is no error code (ie more tuples available for reading ).. */
+	EXEC SQL OPEN cursor2 for readonly;
+	while (sqlca.sqlcode == 0) {
+		EXEC SQL FETCH cursor2 INTO :Hotels INDICATOR :null_indicator;
+		if (sqlca.sqlcode == 0) {
+			/*copy the record to the hotels structure defined by us (ie c data structure)*/
+			head = add_hrecord(head, Hotels.hname, Hotels.hcity);
+		}
+	}
+	EXEC SQL CLOSE cursor2;/*close the cursor */
+	EXEC SQL commit;/* Commit releases the read lock on the table */
+	EXEC SQL DISCONNECT;/* disconnect from the database before finishing.*/
+
+	return head;/*return the head of the C data structure for hotels table */
+}
+
+
+/*==============================================================================
+** add_hrecord:adds a new Hotels_reecord node to the end of the C linked list 
+**  input- ptr to head of the hotels table, the hotel name,and  hotel city .
+**  output- the head of the owners linked list, with the new node added to the end.
+**============================================================================*/
+
+Hotels_record *add_hrecord(Hotels_record *head, char *hotel_name, char *hotel_city)
+{
+	Hotels_record *new_record;
+	Hotels_record *curr_ptr = head;
+	Hotels_record *prv_ptr = NULL;
+
+	new_record = malloc(sizeof(Hotels_record ));
+	
+	strcpy(new_record->hotel_name, hotel_name); 
+	strcpy(new_record->hotel_city, hotel_city);
+	new_record->next = NULL;
+
+	/*if the head of the linked list is NULL, then add the node there, otherwise put it
+		at the end of the linked list*/
+	if (head == NULL)
+		head = new_record;
+
+	else {
+		while (curr_ptr != NULL) {
+			prv_ptr = curr_ptr;
+			curr_ptr = curr_ptr->next;
+		}
+		prv_ptr->next = new_record;
+	}
+
+	return head;
+
+}
+============================================
+src/build.e
+13:28:18_Wednesday_30_May_2001
+============================================
+/******************************************************************************/
+/*----------------------------------------------------------------------------*/
+/*
+**  Program : build.e:
+**  For     : 433 -351: Databases;
+**            PROJECT 2
+**  Written : Mark Angrish, Student number: 74592
+**            May 2001;
+**  Input   : the head of the owners list and the head of the hotels list.  
+**  Output  : the head of the ouput linked list. 
+**  
+*/
+/*----------------------------------------------------------------------------*/
+/******************************************************************************/
+
+#include "owners.h"
+
+/*---------------------------*/
+/* LOCAL FUNCTION PROTOTYPES */
+/*---------------------------*/
+
+Output *make_output_node(char *, char *);
+Output *add_owners(Owners_record *, Output *, char *, char *, float);
+Output *insert_output(Output *, Output *);
+
+/*---------------------------*/
+
+
+Output *build(	Owners_record *owners_head, Hotels_record *hotel_head )
+{
+	Hotels_record *current_hotel= NULL;
+	Owners_record *current_owner = NULL;
+	Output *output_head = NULL;
+	Output *output_curr = NULL;
+
+	current_hotel = hotel_head;
+
+	/*while there are hotels ...*/
+	while (current_hotel != NULL) {
+
+		/*make an output node for it..*/
+		output_curr = make_output_node(current_hotel->hotel_name,current_hotel->hotel_city);
+
+		/*then look through the owners structure one by one, and if the current hotel matches
+			the current owner then add that owner to the ouput node for that hotel..*/
+		current_owner = owners_head;
+		while (current_owner != NULL) {
+			if (strcmp(current_hotel->hotel_name, current_owner->child_name) == 0 &&
+					strcmp(current_hotel->hotel_city, current_owner->child_city) == 0 ){
+
+				output_curr = add_owners(owners_head, output_curr, current_owner->parent_name, 
+																current_owner->parent_city, current_owner->fraction);
+				break;
+			}
+			current_owner = current_owner->next;	
+		}	
+		
+		/*then place the node into the output list*/
+		output_head = insert_output(output_head, output_curr);
+		current_hotel = current_hotel->next;
+	}
+
+	return output_head;/*return the head of the output list */
+}
+
+
+/*==============================================================================
+** make_output_node: creates a new output node with only the hotel name and city
+**									 filled in.
+**	input- string of the hotel name, and its city 
+**	output- an output node for the hotel name and its city.
+**============================================================================*/
+
+
+Output *make_output_node(char *hotel_name, char *hotel_city)
+{
+	Output *new_node;
+
+	new_node = malloc(sizeof(Output));
+	
+	strcpy(new_node->hotel_name, hotel_name);
+	strcpy(new_node->hotel_city, hotel_city);
+	new_node->company_head = NULL;
+	new_node->next = NULL;
+
+	return new_node;
+}
+
+/*==============================================================================
+** add_owners: adds all the owners of a hotel into the ouput data structure for
+**						 a particular hotel
+**	input- the head of the owners list, the ouput node itself, the company name
+**				 and city that was matched to that hotel and the fraction of ownership
+**	output- an output node with all its owners in it.
+**============================================================================*/
+
+
+Output *add_owners(Owners_record *head, Output *node, char *company_name, char *company_city, float fraction)
+{
+	Company *owner;
+	Company *curr_ptr;
+	Company *prv_ptr;
+	Owners_record *curr_owner;
+
+	curr_owner = head;
+
+	owner = malloc(sizeof(Company));
+
+	/*add the matched company name and city to the list of companys for ownership of
+		that hotel */
+	strcpy(owner->company_name, company_name);
+	strcpy(owner->company_city, company_city);
+	owner->percentage =(fraction * 100);
+	owner->next = NULL;
+
+	curr_ptr = node->company_head;
+
+	/*..and place it at the end of the list for the compnays that own the hotel.*/
+	if (node->company_head == NULL)
+		node->company_head = owner;
+	else {
+		while (curr_ptr != NULL) {
+			prv_ptr = curr_ptr;
+			curr_ptr = curr_ptr->next;
+		}
+		prv_ptr->next = owner;
+	}
+
+	/* for a company, if another company owns it in someway, then recurse to find the 
+		 owner of that company and add it to the company list for that hotel.*/
+	while (curr_owner != NULL) {
+		if (strcmp(curr_owner->child_name, company_name) == 0 &&	
+			  strcmp(curr_owner->child_city, company_city) == 0 ) {
+			return add_owners(head, node, curr_owner->parent_name, curr_owner->parent_city, curr_owner->fraction * fraction);	
+		}
+		curr_owner = curr_owner->next;
+	}
+
+	return node;
+
+}
+
+/*==============================================================================
+** insert_output: adds the node given to the list of output nodes.
+**	input- the ptr to the head of the output list, and the node to be added.
+**	output- the output list head, with the new node added.
+**============================================================================*/
+
+Output *insert_output(Output *head, Output *node)
+{
+	Output *curr_ptr = NULL;
+	Output *prv_ptr = NULL;
+
+	curr_ptr = head;
+
+	if (head == NULL)
+		head = node;
+
+	else {
+		while (curr_ptr !=NULL){
+			prv_ptr = curr_ptr;
+			curr_ptr = curr_ptr->next;
+		}
+		prv_ptr->next = node;
+	}
+
+	return head;
+}

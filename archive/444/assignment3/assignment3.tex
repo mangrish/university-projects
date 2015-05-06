@@ -1,0 +1,388 @@
+\documentclass{article}
+
+\usepackage{epsfig}
+
+\title{433-444 Software Reliability and Testing\\
+	Assignment 3 - Safety Analysis\\
+	}
+\author{Mark Angrish (mangr)\\
+  Student Number: 74592}
+\date{\today}
+
+\begin{document}
+\pagenumbering{roman}
+
+\maketitle
+
+\begin{abstract}
+\noindent
+This document describes the processes, findings and conclusions, of performing
+preliminary hazard analysis and fault tree analysis for a motor manufacturers
+computer assisted braking system (CAB).
+\end{abstract}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\pagenumbering{arabic}
+\section{Introduction}
+
+\subsection{Aim of project}
+The purpose of this document is to demonstrate the process of conducting
+preliminary harard idenification and analysis, followed by a fault tree analysis
+for a major motor manufacturers computer assisted braking system (CAB).
+
+\subsection{Overview of Safety Analysis Process}
+The safety analysis process was conducted as follows, incorporating what
+activities are to be performed in each step:
+
+\begin{enumerate}
+	\item \textit{Preliminary Hazard Analysis}\\
+	\noindent
+	PHA consists of two parts, that is:
+	\begin{enumerate}
+		\item textit{Preliminary Hazard Identification}\\
+		\noindent
+		is aimed at determining potential hazards for a system in a group 
+		based activity.\\
+		\item \textit{Preliminary Hazard Analysis}\\
+		\noindent
+		is aimed at determining potential hazards for a system as well as
+		well as the causes of failure leading to these hazards and the 
+		liklihood of such failures.\\
+	\end{enumerate}	
+	\item \textit{Fault Tree Analysis}\\
+	\noindent
+	is a deductive technique for hazard analysis, and is drawn by working
+	back from hazards to basic causes.  Fault trees are a graphical notation
+	and consist of events and gates.\\
+
+\end{enumerate}
+
+\newpage
+\section{Preliminary Hazard Analysis}
+
+\subsection{Preliminary Hazard Identification}
+\noindent
+A preliminary hazard identification brainstorming activity session was 
+conducted informally by a group of 3 people.\\
+Initially, the team created a checklist of weather conditions, road types,
+and random possible triggers.  We used this checklist to ensure completeness
+of the hazard analysis.  The checklist used appears in table 1.\\
+
+\begin{table}[h!tbp]
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{weather conditions}	&	\textbf{road types}	& \textbf{random triggers}\\
+\hline
+rain affected- heavy&	smooth bituman/concrete&	weight of car\\
+rain affected- light&	rough bituman&		uphill/ downhill\\
+hail&	gravel	&	speed\\
+sleet&	mud&\\
+snow& 	dry mud/dirt&\\
+dry&	soil/grass&\\
+ice/frost&	&\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Preliminary Hazard Identification session checklist}
+\label{fig:PHIChecklist}
+\end{table}
+
+
+
+\noindent
+After generating these conditions and types etc. one varibale was kept constant
+while conditions wer eiterated through.  For example, going through all 
+weather conditions for a dry road, then a gravel road etc.\\
+
+\noindent
+The following table is the result of the brainstorming session, and only 
+contains identified hazards.  Hazards were identified on various surfaces,
+however this number would increase due to the number of similar conditions that
+a hazard can occur in, or likewise a failure can occur on one or more wheels.
+Therefore all hazards identified are the generic failure which \emph{can} occur in
+\emph{any possible} condition.  This is to isolate all the possible hazards that
+affect the system reguardless of what conditions, in the name of improving safety.\\
+
+\noindent
+This investigation assumed that drivers of the car would be familier with road laws
+and understand how to drive in various driving conditions (ie snow chains for tyres
+when driving in snow etc.), however leeway was given when doing this as occasionly
+circumstances occured where a hazard may arise (for example, even when driving 
+cautiously on a road with black ice, a child may come in front of the car) thereby
+creating a critical safety issue.\\
+
+
+\begin{table}[h!tbp]
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+	& textbf{Identified Hazards}		\\
+\hline
+1	&	Car skids when brakes are applied.*\\
+2	&	Brakes engage too slowly when brakes applied.*\\
+3	&	Brakes engage too hard and fast when brakes applied (jerkish).*\\
+4	&	Brakes engaged but brakes not applied.*\\
+5	&	Brakes dont engage when brakes applied.*\\
+6	&	Brakes engage too soft when brakes applied.*\\
+7	&	Brakes engage too much when brakes applied.*\\
+8	&	Brakes dont release when brakes are not applied.*\\
+9	&	Brakes release when brakes not applied.*\\
+10	&	Brakes release too slow when brakes are being released.*\\
+11	&	Brakes release too soft when brakes are being released.*\\
+12	&	Brakes release too hard when brakes are being released.*\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Results of Preliminary Hazard Identification session. * indicates 
+that a hazard can occur on one or more wheels}
+\label{fig:PHITable}
+\end{table}
+
+\newpage
+\subsection{Preliminary Hazard Analysis}
+\noindent
+The following table is the hazard log related to the identified hazards of
+table 2.  This table was created with reference to the risk classes
+according to IEC65A (defined in lecture notes). Severity's and Frequency's
+are also exracted from the same standard (again refer to lecture notes).\\
+
+
+
+\begin{table}[h!tbp]
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Reference}&		1\\
+\textbf{Hazard}&	Car skids when brakes are applied.\\
+\textbf{Possible Cause}&	Environmental factors, ABS failure\\
+\textbf{Severity}&	Catastrophic\\
+\textbf{Uncontolled Risk}&	I\\
+\textbf{Estimated Tolerable Risk}&	III\\
+\hline
+\hline
+\textbf{Reference}&		2\\
+\textbf{Hazard}&	Brakes engage too slowly when brakes applied.\\
+\textbf{Possible Cause}&	hydrolic line failure, actuator failure\\
+\textbf{Severity}&	Critical/Catastrophic (depending on amount of failure)\\
+\textbf{Uncontolled Risk}&	II\\
+\textbf{Estimated Tolerable Risk}&	III\\
+\hline
+\hline
+\textbf{Reference}&		3\\
+\textbf{Hazard}&Brakes engage too hard and fast when brakes applied (jerkish).\\
+\textbf{Possible Cause}&	hydrolic line failure, actuator failure\\
+\textbf{Severity}&	Marginal\\
+\textbf{Uncontolled Risk}&	III\\
+\textbf{Estimated Tolerable Risk}&	III\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Results of Preliminary Hazard Analysis: Hazard Log}
+\label{fig:HazardLogTable1}
+\end{table}
+
+\begin{table}[h!tbp]
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Reference}&	4\\
+\textbf{Hazard}&	Brakes engaged but brakes not applied.\\
+\textbf{Possible Cause}&	pressure sensor failure, actuator failure\\
+\textbf{Severity}&	Marginal\\
+\textbf{Uncontolled Risk}&	III\\
+\textbf{Estimated Tolerable Risk}&	III\\
+\hline
+\hline
+\textbf{Reference}&	5\\
+\textbf{Hazard}&	Brakes dont engage when brakes applied.\\
+\textbf{Possible Cause}& pressure sensor failure, actuator failure\\
+\textbf{Severity}&	Catastrophic\\
+\textbf{Uncontolled Risk}&	I\\
+\textbf{Estimated Tolerable Risk}&	III\\
+\hline
+\hline
+\textbf{Reference}&	6\\
+\textbf{Hazard}&	Brakes engage too soft when brakes applied.\\
+\textbf{Possible Cause}&	pressure sensor failure, hydrolic failure, actuator failure	\\
+\textbf{Severity}&	Critical\\
+\textbf{Uncontolled Risk}&	II\\
+\textbf{Estimated Tolerable Risk}&	III\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Results of Preliminary Hazard Analysis: Hazard Log}
+\label{fig:HazardLogTable2}
+\end{table}
+
+
+\begin{table}[h!tbp]
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Reference}&	7\\
+\textbf{Hazard}&	Brakes engage too much when brakes applied.\\
+\textbf{Possible Cause}&pressure sensor failure, hydrolic failure, actuator failure	\\
+\textbf{Severity}&	Marginal\\
+\textbf{Uncontolled Risk}&	III\\
+\textbf{Estimated Tolerable Risk}&	III\\
+\hline
+\hline
+\textbf{Reference}&	8\\
+\textbf{Hazard}&	Brakes dont release when brakes are not applied.\\
+\textbf{Possible Cause}&	pressure sensor failure, actuator failure, hydolic failure\\
+\textbf{Severity}&	Marginal\\
+\textbf{Uncontolled Risk}&	III\\
+\textbf{Estimated Tolerable Risk}&	III\\
+\hline
+\hline
+\textbf{Reference}&	9\\
+\textbf{Hazard}&	Brakes release when brakes are applied.\\
+\textbf{Possible Cause}&	pressure sensor failure, actuator failure, hydolic failure\\
+\textbf{Severity}&	Catastrophic\\
+\textbf{Uncontolled Risk}&	I\\
+\textbf{Estimated Tolerable Risk}&	III\\
+\hline
+\hline
+\end{tabular}
+\end{center}
+\caption{Results of Preliminary Hazard Analysis: Hazard Log}
+\label{fig:HazardLogTable3}
+\end{table}
+
+\begin{table}[h!tbp]
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Reference}&	10\\
+\textbf{Hazard}&	Brakes release too slow when brakes are being released.\\
+\textbf{Possible Cause}& pressure sensor failure, actuator failure, hydolic failure	\\
+\textbf{Severity}&	Critical\\
+\textbf{Uncontolled Risk}&	II\\
+\textbf{Estimated Tolerable Risk}&	III\\
+\hline
+\hline
+\textbf{Reference}&	11\\
+\textbf{Hazard}&	Brakes release too soft when brakes are being released.\\
+\textbf{Possible Cause}&	pressure sensor failure, actuator failure, hydolic failure\\
+\textbf{Severity}&	Marginal\\
+\textbf{Uncontolled Risk}&	IV\\
+\textbf{Estimated Tolerable Risk}&	IV\\
+\hline
+\textbf{Reference}&	12\\
+\textbf{Hazard}&	Brakes release too hard when brakes are being released.\\
+\textbf{Possible Cause}&	pressure sensor failure, actuator failure, hydolic failure\\
+\textbf{Severity}&	Marginal\\
+\textbf{Uncontolled Risk}&	III\\
+\textbf{Estimated Tolerable Risk}&	III\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Results of Preliminary Hazard Analysis: Hazard Log}
+\label{fig:HazardLogTable4}
+\end{table}
+
+\subsection{Justification of estimates for hazards}
+\noindent
+Justification for the hazards defined in the hazard log are defined below.
+
+\begin{enumerate}
+\item A car could skid due to environmental conditions such as bald tyres,
+	ice on the road, or any other conditions.  Therefore for the car to skid
+	other than environmental conditions would mean ABS failure.  Since this
+	is a safety investigation into the braking system, it would be catastrophic
+	not only in terms of reputability, but potential loss of life, from ABS
+	failure.  This was therefore estimated at being an intollerable risk, 
+	which must be lowered significantly, to at least a level III class.
+
+\item If the brakes dont come on fast enough, potential loss of life may occur
+	depending on the speed involved.  This risk can therefore vary upon speed
+	and circumstance, but it is still a critical risk nonetheless.  It was 
+	estimated that this risk is undesirable and a reduction to a class III,
+	would be well worth the effort.
+
+\item Brakes being jerky, might be a result of build up in the hydrolic pipes
+	or an actuator failure.  While these are undesirable, they dont constitute
+	more than a level III risk as it is tolerable for the brakes to be jerky,
+	as long as it does its job.  Therefore this risk wouldnt be worth  the 
+	reduction, so it would be smart to leave this risk as is (tolerable).
+
+\item If the brakes are on, but they arnt being applied, this can present a 
+	serious problem.  While this risk is serious, it does not create a major
+	safety hazard, as accidents can still be avioded.  Therefore this risk is
+	marginal, in that this risk is tolerable.  Any further improvement in
+	risk class would not exceed the improvement gained.
+
+\item Brakes not engaging when the brakes are applied constitutes the most 
+	serious risk out of all identified.  This risk is intolerable, and must
+	be ensured that is becomes at least a level II class.  However,
+	it would be desirable from this risk to never happen, or occur remotly,
+	therefore it would be better for this risk to become a level III risk.
+
+\item Brakes engaging too soft may be the result of environmental conditions
+	such as warn disc brakes, etc. but this risk would be marginal, as the
+	risk is tolerable.  Any more risk reduction wouldnt exceed the improvement
+	gained.
+
+\item Again, this hazard is only a marginal risk, and is any amount of time
+	spend reducing the risk of this happening would be great for little or
+	no gain. (see hazard 3 for similarity).
+
+\item Again, this is simlar to hazard 4 in terms of failure, tolerable and
+	intolerable risk.
+
+\item This is a major hazard rated at class I for obvious reasons.  To reduce
+	this risk would be well worth the effort, as described in events described 
+	eariler.
+
+\item Brakes releasing too slow is again only a marginal risk class.
+	Similarities between this hazard and hazard 2 can be drawn, in terms
+	of dealing with its severity, and its primary causes.
+
+\item This hazard is similar again to hazard 6 in both its causes, uncontrolled
+	risk and tolerable risks.
+
+\item This hazard is similar to hazard 3 in both its causes, uncontrolled risk
+	and tolerable risks.
+
+\end{enumerate}
+
+\newpage
+\section{Fault Tree Analysis}
+
+\noindent
+Fault tree analysis was performed on the top three most critical
+hazards (in terms of risk classes),  to determine the possible causes of those
+hazards.\\
+
+\noindent
+The top three identified hazards are:
+\begin{enumerate}
+	\item Reference number: 5
+	\item Reference number: 1
+	\item Reference number: 9
+\end{enumerate}
+
+\noindent
+Due to the size of the fault trees they have been hand drawn, and placed as 
+an appendix to this document (See appendix A).\\
+
+\newpage
+\section{Conclusion}
+The findings of this Investigation show that the safety critical computer assisted
+braking system proposed, does not meet this investigations expectations of safety 
+and its design should be further explored before being implemented on testing
+rigs or prototype vehicles.\\
+
+\newpage
+\appendix
+\section{Fault Tree Analysis Diagrams}
+\noindent
+These diagrams are hand drawn and represent the three top hazards identified. 
+
+\end{document}

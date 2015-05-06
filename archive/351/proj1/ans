@@ -1,0 +1,15 @@
+INGRES TERMINAL MONITOR Copyright (c) 1981, 1998 Computer Associates Intl, Inc.
+Ingres SPARC SOLARIS Version II 2.0/9808 (su4.us5/00) login
+Wed Apr  4 17:45:25 2001
+
+continue
+* * * * Executing . . .
+
+E_US0B63 line 1, The columns in the SELECT clause must be contained in the
+    GROUP BY clause.
+    (Wed Apr  4 17:45:25 2001)
+
+continue
+* 
+Ingres Version II 2.0/9808 (su4.us5/00) logout
+Wed Apr  4 17:45:25 2001

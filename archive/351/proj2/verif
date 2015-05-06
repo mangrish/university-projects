@@ -1,0 +1,497 @@
+============================================
+vis/mangr-compile.out
+01:48:32_Saturday_19_May_2001
+============================================
+===== Begin Compiling Log =====
+cp owners.e tmp.c
+cp gethotels.e tmp2.c
+cp getowners.e tmp3.c
+cp build.e tmp4.c
+cp /home/stude/data/351/proj2/dbname.h .
+gcc -E tmp.c > owners.sc
+gcc -E tmp2.c > gethotels.sc
+gcc -E tmp3.c > getowners.sc
+gcc -E tmp4.c > build.sc
+esqlc owners.sc gethotels.sc getowners.sc build.sc
+ESQL owners.sc:
+ESQL gethotels.sc:
+ESQL getowners.sc:
+ESQL build.sc:
+gcc -g -o owners owners.c gethotels.c getowners.c build.c -L I_SYSTEM/ingres/lib -linterp.1 -lframe.1 -lq.1 -lcompat.1 -lm -lc -lsocket -lelf
+rm tmp*
+============================================
+vis/mangr-stderr.out
+01:48:32_Saturday_19_May_2001
+============================================
+===== Begin Error Log =====
+===== Begin Compiling =====
+===== Begin testing =====
+===== Finish testing =====
+===== Begin bonus mark testing =====
+===== Finish bonus mark testing =====
+============================================
+vis/mangr.out
+01:48:32_Saturday_19_May_2001
+============================================
+433-351 Submission Results for Project 2
+User:  mangr
+
+Report on hotel owners
+======================
+Regent Hotel,  Sydney:
+	Telstra, Melbourne (50.0%)
+	LindaLand, Melbourne (31.2%)
+Queens Hotel,  London:
+	Optus, Melbourne (10.0%)
+	Microsoft, Seattle (1.0%)
+	LindaLand, Melbourne (1.0%)
+Ritz Motel,  New York:
+	Qantas, Brisbane (71.4%)
+Ritz Hotel,  New York:
+	Coles Myer, Sydney (23.7%)
+	Qantas, Brisbane (5.6%)
+L`Hotel Sur Le Seine,  Paris
+L`Hotel de Paris,  Paris:
+	LindaLand, Sydney (47.7%)
+	Apple Inc., San Jose (8.2%)
+===== Begin bonus mark testing =====
+Note: This test is irrelevant to you if you have not done the bonus question.
+Report on hotel owners
+======================
+Ritz Hotel,  New York:
+	Coles Myer, Sydney (23.7%)
+	Qantas, Brisbane (5.6%)
+===== Finish bonus mark testing =====
+============================================
+src/makefile
+01:48:29_Saturday_19_May_2001
+============================================
+
+
+owners:	owners.e gethotels.e getowners.e build.e owners.h 
+	cp owners.e tmp.c
+	cp gethotels.e tmp2.c
+	cp getowners.e tmp3.c
+	cp build.e tmp4.c
+	cp /home/stude/data/351/proj2/dbname.h .
+	gcc -E tmp.c > owners.sc
+	gcc -E tmp2.c > gethotels.sc
+	gcc -E tmp3.c > getowners.sc
+	gcc -E tmp4.c > build.sc
+	esqlc owners.sc gethotels.sc getowners.sc build.sc
+	gcc -g -o owners owners.c gethotels.c getowners.c build.c -L $II_SYSTEM/ingres/lib -linterp.1 -lframe.1 -lq.1 -lcompat.1 -lm -lc -lsocket -lelf
+	rm tmp*
+============================================
+src/gethotels.e
+01:48:29_Saturday_19_May_2001
+============================================
+#include "owners.h"
+
+Hotels_record *add_hrecord(Hotels_record *, char *, char *);
+
+Hotels_record *gethotels(void)
+{
+	Hotels_record *head  = NULL;
+
+	EXEC SQL BEGIN DECLARE SECTION;
+
+	struct {
+		char hname[HNAME_LENGTH];
+		char hcity[COCITY_LENGTH];
+	} Hotels;
+
+	short null_indicator[2];
+
+	EXEC SQL END DECLARE SECTION;
+
+	EXEC SQL DECLARE cursor2 CURSOR FOR
+	SELECT hname, hcity
+	FROM hotel;
+
+	EXEC SQL CONNECT DBNAME;
+
+	EXEC SQL OPEN cursor2;
+	while (sqlca.sqlcode == 0) {
+		EXEC SQL FETCH cursor2 INTO :Hotels INDICATOR :null_indicator;
+		if (sqlca.sqlcode == 0) {
+			head = add_hrecord(head, Hotels.hname, Hotels.hcity);
+		}
+	}
+	EXEC SQL CLOSE cursor2;
+	EXEC SQL commit;
+	EXEC SQL DISCONNECT;
+
+	return head;
+}
+
+Hotels_record *add_hrecord(Hotels_record *head, char *hotel_name, char *hotel_city)
+{
+	Hotels_record *new_record;
+	Hotels_record *curr_ptr = head;
+	Hotels_record *prv_ptr = NULL;
+
+	new_record = malloc(sizeof(Hotels_record ));
+	
+	strcpy(new_record->hotel_name, hotel_name); 
+	strcpy(new_record->hotel_city, hotel_city);
+	new_record->next = NULL;
+
+	if (head == NULL)
+		head = new_record;
+
+	else {
+		while (curr_ptr != NULL) {
+			prv_ptr = curr_ptr;
+			curr_ptr = curr_ptr->next;
+		}
+		prv_ptr->next = new_record;
+	}
+
+	return head;
+
+}
+============================================
+src/build.e
+01:48:29_Saturday_19_May_2001
+============================================
+#include "owners.h"
+
+Output *make_output_node(char *, char *);
+Output *add_owners(Owners_record *, Output *, char *, char *, float);
+Output *insert_output(Output *, Output *);
+
+Output *build(	Owners_record *owners_head, Hotels_record *hotel_head )
+{
+	Hotels_record *current_hotel= NULL;
+	Owners_record *current_owner = NULL;
+	Output *output_head = NULL;
+	Output *output_curr = NULL;
+
+	current_hotel = hotel_head;
+
+	while (current_hotel != NULL) {
+
+		output_curr = make_output_node(current_hotel->hotel_name,current_hotel->hotel_city);
+
+		current_owner = owners_head;
+		while (current_owner != NULL) {
+			if (strcmp(current_hotel->hotel_name, current_owner->child_name) == 0 &&
+					strcmp(current_hotel->hotel_city, current_owner->child_city) == 0 ){
+
+				output_curr = add_owners(owners_head, output_curr, current_owner->parent_name, 
+																current_owner->parent_city, current_owner->fraction);
+				break;
+			}
+			current_owner = current_owner->next;	
+		}	
+		
+		output_head = insert_output(output_head, output_curr);
+		current_hotel = current_hotel->next;
+	}
+
+	return output_head;
+}
+
+Output *make_output_node(char *hotel_name, char *hotel_city)
+{
+	Output *new_node;
+
+	new_node = malloc(sizeof(Output));
+	
+	strcpy(new_node->hotel_name, hotel_name);
+	strcpy(new_node->hotel_city, hotel_city);
+	new_node->company_head = NULL;
+	new_node->next = NULL;
+
+	return new_node;
+}
+
+Output *add_owners(Owners_record *head, Output *node, char *company_name, char *company_city, float fraction)
+{
+	Company *owner;
+	Company *curr_ptr;
+	Company *prv_ptr;
+	Owners_record *curr_owner;
+
+	curr_owner = head;
+
+	owner = malloc(sizeof(Company));
+
+	strcpy(owner->company_name, company_name);
+	strcpy(owner->company_city, company_city);
+	owner->percentage =(fraction * 100);
+	owner->next = NULL;
+
+	curr_ptr = node->company_head;
+
+	if (node->company_head == NULL)
+		node->company_head = owner;
+	else {
+		while (curr_ptr != NULL) {
+			prv_ptr = curr_ptr;
+			curr_ptr = curr_ptr->next;
+		}
+		prv_ptr->next = owner;
+	}
+
+	while (curr_owner != NULL) {
+		if (strcmp(curr_owner->child_name, company_name) == 0 &&	
+			  strcmp(curr_owner->child_city, company_city) == 0 ) {
+			return add_owners(head, node, curr_owner->parent_name, curr_owner->parent_city, curr_owner->fraction * fraction);	
+		}
+		curr_owner = curr_owner->next;
+	}
+
+	return node;
+
+}
+
+Output *insert_output(Output *head, Output *node)
+{
+	Output *curr_ptr = NULL;
+	Output *prv_ptr = NULL;
+
+	curr_ptr = head;
+
+	if (head == NULL)
+		head = node;
+
+	else {
+		while (curr_ptr !=NULL){
+			prv_ptr = curr_ptr;
+			curr_ptr = curr_ptr->next;
+		}
+		prv_ptr->next = node;
+	}
+
+	return head;
+}
+============================================
+src/owners.e
+01:48:29_Saturday_19_May_2001
+============================================
+#include "owners.h"
+
+void usage(char *);
+Hotels_record *getopthotel(char *, char *);
+void print_out(Output *);
+
+int main(int argc, char *argv[])
+{
+	char *prog_name = argv[0];
+	char *hotel_name; 
+	char *hotel_city;
+	Owners_record *owners;
+	Hotels_record *hotels;
+	Output *output;
+
+	if (argc != 1 && (argc != 4 || strcmp(argv[1],"-h") != 0)) 
+		usage(prog_name);
+
+	if (argc == 1) 
+		hotels = gethotels();
+	else {
+		hotel_name = argv[2];
+		hotel_city = argv[3];
+		hotels = getopthotel(hotel_name, hotel_city);
+	}
+
+	owners = getowners();
+	output = build(owners, hotels);
+	print_out(output);
+
+
+	return 0;
+}
+
+
+void usage(char *prog_name)
+{
+	fprintf(stderr, "Usage: %s [-h \"Hotel name\" \"Hotel city\"]\n", prog_name);
+	exit(EXIT_FAILURE);
+}
+
+Hotels_record *getopthotel(char *hotel_name, char *hotel_city)
+{
+	Hotels_record *node;	
+
+	node = malloc(sizeof(Hotels_record));
+
+	strcpy(node->hotel_name, hotel_name);
+	strcpy(node->hotel_city, hotel_city);
+	node->next = NULL;
+
+	return node;
+}
+
+
+void print_out(Output *output)
+{
+	Output *curr_ptr ;
+	Company *company_curr ;
+
+	printf("Report on hotel owners\n");
+	printf("======================\n");
+
+	curr_ptr = output;
+
+	while (curr_ptr != NULL) {
+		printf("%s,  %s",curr_ptr->hotel_name, curr_ptr->hotel_city);
+		if (curr_ptr->company_head == NULL)
+			printf("\n");
+		else {
+			printf(":\n");
+			company_curr = curr_ptr->company_head;
+			while (company_curr != NULL) {
+				printf("\t%s, %s (%.1f%\%)\n",company_curr->company_name, company_curr->company_city, 
+							 company_curr->percentage);
+				company_curr = company_curr->next;
+			}
+		}
+		curr_ptr = curr_ptr->next;
+	}
+
+	return;
+}
+============================================
+src/owners.h
+01:48:29_Saturday_19_May_2001
+============================================
+#include <stdio.h>
+#include <stdlib.h>
+#include <strings.h>
+
+#include "/usr/include/sys/socket.h"
+#include "dbname.h"
+
+
+#define PARENT_NAME_LENGTH 12
+#define PARENT_CITY_LENGTH 11
+#define CHILD_NAME_LENGTH 22 
+#define CHILD_CITY_LENGTH 11
+
+#define CONAME_LENGTH 12
+#define COCITY_LENGTH 11
+
+#define HNAME_LENGTH 22
+#define HCITY_LENGTH 10
+
+typedef struct owners Owners_record;
+typedef struct hotels Hotels_record;
+typedef struct company Company;
+typedef struct output Output;
+
+struct owners {
+		char parent_name[PARENT_NAME_LENGTH];
+		char parent_city[PARENT_CITY_LENGTH];
+		char child_name[CHILD_NAME_LENGTH];
+		char child_city[CHILD_CITY_LENGTH];
+		float fraction;
+		Owners_record *next;
+	};
+
+struct hotels {
+	char hotel_name[HNAME_LENGTH];
+	char hotel_city[HCITY_LENGTH];
+	Hotels_record *next;
+	};
+
+struct company {
+	char company_name[CONAME_LENGTH];
+	char company_city[COCITY_LENGTH];
+	double percentage;
+	Company *next;
+	};
+
+struct output {
+	char hotel_name[HNAME_LENGTH];
+	char hotel_city[HCITY_LENGTH];
+	Company *company_head;
+	Output *next;
+	};
+	
+
+EXEC SQL INCLUDE SQLCA;
+EXEC SQL WHENEVER SQLERROR STOP;
+
+Owners_record *getowners( void);
+Hotels_record *gethotels( void);
+Output *build(Owners_record *, Hotels_record *);
+============================================
+src/getowners.e
+01:48:29_Saturday_19_May_2001
+============================================
+#include "owners.h"
+
+Owners_record *add_orecord(Owners_record *, char *, char *, char *, char *, float);
+
+Owners_record *getowners(void)
+{
+	Owners_record *head = NULL;
+
+	EXEC SQL BEGIN DECLARE SECTION;
+
+	struct {
+		char parentname[PARENT_NAME_LENGTH];
+		char parentcity[PARENT_CITY_LENGTH];
+		char childname[CHILD_NAME_LENGTH];
+		char childcity[CHILD_CITY_LENGTH];
+		float fraction;
+	} Owners;
+
+	short null_indicator[5];
+
+	EXEC SQL END DECLARE SECTION;
+
+	EXEC SQL DECLARE cursor1 CURSOR FOR
+	SELECT *
+	FROM owners;
+
+	EXEC SQL CONNECT DBNAME;
+
+	EXEC SQL OPEN cursor1;
+	while (sqlca.sqlcode == 0) {
+		EXEC SQL FETCH cursor1 INTO :Owners INDICATOR :null_indicator;
+		if (sqlca.sqlcode == 0) {
+				
+			head = add_orecord(head, Owners.parentname, Owners.parentcity, Owners.childname,
+												Owners.childcity, Owners.fraction);
+		}
+	}
+	EXEC SQL CLOSE cursor1;
+	EXEC SQL commit;
+	EXEC SQL DISCONNECT;
+
+	return head;
+}
+
+Owners_record *add_orecord(Owners_record *head, char *parent_name, char *parent_city,
+													char *child_name, char *child_city, float fraction)
+{
+
+	Owners_record *new_record;
+	Owners_record *curr_ptr = head;
+	Owners_record *prv_ptr = NULL;
+
+	new_record = malloc(sizeof(Owners_record ));
+	
+	strcpy(new_record->parent_name, parent_name);
+	strcpy(new_record->parent_city, parent_city);
+	strcpy(new_record->child_name, child_name);
+	strcpy(new_record->child_city, child_city);
+	new_record->fraction = fraction;
+	new_record->next = NULL;
+
+	if (head == NULL)
+		head = new_record;
+
+	else {
+		while (curr_ptr != NULL) {
+			prv_ptr = curr_ptr;
+			curr_ptr = curr_ptr->next;
+		}
+		prv_ptr->next = new_record;
+	}
+
+	return head;
+}

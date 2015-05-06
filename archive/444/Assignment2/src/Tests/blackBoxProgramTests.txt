@@ -1,0 +1,130 @@
+BOUNDARY VALUE ANALYSIS
+-----------------------
+
+INPUT CONDITIONS (SYSTEM TESTING)
+=================================
+
+			valid input conditions			invalid input condtions
+			----------------------			-----------------------
+1. Input file	A. 1 line of data for 			C. 0 lines of data.
+			   a single student.			D. 1 line of data for
+			B. 6 lines of student			   2 students.
+			   data.					E. 6 lines of student
+			   						   data with a newline
+									   every 2nd line.
+
+2. student no.	A.5 digit num.				D.4 digit num.
+			B.6 digit num.				E.7 digit num.
+			C.9 digit num.				F.8 digit num.
+									G.10 digit num.
+
+3. birth month	A. valid month of 			B. invalid month of 
+			   birth with a 3 char			   birth with a 3 char	
+			   string.					   string.
+			   						C. 2 char string.
+									D. 4 char string.
+
+
+4. birth date	A. 1 jan					Y. 0 jan
+			B. 31 jan					Z. 32 jan
+			C. 1 feb					1. 0 feb
+			D. 29 feb					2. 29 feb
+			E. 1 mar					3. 0 mar
+			F. 31 mar					4. 31 mar
+			G. 1 apr					5. 0 apr
+			H. 30 apr					6. 31 apr
+			I. 1 may					7. 0 may
+			J. 31 may					8. 32 may
+			K. 1 jun					9. 0 jun
+			L. 30 jun					10. 31 jun
+			M. 1 jul					11. 0 jul
+			N. 31 jul					12. 32 jul
+			O. 1 aug					13. 0 aug
+			P. 31 aug					14. 32 aug
+			Q. 1 sep					15. 0 sep
+			R. 30 sep					16. 31 sep
+			S. 1 oct					17. 0 oct
+			T. 31 oct					18. 32 oct
+			U. 1 nov					19. 0 nov
+			V. 30 nov					20. 31 nov
+			W. 1 dec					21. 0 dec
+			X. 31 dec					22. 32 dec
+
+5. first name	A. string without no.			B. string with numbers
+									C. empty string
+									D. string with 1 number
+
+6. surname initl	A. char 'A'					E. multiple letters
+			B. char 'Z'					F. char '1'
+			C. char 'a'					G. char ' '
+			D. char 'z'					H. char ''
+
+7. lectures mis	A. 1 						D. 0
+			B. 6						E. -1
+			C. 12						F. 13
+
+8. slept during	A. true					C. other string
+			B. false					D. " "
+
+-------------------------------------------------------------------------------
+
+UNIT TESTING
+============
+
+CalcMarks.java
+--------------
+
+9. int calcAssignment1Mark(long studentNum);
+	A.a1mark = -1
+	B.0 < a1mark < 3, then a1mark >2 (from specs)
+	C.a1mark = 3
+	D.a1mark = 5
+	E.a1mark = 6
+
+10.  int calcAssignment2Mark(String month, int Date);
+	A. a2mark = -1 
+	B. 0 < a2mark < 5, then a1mark > 10 (from specs)
+	C. a2mark = 5
+	D. a2mark = 25
+	E. a2mark = 26
+
+11. int calcAssignment3Mark(int numMissed, boolean slept);
+	A. a3mark -x, then a1mark =0
+	B. a3mark = 0, then a1mark = (see spec algorithm)
+  	C. a3mark =4, then a1mark = (see spc algorithmn)
+  	D. a3mark = 5
+	E. a3mark = 6
+	F. a3mark = 10
+	G. a3mark = 11
+
+12. int calcExamMarks(string fistName, char surnameInitial);
+	A. exam mark = 20
+	B. exam mark = 19, then exam mark = 44 after algorithm
+	C. exam mark = 21
+	D. exam mark = -1
+	E. exam mark = 60
+	F. exam mark = 61
+
+
+12. String calcGrade()
+	A. H1 
+	B. H2A 
+	C. H2B 
+	D. H3 
+	E. P 
+	F. N 
+	G. NCP 
+	H. N+ 
+
+13. String getComment();
+	A. Excellent
+	B. Good Work.
+	C. You missed a few points here and there
+	D. You may have misunderstood some concepts
+	E. I recommend you work harder next semester
+	F. Im sorry. You did not pass the subject.
+	G. You just scraped through
+	H. Im sorry. You failed both the project and the exam hurdles
+	I. Im sorry. You failed the project hurdle
+	J. Im sorry. You failed the exam hurdle
+

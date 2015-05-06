@@ -1,0 +1,34 @@
+#!/bin/sh
+#set -x
+usage="Usage: wh [-af] [-p#] searchword..."
+
+option=x
+op2=one
+path=$PATH
+
+while getopts afp: flag; do
+    case $flag in
+	a) op2=all;;
+	f) op2=all;
+     option=f;;
+	p) op2=all;
+		 option=f;
+		 path=$OPTARG;;   
+	\?) echo $usage;exit 1;; 
+    esac
+done
+
+shift `expr "$OPTIND" - 1`
+ 
+for var in `echo $path | tr ':' ' '`
+	do
+		if [ -$option "$var"/"$1" ]
+			then
+				echo $var/$1
+				if [ $op2 = one ]
+					then
+					break
+				fi
+		fi
+	done
+

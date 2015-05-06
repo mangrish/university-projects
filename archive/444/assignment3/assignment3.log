@@ -1,0 +1,173 @@
+This is TeX, Version 3.14159 (Web2C 7.3.1) (format=latex 2001.10.8)  15 AUG 2002 18:05
+**assignment3.tex
+(assignment3.tex
+LaTeX2e <1999/12/01> patch level 1
+Babel <v3.6Z> and hyphenation patterns for american, french, german, ngerman, n
+ohyphenation, loaded.
+(/local/solaris86/apps/tetex-1.0.7/share/texmf/tex/latex/base/article.cls
+Document Class: article 1999/09/10 v1.4a Standard LaTeX document class
+(/local/solaris86/apps/tetex-1.0.7/share/texmf/tex/latex/base/size10.clo
+File: size10.clo 1999/09/10 v1.4a Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/local/solaris86/apps/tetex-1.0.7/share/texmf/tex/latex/graphics/epsfig.sty
+Package: epsfig 1999/02/16 v1.7a (e)psfig emulation (SPQR)
+
+(/local/solaris86/apps/tetex-1.0.7/share/texmf/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/local/solaris86/apps/tetex-1.0.7/share/texmf/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/local/solaris86/apps/tetex-1.0.7/share/texmf/tex/latex/graphics/graphics.sty
+Package: graphics 1999/02/16 v1.0l Standard LaTeX Graphics (DPC,SPQR)
+
+(/local/solaris86/apps/tetex-1.0.7/share/texmf/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/local/solaris86/apps/tetex-1.0.7/share/texmf/tex/latex/config/graphics.cfg)
+Package graphics Info: Driver file: dvips.def on input line 80.
+
+(/local/solaris86/apps/tetex-1.0.7/share/texmf/tex/latex/graphics/dvips.def
+File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+\epsfxsize=\dimen105
+\epsfysize=\dimen106
+)
+No file assignment3.aux.
+\openout1 = `assignment3.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 15.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 15.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 15.
+[1
+
+]
+No file assignment3.toc.
+\tf@toc=\write3
+\openout3 = `assignment3.toc'.
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 47--51
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--56
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 57--62
+
+ []
+
+[1]
+Underfull \hbox (badness 10000) in paragraph at lines 69--75
+
+ []
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 78.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 78.
+
+Underfull \hbox (badness 10000) in paragraph at lines 98--102
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 103--111
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--119
+
+ []
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 149--154
+
+ []
+
+
+Overfull \hbox (83.45401pt too wide) in paragraph at lines 159--185
+ [] 
+ []
+
+
+Overfull \hbox (48.98169pt too wide) in paragraph at lines 192--218
+ [] 
+ []
+
+
+Overfull \hbox (48.98169pt too wide) in paragraph at lines 226--253
+ [] 
+ []
+
+
+Overfull \hbox (50.73161pt too wide) in paragraph at lines 260--285
+ [] 
+ []
+
+[3] [4] [5] [6]
+Underfull \hbox (badness 10000) in paragraph at lines 358--362
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 371--374
+
+ []
+
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 377--381
+
+ []
+
+[8] [9] (assignment3.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 567 strings out of 10901
+ 6606 string characters out of 71772
+ 65542 words of memory out of 263001
+ 3540 multiletter control sequences out of 10000+0
+ 8848 words of font info for 31 fonts, out of 400000 for 1000
+ 14 hyphenation exceptions out of 1000
+ 32i,7n,21p,226b,326s stack positions out of 300i,100n,500p,200000b,4000s
+
+Output written on assignment3.dvi (11 pages, 22628 bytes).
